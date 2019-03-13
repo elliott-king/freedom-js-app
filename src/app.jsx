@@ -16,7 +16,6 @@ console.log("App started");
 
 var map;
 var client = new AWSClientHandler()
-// var markers = [];
 
 class PublicArtText extends React.Component {
     render() {
@@ -93,6 +92,11 @@ function getPublicArtWithinMap() {
         deleteMarkers(markers);
         showMarkers(markers);
 
+        /*
+        TODO: research problem with callback scope. These functions fail if in the global scope.
+        HOWEVER, they will NOT fail if I remove the call in client-handler for callback(new_markers).
+        */
+       
         function setMapOnAll(map, markers) {
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
@@ -103,7 +107,6 @@ function getPublicArtWithinMap() {
         }
         function deleteMarkers(markers) {
             setMapOnAll(null, markers);
-            // markers = [];
         }
     });
 }
