@@ -16,10 +16,6 @@ console.log("App started");
 var map;
 var markers = [];
 
-
-// TODO: remove this for a button that fulfills this feature.
-// google.maps.event.addListener(map, 'bounds_changed', getPublicArtWithinMap);
-
 const client = new AWSAppSyncClient({
     url: aws_config.aws_appsync_graphqlEndpoint,
     region: aws_config.aws_appsync_region,
@@ -40,12 +36,8 @@ class PublicArtText extends React.Component {
 }
 
 class PublicArtUi extends React.Component {
-    // renderText() {
-    //     return <PublicArtText />;
-    // }
     render() {
         return (
-            // <div className="public-art-ui">
             <div className="public-art-ui" 
             title='Click to find nearby public art.' 
             onClick={getPublicArtWithinMap}>
@@ -70,28 +62,6 @@ function initMap() {
         center: {lat: 40, lng: -75},
         zoom: 15
     });
-
-    // TODO: react
-    // var publicArtControlDiv = document.createElement('div');
-    // var publicArtControl = new FindPublicArtControl(publicArtControlDiv, map);
-
-    // var publicArtControlDiv = document.createElement('div');
-    // publicArtControlDiv.appendChild(React.createElement(PublicArtUi));
-
-    // var publicArtControlDiv = controls.PublicArtControlDiv();
-    // var publicArtControlDiv = React.createElement(PublicArtControlDiv);
-    // publicArtControlDiv.addEventListener('click', function() {
-    //     getPublicArtWithinMap();
-    // })
-
-    // ReactDOM.render(
-    //     // <PublicArtControlDiv />,
-    //     publicArtControlDiv,
-    //     document.getElementById('root')
-    // );
-    
-    // publicArtControlDiv.index = 1;
-    // console.log(publicArtControlDiv);
 
     // Taken from:
     // https://github.com/tomchentw/react-google-maps/issues/818
@@ -127,45 +97,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                           'Error: your browser does not support geolocation.');
     infoWindow.open(map);
 }
-
-
-
-/**
- * The FindPublicArtControl adds a control to the map that recenters the map on
- * Chicago.
- * This constructor takes the control DIV as an argument.
- * @constructor
- */
-function FindPublicArtControl(controlDiv, map) {
-    // Control border
-    var controlUI = document.createElement('div');
-    controlUI.style.backgroundColor = '#fff';
-    controlUI.style.border = '2px solid #fff';
-    controlUI.style.borderRadius = '3px';
-    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-    controlUI.style.cursor = 'pointer';
-    controlUI.style.marginBottom = '22px';
-    controlUI.style.textAlign = 'center';
-    controlUI.title = 'Click to find nearby public art.';
-    controlDiv.appendChild(controlUI);
-
-    // control interior & text
-    var controlText = document.createElement('div');
-    controlText.style.color = 'rgb(25,25,25)';
-    controlText.style.fontFamily = 'Roboto,Arial, sans-serif';
-    controlText.style.fontSize = '16px';
-    controlText.style.lineHeight = '38px';
-    controlText.style.paddingLeft = '5px';
-    controlText.style.paddingRight = '5px';
-    controlText.innerHTML = 'Public Art';
-    controlUI.appendChild(controlText);
-
-    controlUI.addEventListener('click', function() {
-        getPublicArtWithinMap();
-    })
-}
-
-
 
 function getPublicArtWithinMap() {
     var bounds = map.getBounds();
