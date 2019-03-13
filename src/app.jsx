@@ -1,13 +1,10 @@
-import gql from 'graphql-tag';
-import AWSAppSyncClient, {AUTH_TYPE} from 'aws-appsync';
-import aws_config from './aws-exports';
-import {getPublicArtWithinBoundingBox} from './graphql/queries';
 import '../css/style.css';
 import {GoogleOauth} from '@aws-amplify/core';
 import { PassThrough} from 'stream';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AWSClientHandler from './utils/client-handler';
 
 /*
 MAJOR TODOS:
@@ -18,18 +15,8 @@ MAJOR TODOS:
 console.log("App started");
 
 var map;
-var markers = [];
-
-const client = new AWSAppSyncClient({
-    url: aws_config.aws_appsync_graphqlEndpoint,
-    region: aws_config.aws_appsync_region,
-    auth: {
-        type: AUTH_TYPE.API_KEY,
-        apiKey: aws_config.aws_appsync_apiKey,
-    }
-});
-
-
+var client = new AWSClientHandler()
+// var markers = [];
 
 class PublicArtText extends React.Component {
     render() {
@@ -102,52 +89,21 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getPublicArtWithinMap() {
-    var bounds = map.getBounds();
-    console.log("Bounds: ", bounds.toString());
+    client.getPublicArtWithinMap(map, function(markers) {
+        deleteMarkers(markers);
+        showMarkers(markers);
 
-    client.query({
-        query: gql(getPublicArtWithinBoundingBox),
-        variables: {
-            top_right_gps: JSON.stringify({
-                lat: bounds.getNorthEast().lat(),
-                lng: bounds.getNorthEast().lng()
-            }),
-            bottom_left_gps: JSON.stringify({
-                lat: bounds.getSouthWest().lat(),
-                lng: bounds.getSouthWest().lng()
-            })
+        function setMapOnAll(map, markers) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
         }
-    }).then(({data: { getPublicArtWithinBoundingBox } } ) => {
-        deleteMarkers();
-
-        console.log("Listing public art from getWithinBoundingBox: ");
-        console.log(getPublicArtWithinBoundingBox);
-
-        for (var publicArt of getPublicArtWithinBoundingBox) {
-            let location = JSON.parse(publicArt.location); 
-
-            // TODO: FIXME
-            location.lng = location.lon;
-
-            var marker = new google.maps.Marker({position: location, map: map, title: publicArt.name});
-            markers.push(marker);
+        function showMarkers() {
+            setMapOnAll(map, markers);
         }
-
-        showMarkers()
-    }).catch(e => {
-        console.error(e.toString());
+        function deleteMarkers(markers) {
+            setMapOnAll(null, markers);
+            // markers = [];
+        }
     });
-}
-
-function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
-}
-function showMarkers() {
-    setMapOnAll(map);
-}
-function deleteMarkers() {
-    setMapOnAll(null);
-    markers = [];
 }
