@@ -5,11 +5,15 @@ import {getPublicArtWithinBoundingBox} from './graphql/queries';
 import '../css/style.css';
 import {GoogleOauth} from '@aws-amplify/core';
 import { PassThrough} from 'stream';
-// import PublicArtControlDiv from './components/map-controls.jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+/*
+MAJOR TODOS:
+- make the map a react component
+- move everything to new file (except maybe initMap())
+*/
 
 console.log("App started");
 
@@ -87,7 +91,6 @@ function initMap() {
     }
 }
 initMap();
-
 
 // TODO: infoWindow does not exist
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
