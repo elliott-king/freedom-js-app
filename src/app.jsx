@@ -4,6 +4,8 @@ import { PassThrough} from 'stream';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Select from 'react-select';
+
 import AWSClientHandler from './utils/client-handler';
 
 /*
@@ -12,26 +14,49 @@ MAJOR TODOS:
 - move everything to new file (except maybe initMap())
 */
 
-console.log("App started");
 
 var map;
+var markers = [];
 var client = new AWSClientHandler()
 
-class PublicArtText extends React.Component {
-    render() {
-        return (
-            <div className="public-art-text">Public Art</div>
-        )
-    }
-}
+const options = [
+    { value: 'all', label: 'All'},
+    { value: 'public-art', label: 'Public Art'},
+    { value: 'sculpture', label: 'Sculpture'},
+    { value: 'monument', label: 'Monument'}
+];
 
 class PublicArtUi extends React.Component {
+    // Inherits internal values from child PublicArtDropdownMenu
+    // https://stackoverflow.com/questions/35537229
+    
+    constructor(props) {
+        super(props)
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {filter: 'all'};
+    }
+
+    handleChange(selectedOption){
+        this.setState({filter: selectedOption.value});
+    }
     render() {
         return (
-            <div className="public-art-ui" 
-            title='Click to find nearby public art.' 
-            onClick={getPublicArtWithinMap}>
-                <PublicArtText />
+            <div className="public-art-ui">
+                <React.Fragment>
+                    <div className="public-art-text" 
+                    title='Click to find nearby public art.'
+                    onClick={() => getPublicArtWithinMap(this.state.filter)}>
+                        Public Art Search
+                    </div>
+                    <div className="public-art-dropdown">
+                        <Select
+                            options={options}
+                            isClearable={false}
+                            defaultValue={options[0]}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </React.Fragment>
             </div>
         )
     }
@@ -40,14 +65,15 @@ class PublicArtUi extends React.Component {
 class PublicArtControlDiv extends React.Component {
 
     render() {
-        return <div className="public-art-control" index="1">
-            <PublicArtUi />
+        return (
+        <div className="public-art-control" index="1">
+            <PublicArtUi/>
         </div>
+        )
     }
 }
 
 function initMap() {
-    console.log("Calling initMap");
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40, lng: -75},
         zoom: 15
@@ -87,9 +113,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-function getPublicArtWithinMap() {
-    client.getPublicArtWithinMap(map, function(markers) {
+function getPublicArtWithinMap(filter) {
+
+    client.getPublicArtWithinMap(map, filter, function(new_markers) {
         deleteMarkers(markers);
+        markers = new_markers
         showMarkers(markers);
     });
 }

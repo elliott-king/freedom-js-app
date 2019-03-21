@@ -28,4 +28,9 @@ html, body {
     line-height: 38px;
     padding-left: 5px;
     padding-right: 5px;
+    display: inline-block;
+}
+
+.public-art-dropdown {
+    display: inline-block;
 }
