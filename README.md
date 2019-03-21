@@ -7,3 +7,8 @@
 | Filter public art by class | js          |   high   |             |      |
 | Flag public art            | graphql, js |   high   |             |      |
 | Get photos                 | graphql, js |   high   |             |      |
+
+| Filter public art by class         |     |
+| ---------------------------------- | --- |
+| Add options                        |     |
+| Ability to select multiple options |     |
