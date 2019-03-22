@@ -104,8 +104,8 @@ function initMap() {
 }
 initMap();
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    var infoWindow = new google.maps.infoWindow();
+function handleLocationError(browserHasGeolocation, pos) {
+    var infoWindow = new google.maps.InfoWindow();
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
                           'Error: the geolocation service has failed.' : 
