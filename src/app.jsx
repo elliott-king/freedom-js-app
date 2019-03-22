@@ -95,17 +95,17 @@ function initMap() {
             console.log("Your position: ", pos.toString());
             map.setCenter(pos);
         }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+            handleLocationError(true, map.getCenter());
         });
     } else {
         // Browser does not support HTML5 geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+        handleLocationError(false, map.getCenter());
     }
 }
 initMap();
 
-// TODO: infoWindow does not exist
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    var infoWindow = new google.maps.infoWindow();
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
                           'Error: the geolocation service has failed.' : 
