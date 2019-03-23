@@ -1,23 +1,19 @@
 import '../css/style.css';
-import {GoogleOauth} from '@aws-amplify/core';
-import { PassThrough} from 'stream';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
-import AWSClientHandler from './utils/client-handler';
+import {GetPublicArtWithinMap} from './utils/client-handler';
 
 /*
 MAJOR TODOS:
-- make the map a react component
 - move everything to new file (except maybe initMap())
 */
 
 
 var map;
 var markers = [];
-var client = new AWSClientHandler()
 
 const options = [
     { value: 'all', label: 'All'},
@@ -115,7 +111,7 @@ function handleLocationError(browserHasGeolocation, pos) {
 
 function getPublicArtWithinMap(filter) {
 
-    client.getPublicArtWithinMap(map, filter, function(new_markers) {
+    GetPublicArtWithinMap(map, filter, function(new_markers) {
         deleteMarkers(markers);
         markers = new_markers
         showMarkers(markers);
