@@ -71,7 +71,7 @@ export function GetPublicArtWithinMap(map, filter, callback) {
         console.log("Public art from getWithinBoundingBox: ");
         console.log(getPublicArtWithinBoundingBox);
 
-        for (var publicArt of getPublicArtWithinBoundingBox) {
+        for (let publicArt of getPublicArtWithinBoundingBox) {
             let location = JSON.parse(publicArt.location); 
 
             // TODO: FIXME
