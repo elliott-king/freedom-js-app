@@ -3,6 +3,8 @@ import AWSAppSyncClient, {AUTH_TYPE} from 'aws-appsync';
 import aws_config from '../aws-exports';
 import {getPublicArtWithinBoundingBox, getPublicArt} from '../graphql/queries';
 
+var previousInfoWindow = false;
+
 function createClient() {
     return new AWSAppSyncClient({
         url: aws_config.aws_appsync_graphqlEndpoint,
@@ -80,8 +82,12 @@ export function GetPublicArtWithinMap(map, filter, callback) {
             let marker = new google.maps.Marker({position: location, map: map, title: publicArt.name});
             marker.addListener("click", function() {
                 console.log("Getting info window and photo for:", publicArt.name);
+                if (previousInfoWindow) {
+                    previousInfoWindow.close();
+                }
                 getPublicArtInfoWindow(publicArt.name, function(infoWindow) {
-                    infoWindow.open(map, marker);
+                    previousInfoWindow = infoWindow;
+                    previousInfoWindow.open(map, marker);
                 });
             });
             new_markers.push(marker);
