@@ -8,24 +8,26 @@
 | Flag public art               | graphql, js |   high   |             |      |
 | Get photos & show info window | graphql, js |   high   |         yes |  MVP |
 
-| Filter public art by class                            | Status |
-| ----------------------------------------------------- | ------ |
-| Add options                                           | done   |
-| Ability to select multiple options                    |        |
-| Store types as list (currently only one type allowed) |        |
-
 | React components                   | Status |
 | ---------------------------------- | ------ |
 | Dropdown menu size more consistent |        |
 | Move to another file               |        |
 
-| Flag public art/event               | Status            |
-| ----------------------------------- | ----------------- |
-| Seperate DynamoDB table             |                   |
-| Authentication for users            | URGENT FOR PUBLIC |
-| Seperate classes for public/private |                   |
+| Filter public art by class                                        | Status |
+| ----------------------------------------------------------------- | ------ |
+| Add options                                                       | done   |
+| Ability to select multiple options                                |        |
+| Store types as list in dynamoDB (currently only one type allowed) |        |
+| Make types an enum in Appsync GraphQL API                         |        |
 
-| Get photos                                     | Status            |
+| Flag public art/event                  | Status            |
+| -------------------------------------- | ----------------- |
+| Seperate DynamoDB table                |                   |
+| Authentication for users               | URGENT FOR PUBLIC |
+| Seperate classes for public/private    |                   |
+| Make flags enum in Appsync GraphQL API |                   |
+
+| Get photos & Info Window                       | Status            |
 | ---------------------------------------------- | ----------------- |
 | Download from DB                               | done              |
 | Close old info window when a new one is opened | done              |
