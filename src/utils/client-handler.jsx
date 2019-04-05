@@ -2,6 +2,9 @@ import gql from 'graphql-tag';
 import AWSAppSyncClient, {AUTH_TYPE} from 'aws-appsync';
 import aws_config from '../aws-exports';
 import {getPublicArtWithinBoundingBox, getPublicArt} from '../graphql/queries';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FlagLocationPopup from './flag-form.jsx';
 
 var previousInfoWindow = false;
 
@@ -17,17 +20,28 @@ function createClient() {
 }
 
 function createInfoWindow(publicArt) {
-    var contentString = '<div id="content">' +
-        '<h3 id="name">' + publicArt.name + '</h3>';
+    console.log("Creating info window for for:", publicArt);
 
-    // TODO: photo resizing
-    if (publicArt.photos.length > 0) {
-        var photo = JSON.parse(publicArt.photos[0]);
-        contentString += '<img src="' + photo.link + '">';
-    }
+    // Content of infoWindow is a DOM element, not a string representing HTML.
+    // https://developers.google.com/maps/documentation/javascript/infowindows
+    
 
+    var content = document.createElement('div');
+    ReactDOM.render(
+        <FlagLocationPopup
+            name={publicArt.name}
+            // TODO: photo resizing: infowindow final size is all over the place.
+            photos={publicArt.photos}
+        />,
+        content
+    );
+
+    // For some reason, I can't call var infoWindow = new google.maps.InfoWindow().
+    // The creation of the infoWindow creates an error: 
+    // 'function a.addListener() does not exist' ...?
+    // HOWEVER, it works fine if we just return it straight up.
     return new google.maps.InfoWindow({
-        content: contentString,
+        content: content
     });
 }
 
@@ -81,7 +95,6 @@ export function GetPublicArtWithinMap(map, filter, callback) {
 
             let marker = new google.maps.Marker({position: location, map: map, title: publicArt.name});
             marker.addListener("click", function() {
-                console.log("Getting info window and photo for:", publicArt.name);
                 if (previousInfoWindow) {
                     previousInfoWindow.close();
                 }

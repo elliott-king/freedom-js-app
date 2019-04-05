@@ -4,13 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
-import {GetPublicArtWithinMap} from './utils/client-handler';
-
-/*
-MAJOR TODOS:
-- move everything to new file (except maybe initMap())
-*/
-
+import {GetPublicArtWithinMap} from './utils/client-handler.jsx';
 
 var map;
 var markers = [];
@@ -82,7 +76,7 @@ function initMap() {
     ReactDOM.render(
         <PublicArtControlDiv/>,
         publicArtControlDiv
-    )
+    );
 
     // Try HTML5 geolocation
     if (navigator.geolocation) {
