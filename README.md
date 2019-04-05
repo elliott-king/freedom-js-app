@@ -1,17 +1,19 @@
 # Todos
 
 ### Goals for alpha-mom testing:
-| Goal                          | Tag         | Priority | In Progress | Done |
-| ----------------------------- | ----------- | :------: | ----------: | ---: |
-| React Components              | qol, js     |   low    |             |      |
-| Filter public art by class    | js          |   high   |         yes |  MVP |
-| Flag public art               | graphql, js |   high   |             |      |
-| Get photos & show info window | graphql, js |   high   |         yes |  MVP |
+| Goal                          | Tag          | Priority | In Progress | Done |
+| ----------------------------- | ------------ | :------: | ----------: | ---: |
+| React Components              | qol, js      |   low    |             |      |
+| Filter public art by class    | js           |   high   |         yes |  MVP |
+| Flag public art               | graphql, js  |   high   |             |      |
+| Get photos & show info window | graphql, js  |   high   |         yes |  MVP |
+| UI & QOL improvements         | qol, css, js |   low    |             |      |
 
-| React components                   | Status |
-| ---------------------------------- | ------ |
-| Dropdown menu size more consistent |        |
-| Move to another file               |        |
+| React components                                              | Status |
+| ------------------------------------------------------------- | ------ |
+| Move to another file                                          |        |
+| Turn map itself into React component (google-maps-react)      |        |
+| Have info window content be component that then contains form |        |
 
 | Filter public art by class                                        | Status |
 | ----------------------------------------------------------------- | ------ |
@@ -32,5 +34,13 @@
 | Download from DB                               | done              |
 | Close old info window when a new one is opened | done              |
 | Upload resized photos to db (400 x 400?)       |                   |
-| Upload photos (mobile app only?)               |                   |
+| Upload photos from app (mobile app only?)      |                   |
 | Enforce Google Places API from app/site only   | URGENT FOR PUBLIC |
+
+| UI & QOL improvements                                 | Status |
+| ----------------------------------------------------- | ------ |
+| Resize image window to a standard size                |        |
+| Place 'Report location' in own div                    |        |
+| Main dropdown menu size more consistent               |        |
+| All code to call AWS client should be in one file -_- |        |
+| Change name "flag form" -> "report form"              |        |
