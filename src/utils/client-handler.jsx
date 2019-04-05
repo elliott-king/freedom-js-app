@@ -20,7 +20,7 @@ function createClient() {
 }
 
 function createInfoWindow(publicArt) {
-    console.log("Creating info window for for:", publicArt);
+    console.debug("Creating info window for for:", publicArt);
 
     // Content of infoWindow is a DOM element, not a string representing HTML.
     // https://developers.google.com/maps/documentation/javascript/infowindows
@@ -64,7 +64,7 @@ export function GetPublicArtWithinMap(map, filter, callback) {
 
     var bounds = map.getBounds();
     var new_markers = [];
-    console.log("Bounds: ", bounds.toString());
+    console.debug("Bounds: ", bounds.toString());
 
     var query = gql(getPublicArtWithinBoundingBox);
     var variables = {
@@ -84,8 +84,8 @@ export function GetPublicArtWithinMap(map, filter, callback) {
         variables: variables
     }).then(({data: { getPublicArtWithinBoundingBox } } ) => {
 
-        console.log("Public art from getWithinBoundingBox: ");
-        console.log(getPublicArtWithinBoundingBox);
+        console.debug("Public art from getWithinBoundingBox: ");
+        console.debug(getPublicArtWithinBoundingBox);
 
         for (let publicArt of getPublicArtWithinBoundingBox) {
             let location = JSON.parse(publicArt.location); 

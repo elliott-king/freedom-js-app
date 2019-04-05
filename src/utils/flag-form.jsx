@@ -40,6 +40,8 @@ export default class FlagLocationPopup extends React.Component {
             displayStyle: {display: "block"},
             reasonContinued: "",
             selectedOption: "",
+            // TODO: think of more elegant solution.
+            reported: 0
         };
         this.optionChange = this.optionChange.bind(this);
         this.textChange = this.textChange.bind(this);
@@ -61,9 +63,9 @@ export default class FlagLocationPopup extends React.Component {
                 }
             }
         }).then(( { data: {flagPublicArt} }) => {
-            console.log("flagged:", flagPublicArt);
+            this.setState({reported: this.state.reported + 1});
+            console.debug("flagged:", flagPublicArt);
         });
-        // TODO: add issue to dynamoDB
     }
 
     optionChange(selectedOption) {
@@ -79,6 +81,14 @@ export default class FlagLocationPopup extends React.Component {
         if (this.props.photos.length > 0) {
             var photo = JSON.parse(this.props.photos[0]);
             return <img src={photo.link}/>
+        } else {
+            return null;
+        }
+    }
+
+    renderResponse() {
+        if (this.state.reported > 0){
+            return <p id="location-reported">Issue "{this.state.selectedOption.label}" for location "{this.props.name}" reported.</p>
         } else {
             return null;
         }
@@ -110,6 +120,7 @@ export default class FlagLocationPopup extends React.Component {
                     <button type="submit" className="btn">Report Location</button>
                     {/* <button type="submit" className="btn cancel" onClick={this.closeForm}>Cancel</button> */}
                 </form>
+                {this.renderResponse()}
             </div>
         )
     }
