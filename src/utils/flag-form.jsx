@@ -1,5 +1,20 @@
 import React from 'react';
 import Select from 'react-select';
+import gql from 'graphql-tag';
+import AWSAppSyncClient, {AUTH_TYPE} from 'aws-appsync';
+import aws_config from '../aws-exports';
+import { flagPublicArt } from '../graphql/mutations';
+
+function createClient() {
+    return new AWSAppSyncClient({
+        url: aws_config.aws_appsync_graphqlEndpoint,
+        region: aws_config.aws_appsync_region,
+        auth: {
+            type: AUTH_TYPE.API_KEY,
+            apiKey: aws_config.aws_appsync_apiKey,
+        }
+    });
+}
 
 // Options for flagging public art.
 const options = [
@@ -13,6 +28,10 @@ const options = [
 // Form adapted from: https://www.w3schools.com/howto/howto_js_popup_form.asp
 
 // Forms in React: https://reactjs.org/docs/forms.html
+
+// TODO: would like to make form appear/disappear.
+// See style changes in response to state change:
+// https://stackoverflow.com/questions/33593478
 export default class FlagLocationPopup extends React.Component {
 
     constructor(props) {
@@ -28,8 +47,22 @@ export default class FlagLocationPopup extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log("Flagged:", this.state);
         event.preventDefault(); // KTHXWHAT????
+
+        var client = createClient();
+
+        client.mutate({
+            mutation: gql(flagPublicArt),
+            variables: {
+                input: {
+                    name: this.props.name,
+                    reason: this.state.selectedOption.value,
+                    reason_continued: this.state.reasonContinued
+                }
+            }
+        }).then(( { data: {flagPublicArt} }) => {
+            console.log("flagged:", flagPublicArt);
+        });
         // TODO: add issue to dynamoDB
     }
 
@@ -40,6 +73,8 @@ export default class FlagLocationPopup extends React.Component {
         this.setState({reasonContinued: event.target.value});
     }
 
+    // Render optional things in React:
+    // https://stackoverflow.com/questions/44015876
     renderImg() {
         if (this.props.photos.length > 0) {
             var photo = JSON.parse(this.props.photos[0]);
@@ -49,14 +84,10 @@ export default class FlagLocationPopup extends React.Component {
         }
     }
 
-    // Style changes in response to state change.
-    // Taken from: https://stackoverflow.com/questions/33593478
     render() {
         return (
             <div id="content">
                 <h3>{this.props.name}</h3>
-                {/* Render optional things in React:
-                https://stackoverflow.com/questions/44015876 */}
                 {this.renderImg()}
                 <form style={this.state.displayStyle} 
                     className="flag-location-popup"
