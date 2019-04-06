@@ -1,6 +1,6 @@
 # Todos
 
-### Goals for alpha-mom testing:
+### Goals for alpha and beta testing:
 | Goal                          | Tag          | Priority | In Progress | Done |
 | ----------------------------- | ------------ | :------: | ----------: | ---: |
 | React Components              | qol, js      |   low    |             |      |
@@ -37,11 +37,11 @@
 | Upload photos from app (mobile app only?)      | URGENT FOR PUBLIC |
 | Enforce Google Places API from app/site only   | done              |
 
-| UI & QOL improvements                                 | Status          |
-| ----------------------------------------------------- | --------------- |
-| Resize image window to a standard size                |                 |
-| Place 'Report location' in own div                    |                 |
-| Main dropdown menu size more consistent               |                 |
-| All code to call AWS client should be in one file -_- |                 |
-| Change name "flag form" -> "report form"              |                 |
-| Fix problem with 'amplify publish'                    | HUGELY ANNOYING |
+| UI & QOL improvements                                   | Status          |
+| ------------------------------------------------------- | --------------- |
+| Resize image window to a standard size                  |                 |
+| Place 'Report location' in own div                      |                 |
+| Main dropdown menu size more consistent                 |                 |
+| All code to call AWS client should be in one file (-_-) |                 |
+| Change name "flag form" -> "report form"                |                 |
+| Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
