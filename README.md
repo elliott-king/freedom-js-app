@@ -1,3 +1,7 @@
+# Status
+MVP
+https://d3w3kga4a1s0nc.cloudfront.net/
+
 # Todos
 
 ### Goals for alpha and beta testing:
