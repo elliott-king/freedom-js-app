@@ -33,11 +33,16 @@ class PublicArtUi extends React.Component {
         return (
             <div className="public-art-ui">
                 <React.Fragment>
-                    <div className="public-art-text" 
+                    <button className="public-art-text"
+                    title="Click to find nearby public art."
+                    onClick={() => getPublicArtWithinMap(this.state.filter)}>
+                        Public Art Search
+                    </button>
+                    {/* <div className="public-art-text" 
                     title='Click to find nearby public art.'
                     onClick={() => getPublicArtWithinMap(this.state.filter)}>
                         Public Art Search
-                    </div>
+                    </div> */}
                     <div className="public-art-dropdown">
                         <Select
                             options={options}
