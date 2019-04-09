@@ -33,18 +33,14 @@ class PublicArtUi extends React.Component {
         return (
             <div className="public-art-ui">
                 <React.Fragment>
-                    <button className="public-art-text"
+                    <button className="public-art-button"
                     title="Click to find nearby public art."
                     onClick={() => getPublicArtWithinMap(this.state.filter)}>
                         Public Art Search
                     </button>
-                    {/* <div className="public-art-text" 
-                    title='Click to find nearby public art.'
-                    onClick={() => getPublicArtWithinMap(this.state.filter)}>
-                        Public Art Search
-                    </div> */}
                     <div className="public-art-dropdown">
                         <Select
+                            menuPlacement="top"
                             options={options}
                             isClearable={false}
                             defaultValue={options[0]}
@@ -77,7 +73,7 @@ function initMap() {
     // Taken from:
     // https://github.com/tomchentw/react-google-maps/issues/818
     var publicArtControlDiv = document.createElement('div');
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(publicArtControlDiv);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(publicArtControlDiv);
     ReactDOM.render(
         <PublicArtControlDiv/>,
         publicArtControlDiv
