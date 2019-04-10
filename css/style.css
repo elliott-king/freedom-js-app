@@ -11,8 +11,11 @@ html, body {
     padding: 0;
 }
 
-.public-art-control {
-    padding: 30px;
+#public-art-upload-form {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    display: flex;
 }
 
 .public-art-ui {

@@ -79,6 +79,14 @@ function initMap() {
         publicArtControlDiv
     );
 
+    map.addListener('click', function(event) {
+        var latLng = event.latLng;
+        var lat = latLng.lat();
+        var lng = latLng.lng();
+
+        newPublicArtUpload(lat, lng);
+    });
+
     // Try HTML5 geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -123,4 +131,102 @@ function showMarkers(markers) {
 }
 function deleteMarkers(markers) {
     setMapOnAll(null, markers);
+}
+
+class PublicArtUploadForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: "",
+            description: "",
+            selectedOption: ""
+        };
+        this.optionChange = this.optionChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.nameChange = this.nameChange.bind(this);
+        this.descriptionChange = this.descriptionChange.bind(this);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault(); // KTHXWHAT?
+
+        // TODO: need a check on mandatory fields. 
+        // Could just rely on server throwing an error.
+        console.log("Submit location:", this.state);
+
+        // Delete a div from the DOM.
+        // https://stackoverflow.com/questions/8404797/
+        var f = document.getElementById("public-art-upload-form");
+        f.parentNode.removeChild(f);
+
+    }
+
+    optionChange(selectedOption) {
+        this.setState({selectedOption: selectedOption});
+    }
+
+    nameChange(event) {
+        this.setState({name: event.target.value});
+    }
+
+    descriptionChange(event) {
+        this.setState({description: event.target.value});
+    }
+
+    // center div horizontally & vertically
+    // https://stackoverflow.com/questions/22658141
+
+    render() {
+        return (
+            <div 
+            id="public-art-upload-form"
+            className="public-art-upload-form"
+            >
+                <form onSubmit={this.handleSubmit}>
+                    <h3>Upload new public art.</h3>
+                    <input type="text"
+                        placeholder="Name"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.nameChange}
+                    />
+                    <Select
+                        // TODO: this should not include 'all'
+                        options={options}
+                        onChange={this.optionChange}
+                    />
+                    <div>
+                        <p>Latitude: {this.props.lat}</p>
+                        <p>Longitude: {this.props.lng}</p>
+                    </div>
+                    <div>TODO: here you can upload an image.</div>
+                    <input type="text"
+                        placeholder="Description"
+                        name="description"
+                        value={this.state.description}
+                        onChange={this.descriptionChange}
+                    />
+                    <button type="submit" className="btn">Upload location</button>
+                </form>
+            </div>
+        )
+    }
+}
+
+// TODO: just take in a latLng
+function newPublicArtUpload(lat, lng) {
+    console.debug("New click event at:", lat, lng);
+
+    var publicArtUploadDiv = document.createElement('div');
+    document.getElementById('root').appendChild(publicArtUploadDiv);
+
+    ReactDOM.render(
+        <PublicArtUploadForm
+            lat={lat}
+            lng={lng}
+        />,
+        publicArtUploadDiv
+    );
+
 }
