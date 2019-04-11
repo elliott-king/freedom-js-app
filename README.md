@@ -13,11 +13,14 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Get photos & show info window | graphql, js  |   high   |         yes |  MVP |
 | UI & QOL improvements         | qol, css, js |   low    |             |      |
 
-| React components                                              | Status |
-| ------------------------------------------------------------- | ------ |
-| Move to another file                                          |        |
-| Turn map itself into React component (google-maps-react)      |        |
-| Have info window content be component that then contains form |        |
+| React components                                               | Status |
+| -------------------------------------------------------------- | ------ |
+| Move to another file                                           |        |
+| Turn map itself into React component (google-maps-react)       |        |
+| Have info window content be component that then contains form  |        |
+| Forms should handle changes in multiple inputs with one method |        |
+| Each upload submission creates duplicate empty divs            |        |
+| Only create new upload div if the old one does not exist       | URGENT |
 
 | Filter public art by class                                        | Status |
 | ----------------------------------------------------------------- | ------ |
@@ -49,3 +52,10 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | All code to call AWS client should be in one file (-_-) |                 |
 | Change name "flag form" -> "report form"                |                 |
 | Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
+
+
+### Possible extensions
+- Use AWS Rekognition to reject images that do not meet decency guidelines
+- Add user auth:
+   - credit images
+   - allow upload only if user is logged in
