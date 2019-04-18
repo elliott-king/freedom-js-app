@@ -37,6 +37,7 @@ export default class FlagLocationPopup extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
+            imageFile: "",
             displayStyle: {display: "block"},
             reasonContinued: "",
             selectedOption: "",
@@ -46,6 +47,13 @@ export default class FlagLocationPopup extends React.Component {
         this.optionChange = this.optionChange.bind(this);
         this.textChange = this.textChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.imageChange = this.imageChange.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
+    }
+
+    uploadImage(event) {
+        event.preventDefault(); // ...?
+        console.log(this.state.imageFile);
     }
 
     handleSubmit(event) {
@@ -74,6 +82,9 @@ export default class FlagLocationPopup extends React.Component {
     textChange(event) {
         this.setState({reasonContinued: event.target.value});
     }
+    imageChange(event) {
+        this.setState({imageFile: event.target.value});
+    }
 
     // Render optional things in React:
     // https://stackoverflow.com/questions/44015876
@@ -99,6 +110,18 @@ export default class FlagLocationPopup extends React.Component {
             <div id="content">
                 <h3>{this.props.name}</h3>
                 {this.renderImg()}
+                <form 
+                    className = "new-image-form"
+                    onSubmit={this.uploadImage}
+                >
+                    <h4>Upload new image</h4>
+                    <input 
+                        type="file"
+                        value={this.state.imageFile}
+                        onChange={this.imageChange}
+                    />
+                    <button type="submit" className="btn">Upload</button>
+                </form>
                 <form style={this.state.displayStyle} 
                     className="flag-location-popup"
                     onSubmit={this.handleSubmit}>
