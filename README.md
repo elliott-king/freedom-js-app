@@ -13,14 +13,14 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Get photos & show info window | graphql, js  |   high   |         yes |  MVP |
 | UI & QOL improvements         | qol, css, js |   low    |             |      |
 
-| React components                                               | Status |
-| -------------------------------------------------------------- | ------ |
-| Move to another file                                           |        |
-| Turn map itself into React component (google-maps-react)       |        |
-| Have info window content be component that then contains form  |        |
-| Forms should handle changes in multiple inputs with one method |        |
-| Each upload submission creates duplicate empty divs            |        |
-| Only create new upload div if the old one does not exist       | URGENT |
+| React components                                                  | Status |
+| ----------------------------------------------------------------- | ------ |
+| Move to another file                                              |        |
+| Turn map itself into React component (google-maps-react)          |        |
+| Have info window content be component that then contains form     |        |
+| Forms should handle changes in multiple inputs with one method    |        |
+| Each upload submission creates duplicate empty divs               |        |
+| Only create new upload div if the old one does not exist (bugfix) | URGENT |
 
 | Filter public art by class                                        | Status |
 | ----------------------------------------------------------------- | ------ |
@@ -49,7 +49,7 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Resize image window to a standard size                  |                 |
 | Place 'Report location' in own div                      |                 |
 | Main dropdown menu size more consistent                 |                 |
-| All code to call AWS client should be in one file (-_-) |                 |
+| All code to call AWS client should be in one file (-_-) | done            |
 | Change name "flag form" -> "report form"                |                 |
 | Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
 

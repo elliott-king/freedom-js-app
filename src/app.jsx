@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
-import {GetPublicArtWithinMap} from './utils/client-handler.jsx';
+import {GetPublicArtWithinMap} from './utils/info-window.jsx';
 
 var map;
 var markers = [];

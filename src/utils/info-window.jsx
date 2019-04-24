@@ -1,23 +1,11 @@
 import gql from 'graphql-tag';
-import AWSAppSyncClient, {AUTH_TYPE} from 'aws-appsync';
-import aws_config from '../aws-exports';
 import {getPublicArtWithinBoundingBox, getPublicArt} from '../graphql/queries';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FlagLocationPopup from './flag-form.jsx';
+import { createClient } from './client-handler';
 
 var previousInfoWindow = false;
-
-function createClient() {
-    return new AWSAppSyncClient({
-        url: aws_config.aws_appsync_graphqlEndpoint,
-        region: aws_config.aws_appsync_region,
-        auth: {
-            type: AUTH_TYPE.API_KEY,
-            apiKey: aws_config.aws_appsync_apiKey,
-        }
-    });
-}
 
 function createInfoWindow(publicArt) {
     console.debug("Creating info window for for:", publicArt);
@@ -46,7 +34,7 @@ function createInfoWindow(publicArt) {
 }
 
 function getPublicArtInfoWindow(name, callback) {
-    var client = createClient()
+    var client = createClient();
 
     client.query({
         query: gql(getPublicArt),
