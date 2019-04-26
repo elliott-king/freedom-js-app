@@ -86,6 +86,7 @@ freedom-js-app.code-workspace
 .graphqlconfig.yml
 .amplifyrc
 amplify/
+!amplify/backend/api/freedomjsapp/schema.graphql
 src/aws-exports.js
 src/graphql/
 

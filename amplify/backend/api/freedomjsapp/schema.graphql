@@ -1,0 +1,63 @@
+type PublicArt @model{
+	# location: Location
+	id: ID!
+	location: AWSJSON
+	name: String
+	description: String
+	# type: PublicArtType
+	type: String
+	photos: [AWSJSON]
+	# TODO: need ids...?
+}
+
+input S3ObjectInput {
+    bucket: String!
+    region: String!
+    localUri: String
+    key: String
+    mimeType: String
+}
+
+type S3Object {
+    bucket: String!
+    region: String!
+    key: String!
+}
+
+# TODO: should not be in final Beta
+input ChangePublicArtTypeInput {
+	name: String!
+	type: String!
+}
+
+input UploadImageInput {
+	id: ID 
+	name: String!
+	description: String
+	file: S3ObjectInput
+}
+
+# TODO: make 'reason' an enum
+
+input FlagLocationInput {
+	name: String!
+	reason: String!
+	reason_continued: String
+}
+
+type Mutation {
+	createImage(input: UploadImageInput!): S3Object
+	flagLocation(input: FlagLocationInput!): PublicArt
+	changePublicArtType(input: ChangePublicArtTypeInput!): PublicArt
+}
+
+type Query {
+	# getImage: S3Object
+	# getPublicArt(name: String!): PublicArt
+	getPublicArtWithinBoundingBox(
+		top_right_gps: AWSJSON!,
+		bottom_left_gps: AWSJSON!,
+		limit: Int,
+		type: String
+	): [PublicArt]
+}
