@@ -33,21 +33,23 @@ function createInfoWindow(publicArt) {
     });
 }
 
-function getPublicArtInfoWindow(name, callback) {
+function getPublicArtInfoWindow(id, callback) {
     var client = createClient();
+    console.log("client created");
 
     client.query({
         query: gql(getPublicArt),
-        variables: { name: name },
+        variables: { id: id },
     }).then(({data: {getPublicArt}}) => {
+        console.log("client queried");
         
         var infoWindow = createInfoWindow(getPublicArt);
         callback(infoWindow);
-    })
+    });
 
 }
 
-export function GetPublicArtWithinMap(map, filter, callback) {
+export function getPublicArtWithinMap(map, filter, callback) {
     var client = createClient();
 
     var bounds = map.getBounds();
@@ -86,7 +88,9 @@ export function GetPublicArtWithinMap(map, filter, callback) {
                 if (previousInfoWindow) {
                     previousInfoWindow.close();
                 }
-                getPublicArtInfoWindow(publicArt.name, function(infoWindow) {
+                console.log("querying public art:", publicArt.name, publicArt.id);
+                getPublicArtInfoWindow(publicArt.id, function(infoWindow) {
+                    console.log("callback called");
                     previousInfoWindow = infoWindow;
                     previousInfoWindow.open(map, marker);
                 });

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
-import {GetPublicArtWithinMap} from './utils/info-window.jsx';
+import {getPublicArtWithinMap} from './utils/info-window.jsx';
 
 var map;
 var markers = [];
@@ -35,7 +35,7 @@ class PublicArtUi extends React.Component {
                 <React.Fragment>
                     <button className="public-art-button"
                     title="Click to find nearby public art."
-                    onClick={() => getPublicArtWithinMap(this.state.filter)}>
+                    onClick={() => searchWithinMapBounds(this.state.filter)}>
                         Public Art Search
                     </button>
                     <div className="public-art-dropdown">
@@ -112,9 +112,9 @@ function handleLocationError(browserHasGeolocation, pos) {
     infoWindow.open(map);
 }
 
-function getPublicArtWithinMap(filter) {
+function searchWithinMapBounds(filter) {
 
-    GetPublicArtWithinMap(map, filter, function(new_markers) {
+    getPublicArtWithinMap(map, filter, function(new_markers) {
         deleteMarkers(markers);
         markers = new_markers
         showMarkers(markers);

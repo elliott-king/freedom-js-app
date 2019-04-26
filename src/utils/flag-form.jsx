@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import gql from 'graphql-tag';
-import { flagPublicArt } from '../graphql/mutations';
+import { flagLocation } from '../graphql/mutations';
 import { createClient } from './client-handler';
 
 // Options for flagging public art.
@@ -50,7 +50,7 @@ export default class FlagLocationPopup extends React.Component {
         var client = createClient();
 
         client.mutate({
-            mutation: gql(flagPublicArt),
+            mutation: gql(flagLocation),
             variables: {
                 input: {
                     name: this.props.name,
@@ -58,9 +58,9 @@ export default class FlagLocationPopup extends React.Component {
                     reason_continued: this.state.reasonContinued
                 }
             }
-        }).then(( { data: {flagPublicArt} }) => {
+        }).then(( { data: {flagLocation} }) => {
             this.setState({reported: this.state.reported + 1});
-            console.debug("flagged:", flagPublicArt);
+            console.debug("flagged:", flagLocation);
         });
     }
 
