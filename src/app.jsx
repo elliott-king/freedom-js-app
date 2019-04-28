@@ -138,6 +138,7 @@ class PublicArtUploadForm extends React.Component {
         super(props);
 
         this.state = {
+            imageFile: "",
             name: "",
             description: "",
             selectedOption: ""
@@ -145,6 +146,7 @@ class PublicArtUploadForm extends React.Component {
         this.optionChange = this.optionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameChange = this.nameChange.bind(this);
+        this.imageChange = this.imageChange.bind(this);
         this.descriptionChange = this.descriptionChange.bind(this);
     }
 
@@ -165,13 +167,15 @@ class PublicArtUploadForm extends React.Component {
     optionChange(selectedOption) {
         this.setState({selectedOption: selectedOption});
     }
-
     nameChange(event) {
         this.setState({name: event.target.value});
     }
 
     descriptionChange(event) {
         this.setState({description: event.target.value});
+    }
+    imageChange(event) {
+        this.setState({imageFile: event.target.value});
     }
 
     // center div horizontally & vertically
@@ -200,13 +204,21 @@ class PublicArtUploadForm extends React.Component {
                         <p>Latitude: {this.props.lat}</p>
                         <p>Longitude: {this.props.lng}</p>
                     </div>
-                    <div>TODO: here you can upload an image.</div>
-                    <input type="text"
-                        placeholder="Description"
-                        name="description"
-                        value={this.state.description}
-                        onChange={this.descriptionChange}
-                    />
+                    <div><h4>Choose image for location</h4>
+                        <input 
+                            type="file"
+                            value={this.state.imageFile}
+                            onChange={this.imageChange}
+                        />
+                    </div>
+                    <div>
+                        <input type="text"
+                            placeholder="Description"
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.descriptionChange}
+                        />
+                    </div>
                     <button type="submit" className="btn">Upload location</button>
                 </form>
             </div>
@@ -222,6 +234,7 @@ function newPublicArtUpload(lat, lng) {
     var publicArtUploadDiv = document.createElement('div');
     document.getElementById('root').appendChild(publicArtUploadDiv);
 
+    // TODO: needs an 'x' exit button.
     ReactDOM.render(
         <PublicArtUploadForm
             lat={lat}
