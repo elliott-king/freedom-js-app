@@ -52,6 +52,7 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | All code to call AWS client should be in one file (-_-) | done            |
 | Change name "flag form" -> "report form"                |                 |
 | Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
+| Google uses 'lng', ES uses 'lon' -> inconsistent        |                 |
 
 
 ### Possible extensions

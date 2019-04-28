@@ -41,7 +41,7 @@ export default class FlagLocationPopup extends React.Component {
 
     uploadImage(event) {
         event.preventDefault(); // ...?
-        console.log(this.state.imageFile);
+        console.log(this.state.imageFile); // TODO: upload file to S3
     }
 
     handleSubmit(event) {

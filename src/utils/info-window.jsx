@@ -80,7 +80,7 @@ export function getPublicArtWithinMap(map, filter, callback) {
         for (let publicArt of getPublicArtWithinBoundingBox) {
             let location = JSON.parse(publicArt.location); 
 
-            // TODO: FIXME
+            // TODO: FIXME, google's format is different than elasticsearch's
             location.lng = location.lon;
 
             let marker = new google.maps.Marker({position: location, map: map, title: publicArt.name});

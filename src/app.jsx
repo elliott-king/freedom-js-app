@@ -215,6 +215,7 @@ class PublicArtUploadForm extends React.Component {
 }
 
 // TODO: just take in a latLng
+// TODO: upload items to S3
 function newPublicArtUpload(lat, lng) {
     console.debug("New click event at:", lat, lng);
 
