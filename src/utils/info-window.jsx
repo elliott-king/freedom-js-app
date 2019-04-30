@@ -18,6 +18,7 @@ function createInfoWindow(publicArt) {
     ReactDOM.render(
         <FlagLocationPopup
             name={publicArt.name}
+            id={publicArt.id}
             // TODO: photo resizing: infowindow final size is all over the place.
             photos={publicArt.photos}
         />,
@@ -35,13 +36,11 @@ function createInfoWindow(publicArt) {
 
 function getPublicArtInfoWindow(id, callback) {
     var client = createClient();
-    console.log("client created");
 
     client.query({
         query: gql(getPublicArt),
         variables: { id: id },
     }).then(({data: {getPublicArt}}) => {
-        console.log("client queried");
         
         var infoWindow = createInfoWindow(getPublicArt);
         callback(infoWindow);
@@ -90,7 +89,6 @@ export function getPublicArtWithinMap(map, filter, callback) {
                 }
                 console.log("querying public art:", publicArt.name, publicArt.id);
                 getPublicArtInfoWindow(publicArt.id, function(infoWindow) {
-                    console.log("callback called");
                     previousInfoWindow = infoWindow;
                     previousInfoWindow.open(map, marker);
                 });
