@@ -144,6 +144,7 @@ class PublicArtUploadForm extends React.Component {
             selectedOption: ""
         };
         this.optionChange = this.optionChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameChange = this.nameChange.bind(this);
         this.imageChange = this.imageChange.bind(this);
@@ -161,7 +162,11 @@ class PublicArtUploadForm extends React.Component {
         // https://stackoverflow.com/questions/8404797/
         var f = document.getElementById("public-art-upload-form");
         f.parentNode.removeChild(f);
-
+    }
+    handleClose(event) {
+        event.preventDefault();
+        var f = document.getElementById("public-art-upload-form");
+        f.parentNode.removeChild(f);
     }
 
     optionChange(selectedOption) {
@@ -220,6 +225,7 @@ class PublicArtUploadForm extends React.Component {
                         />
                     </div>
                     <button type="submit" className="btn">Upload location</button>
+                    <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
             </div>
         )
