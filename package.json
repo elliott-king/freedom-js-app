@@ -4,10 +4,13 @@
   "description": "AWS Freedom JavaScript Example",
   "dependencies": {
     "aws-amplify": "^1.1.26",
-    "aws-appsync": "^1.7.2",
-    "graphql-tag": "^2.10.1",
+    "aws-amplify-react": "^2.3.6",
+    "aws-appsync": "file:../aws-mobile-appsync-sdk-js/packages/aws-appsync",
+    "babel-polyfill": "^6.26.0",
+    "graphql-tag": "^2.10.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
