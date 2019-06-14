@@ -1,3 +1,5 @@
+# TODO: consider making @searchable
+# https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model{
 	# location: Location
 	id: ID!
@@ -6,17 +8,39 @@ type PublicArt @model{
 	description: String
 	# type: PublicArtType
 	type: String
+	# TODO: add @connection between this and 'type Photo'
 	photos: [AWSJSON]
 	# TODO: need ids...?
 }
 
-input S3ObjectInput {
-    bucket: String!
-    region: String!
-    localUri: String
-    key: String
-    mimeType: String
+# type Photo @model {
+# 	photo_id: ID!
+# 	location_id: ID!
+# 	description: String
+# 	fileuri: AWSURL!
+# }
+
+# TODO: add @auth rule so everyone can view
+type Photo @model {
+	photo_id: ID
+	location_id: ID!
+	description: String
+	file: S3Object
 }
+
+# enum Visibility {
+# 	public 
+# 	private
+# }
+
+# input S3ObjectInput {
+#     bucket: String!
+#     region: String!
+#     localUri: String!
+# 	visibility: Visibility
+#     key: String!
+#     mimeType: String!
+# }
 
 type S3Object {
     bucket: String!
@@ -30,12 +54,12 @@ input ChangePublicArtTypeInput {
 	type: String!
 }
 
-input UploadImageInput {
-	id: ID 
-	name: String!
-	description: String
-	file: S3ObjectInput
-}
+# input CreatePhotoInput {
+# 	photo_id: ID
+# 	location_id: ID!
+# 	description: String 
+# 	file: S3ObjectInput
+# }
 
 # TODO: make 'reason' an enum
 
@@ -46,14 +70,13 @@ input FlagLocationInput {
 }
 
 type Mutation {
-	createImage(input: UploadImageInput!): S3Object
+	# createPhoto(input: CreatePhotoInput!): Photo
 	flagLocation(input: FlagLocationInput!): PublicArt
 	changePublicArtType(input: ChangePublicArtTypeInput!): PublicArt
 }
 
 type Query {
 	# getImage: S3Object
-	# getPublicArt(name: String!): PublicArt
 	getPublicArtWithinBoundingBox(
 		top_right_gps: AWSJSON!,
 		bottom_left_gps: AWSJSON!,
