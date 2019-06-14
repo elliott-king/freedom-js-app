@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "AWS Freedom JavaScript Example",
   "dependencies": {
-    "aws-amplify": "^1.1.26",
+    "aws-amplify": "^1.1.28",
     "aws-amplify-react": "^2.3.6",
-    "aws-appsync": "file:../aws-mobile-appsync-sdk-js/packages/aws-appsync",
+    "aws-appsync": "file:aws-appsync-1.8.0.tgz",
     "babel-polyfill": "^6.26.0",
+    "graphql": "^14.3.1",
     "graphql-tag": "^2.10.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
