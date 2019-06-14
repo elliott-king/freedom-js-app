@@ -43,6 +43,7 @@ function getPublicArtInfoWindow(id, client, callback) {
     client.query({
         query: gql(getPublicArt),
         variables: { id: id },
+        fetchPolicy: 'network-only',
     }).then(({data: {getPublicArt}}) => {
         
         var infoWindow = createInfoWindow(getPublicArt, client);
