@@ -2,12 +2,14 @@ import gql from 'graphql-tag';
 import {getPublicArtWithinBoundingBox, getPublicArt} from '../graphql/queries';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import FlagLocationPopup from './flag-form.jsx';
-import { createClient } from './client-handler';
+// import { createClient } from './client-handler';
 
 var previousInfoWindow = false;
+// const client = createClient();
 
-function createInfoWindow(publicArt) {
+function createInfoWindow(publicArt, client) {
     console.debug("Creating info window for for:", publicArt);
 
     // Content of infoWindow is a DOM element, not a string representing HTML.
@@ -17,6 +19,7 @@ function createInfoWindow(publicArt) {
     var content = document.createElement('div');
     ReactDOM.render(
         <FlagLocationPopup
+            client={client}
             name={publicArt.name}
             id={publicArt.id}
             // TODO: photo resizing: infowindow final size is all over the place.
@@ -34,22 +37,22 @@ function createInfoWindow(publicArt) {
     });
 }
 
-function getPublicArtInfoWindow(id, callback) {
-    var client = createClient();
+function getPublicArtInfoWindow(id, client, callback) {
+    // var client = createClient();
 
     client.query({
         query: gql(getPublicArt),
         variables: { id: id },
     }).then(({data: {getPublicArt}}) => {
         
-        var infoWindow = createInfoWindow(getPublicArt);
+        var infoWindow = createInfoWindow(getPublicArt, client);
         callback(infoWindow);
     });
 
 }
 
-export function getPublicArtWithinMap(map, filter, callback) {
-    var client = createClient();
+export function getPublicArtWithinMap(map, filter, client, callback) {
+    // var client = createClient();
 
     var bounds = map.getBounds();
     var new_markers = [];
@@ -88,7 +91,7 @@ export function getPublicArtWithinMap(map, filter, callback) {
                     previousInfoWindow.close();
                 }
                 console.log("querying public art:", publicArt.name, publicArt.id);
-                getPublicArtInfoWindow(publicArt.id, function(infoWindow) {
+                getPublicArtInfoWindow(publicArt.id, client, function(infoWindow) {
                     previousInfoWindow = infoWindow;
                     previousInfoWindow.open(map, marker);
                 });

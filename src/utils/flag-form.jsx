@@ -1,8 +1,15 @@
 import React from 'react';
 import Select from 'react-select';
+
+import { v4 as uuid } from 'uuid';
+
 import gql from 'graphql-tag';
-import { flagLocation } from '../graphql/mutations';
-import { createClient } from './client-handler';
+import { flagLocation, createPhoto } from '../graphql/mutations';
+
+// import { createClient } from './client-handler';
+
+import { Storage, Auth } from 'aws-amplify';
+import aws_config from '../aws-exports';
 
 // Options for flagging public art.
 const options = [
@@ -32,24 +39,89 @@ export default class FlagLocationPopup extends React.Component {
             // TODO: think of more elegant solution.
             reported: 0
         };
+
+        // To upload images in React, use file API.
+        // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
+        this.imageInput = React.createRef();
         this.optionChange = this.optionChange.bind(this);
         this.textChange = this.textChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.imageChange = this.imageChange.bind(this);
+        // this.imageChange = this.imageChange.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
     }
 
     uploadImage(event) {
         event.preventDefault(); // ...?
-        console.log(this.state.imageFile); // TODO: upload file to S3
+
+        // const client = createClient();
+
+        (async () => {
+            let file;
+            let photo_id;
+
+            if (this.imageInput.current.files.length > 0) {
+                let img_file = this.imageInput.current.files[0];
+                console.log('file to upload:', img_file);
+
+                // NOTE: Using only amplify Storage module
+                // photo_id = uuid();
+                // Storage.put(photo_id + '.png', img_file, {
+                //     contentType: 'image/png',
+                // })
+                // .then(result => console.log('result of image upload:', result))
+                // .catch(err => console.error(err));
+
+                // NOTE: Attempting to use the AppSync API w/ complex objects uploading
+                const { name: filename, type: mimeType } = img_file;
+                const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(filename);
+                console.log('filename, extension', filename, extension);
+
+                const bucket = aws_config.aws_user_files_s3_bucket;
+                const region = aws_config.aws_user_files_s3_bucket_region;
+                // const visibility = 'public'; // If public, will show publicly in bucket?
+                const visibility = 'private';
+                const {identityId} = await Auth.currentCredentials();
+
+                photo_id = uuid();
+                const key = `${visibility}/${identityId}/${photo_id}${extension && '.'}${extension}`;
+                
+                file = {
+                    bucket, 
+                    key,
+                    region,
+                    mimeType,
+                    localUri: img_file,
+                };
+                console.log('file object:', file);
+                console.log('targeting location:', this.props.name);
+                console.log('location has id:', this.props.id);
+            }
+
+            // const result = await 
+            this.props.client.mutate({
+                mutation: gql(createPhoto),
+                variables: {
+                    input: {
+                        // file: {file, __typename: 'S3Object' },
+                        photo_id: photo_id,
+                        location_id: this.props.id,
+                        description: 'First test: this is a photo file',
+                        file: file
+                        // __typename: 'Photo',
+                    }
+                }
+            })
+            .then( result => console.log('result of image upload:', result))
+            .catch(err => console.error(err));
+        })();
     }
 
     handleSubmit(event) {
         event.preventDefault(); // KTHXWHAT????
 
-        var client = createClient();
+        // const client = createClient();
 
-        client.mutate({
+        this.props.client.mutate({
             mutation: gql(flagLocation),
             variables: {
                 input: {
@@ -70,14 +142,15 @@ export default class FlagLocationPopup extends React.Component {
     textChange(event) {
         this.setState({reasonContinued: event.target.value});
     }
-    imageChange(event) {
-        this.setState({imageFile: event.target.value});
-    }
+    // imageChange(event) {
+    //     console.log(event.target);
+    //     this.setState({imageFile: event.target.files[0]});
+    // }
 
     // Render optional things in React:
     // https://stackoverflow.com/questions/44015876
     renderImg() {
-        if (this.props.photos.length > 0) {
+        if (this.props.photos && this.props.photos.length > 0) {
             var photo = JSON.parse(this.props.photos[0]);
             return <img src={photo.link}/>
         } else {
@@ -105,8 +178,10 @@ export default class FlagLocationPopup extends React.Component {
                     <h4>Upload new image</h4>
                     <input 
                         type="file"
-                        value={this.state.imageFile}
-                        onChange={this.imageChange}
+                        accept="image/png"
+                        ref={this.imageInput}
+                        // value={this.state.imageFile}
+                        // onChange={this.imageChange}
                     />
                     <button type="submit" className="btn">Upload</button>
                 </form>

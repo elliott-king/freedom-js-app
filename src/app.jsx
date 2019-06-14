@@ -5,9 +5,19 @@ import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
 import {getPublicArtWithinMap} from './utils/info-window.jsx';
+import { createClient } from './utils/client-handler';
+
+import {Authenticator} from 'aws-amplify-react';
+import Amplify from 'aws-amplify';
+import aws_config from './aws-exports';
+
+// Needed to avoid error w/ async fns
+// https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
+import 'babel-polyfill';
 
 var map;
 var markers = [];
+const client = createClient();
 
 const options = [
     { value: 'all', label: 'All'},
@@ -58,7 +68,9 @@ class PublicArtControlDiv extends React.Component {
     render() {
         return (
         <div className="public-art-control" index="1">
-            <PublicArtUi/>
+            <Authenticator>
+                <PublicArtUi/>
+            </Authenticator>
         </div>
         )
     }
@@ -75,7 +87,7 @@ function initMap() {
     var publicArtControlDiv = document.createElement('div');
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(publicArtControlDiv);
     ReactDOM.render(
-        <PublicArtControlDiv/>,
+        <PublicArtControlDiv />,
         publicArtControlDiv
     );
 
@@ -101,6 +113,9 @@ function initMap() {
         handleLocationError(false, map.getCenter());
     }
 }
+
+// TODO: can we just do Auth.configure(aws_config)?
+Amplify.configure(aws_config);
 initMap();
 
 function handleLocationError(browserHasGeolocation, pos) {
@@ -114,7 +129,7 @@ function handleLocationError(browserHasGeolocation, pos) {
 
 function searchWithinMapBounds(filter) {
 
-    getPublicArtWithinMap(map, filter, function(new_markers) {
+    getPublicArtWithinMap(map, filter, client, function(new_markers) {
         deleteMarkers(markers);
         markers = new_markers
         showMarkers(markers);
