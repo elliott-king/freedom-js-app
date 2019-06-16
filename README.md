@@ -36,13 +36,14 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Seperate classes for public/private    |                           |
 | Make flags enum in Appsync GraphQL API |                           |
 
-| Get photos & Info Window                       | Status            |
-| ---------------------------------------------- | ----------------- |
-| Download from DB                               | done              |
-| Close old info window when a new one is opened | done              |
-| Upload resized photos to db (400 x 400?)       |                   |
-| Upload photos from app (mobile app only?)      | URGENT FOR PUBLIC |
-| Enforce Google Places API from app/site only   | done              |
+| Get photos & Info Window                                | Status            |
+| ------------------------------------------------------- | ----------------- |
+| Download from DB                                        | done              |
+| Close old info window when a new one is opened          | done              |
+| Upload resized photos to db (400 x 400?)                |                   |
+| Upload photos from app (mobile app only?)               | URGENT FOR PUBLIC |
+| Enforce Google Places API from app/site only            | done              |
+| Error if photo doesn't exist: info window does not open | URGENT            |
 
 | UI & QOL improvements                                   | Status                 |
 | ------------------------------------------------------- | ---------------------- |
