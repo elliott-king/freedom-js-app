@@ -83,4 +83,6 @@ type Query {
 		limit: Int,
 		type: String
 	): [PublicArt]
+
+    whoAmI: String
 }
