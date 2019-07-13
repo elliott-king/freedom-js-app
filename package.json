@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "AWS Freedom JavaScript Example",
   "dependencies": {
-    "aws-amplify": "^1.1.28",
-    "aws-amplify-react": "^2.3.6",
+    "aws-amplify": "^1.1.30",
+    "aws-amplify-react": "^2.3.10",
     "aws-appsync": "file:aws-appsync-1.8.0.tgz",
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.2.8",
-    "graphql": "^14.3.1",
+    "graphql": "^14.4.2",
     "graphql-tag": "^2.10.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
@@ -16,17 +16,17 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^2.1.1",
     "react-select": "^2.4.3",
     "style-loader": "^0.23.1",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
     "start": "webpack && webpack-dev-server --mode development",
