@@ -74,7 +74,8 @@ export function getPublicArtWithinMap(map, filter, client, callback) {
 
     client.query({
         query: query,
-        variables: variables
+        variables: variables,
+        fetchPolicy: 'network-only'
     }).then(({data: { getPublicArtWithinBoundingBox } } ) => {
 
         console.debug("Public art from getWithinBoundingBox: ");
