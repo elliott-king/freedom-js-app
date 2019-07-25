@@ -32,7 +32,7 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Flag public art/event                  | Status                    |
 | -------------------------------------- | ------------------------- |
 | Seperate DynamoDB table                |                           |
-| Authentication for users               | (KINDA) URGENT FOR PUBLIC |
+| Authentication for users               | done |
 | Seperate classes for public/private    |                           |
 | Make flags enum in Appsync GraphQL API |                           |
 
@@ -45,16 +45,17 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Enforce Google Places API from app/site only            | done              |
 | Error if photo doesn't exist: info window does not open | URGENT            |
 
-| UI & QOL improvements                                   | Status                 |
-| ------------------------------------------------------- | ---------------------- |
-| Resize image window to a standard size                  |                        |
-| Place 'Report location' in own div                      |                        |
-| Main dropdown menu size more consistent                 |                        |
-| All code to call AWS client should be in one file (-_-) | done                   |
-| Change name "flag form" -> "report form"                |                        |
-| Fix problem with 'amplify publish'                      | HUGELY ANNOYING        |
-| Google uses 'lng', ES uses 'lon' -> inconsistent        |                        |
-| Revert aws-appsync package to official npm              | AS SOON AS NPM UPDATES |
+| UI & QOL improvements                                   | Status          |
+| ------------------------------------------------------- | --------------- |
+| Resize image window to a standard size                  |                 |
+| Place 'Report location' in own div                      |                 |
+| Main dropdown menu size more consistent                 |                 |
+| All code to call AWS client should be in one file (-_-) | done            |
+| Change name "flag form" -> "report form"                |                 |
+| Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
+| Google uses 'lng', ES uses 'lon' -> inconsistent        |                 |
+| Revert aws-appsync package to official npm              | done            |
+| Revert to default network fetch policy                  |                 |
 
 
 ### Possible extensions
