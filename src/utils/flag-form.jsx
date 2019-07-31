@@ -1,9 +1,13 @@
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 import React from 'react';
 import Select from 'react-select';
 
 import { v4 as uuid } from 'uuid';
 
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
+const gql = require('graphql-tag');
 import { flagLocation, createPhoto } from '../graphql/mutations';
 
 // import { createClient } from './client-handler';
@@ -63,56 +67,103 @@ export default class FlagLocationPopup extends React.Component {
                 let img_file = this.imageInput.current.files[0];
                 console.log('file to upload:', img_file);
 
+
                 // NOTE: Using only amplify Storage module
-                // photo_id = uuid();
-                // Storage.put(photo_id + '.png', img_file, {
-                //     contentType: 'image/png',
-                // })
-                // .then(result => console.log('result of image upload:', result))
-                // .catch(err => console.error(err));
-
-                // NOTE: Attempting to use the AppSync API w/ complex objects uploading
-                const { name: filename, type: mimeType } = img_file;
-                const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(filename);
-                console.log('filename, extension', filename, extension);
-
-                const bucket = aws_config.aws_user_files_s3_bucket;
-                const region = aws_config.aws_user_files_s3_bucket_region;
-                // const visibility = 'public'; // If public, will show publicly in bucket?
-                const visibility = 'private';
-                const {identityId} = await Auth.currentCredentials();
+                console.log("Attempting to upload using AWS amplify storage module.");
+                // Storage.put('test.txt', 'Hello')
+                //     .then(result => console.log(result))
+                //     .catch(err => console.error(err));
 
                 photo_id = uuid();
-                const key = `${visibility}/${identityId}/${photo_id}${extension && '.'}${extension}`;
+                Storage.put(photo_id + '.png', img_file, {
+                    contentType: 'image/png',
+                })
+                .then( () => Auth.currentCredentials())
+                .then( identityId => {
+                    // console.log('result of image upload:', result)
+                    // console.log("identityId", identityId);
+                    this.props.client.mutate({
+                        mutation: gql(createPhoto),
+                        variables: {
+                            input: {
+                                id: photo_id,
+                                location_id: this.props.id,
+                                description: 'First test: this is a photo file',
+                                filename: photo_id + '.png',
+                                user_id: identityId._identityId,
+                            }
+                        }
+                    })
+                    .then(result => {
+                        console.log("result:", result);
+                        console.log("Successfully uploaded new image for", this.props.name, "by user", identityId._identityId);
+                    })
+                    .catch(err => console.error("Error with uploading image metadata to db.", err));
+                })
+                .catch(err => console.error("Error uploading image to s3.", err));
+
+                // NOTE: Attempting to use the AppSync API w/ complex objects uploading
+                // const { name: filename, type: mimeType } = img_file;
+                // const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(filename);
+                // console.log('filename, extension', filename, extension);
+
+                // const bucket = aws_config.aws_user_files_s3_bucket;
+                // const region = aws_config.aws_user_files_s3_bucket_region;
+                // const visibility = 'public'; // If public, will show publicly in bucket?
+                // // const visibility = 'private';
+                // const {identityId} = await Auth.currentCredentials();
+
+                // photo_id = uuid();
+                // const key = `${visibility}/${identityId}/${photo_id}${extension && '.'}${extension}`;
                 
-                file = {
-                    bucket, 
-                    key,
-                    region,
-                    mimeType,
-                    localUri: img_file,
-                };
-                console.log('file object:', file);
-                console.log('targeting location:', this.props.name);
-                console.log('location has id:', this.props.id);
+                // file = {
+                //     bucket, 
+                //     key,
+                //     region,
+                //     mimeType,
+                //     localUri: img_file,
+                // };
+                // console.log('identity id:', identityId);
+                // console.log('file object:', file);
+                // console.log('targeting location:', this.props.name);
+                // console.log('location has id:', this.props.id);
             }
 
+            // TODO: TESTING to view current user.
+            // Need some more npm packages? See https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/300
+            const who = await this.props.client.query({
+            // const who = await client.query({
+                // query: gql`{
+                query: gql`query Q {
+                    whoAmI
+                }`,
+                variables: {},
+                fetchPolicy: 'network-only',
+            });
+
+            const { data: { whoAmI } } = who;
+            console.log("who am i:\n", JSON.stringify(JSON.parse(whoAmI), null, 2));
+
+            // NOTE: for use w/ AppSync GraphQL api
             // const result = await 
-            this.props.client.mutate({
-                mutation: gql(createPhoto),
-                variables: {
-                    input: {
-                        // file: {file, __typename: 'S3Object' },
-                        photo_id: photo_id,
-                        location_id: this.props.id,
-                        description: 'First test: this is a photo file',
-                        file: file
-                        // __typename: 'Photo',
-                    }
-                }
-            })
-            .then( result => console.log('result of image upload:', result))
-            .catch(err => console.error(err));
+            // this.props.client.mutate({
+            // // client.mutate({
+            //     mutation: gql(createPhoto),
+            //     variables: {
+            //         input: {
+            //             // file: {file, __typename: 'S3Object' },
+            //             photo_id: photo_id,
+            //             location_id: this.props.id,
+            //             description: 'First test: this is a photo file',
+            //             file: file
+            //             // __typename: 'Photo',
+            //         }
+            //     },
+            //     // ATTEMPT: resolving "GraphQL error: Missing credentials in config"
+            //     // authmode: 'AMAZON_COGNITO_USER_POOLS'
+            // })
+            // .then( result => console.log('result of image upload:', result))
+            // .catch(err => console.error('error uploading image:', err));
         })();
     }
 

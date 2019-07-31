@@ -22,10 +22,11 @@ type PublicArt @model{
 
 # TODO: add @auth rule so everyone can view
 type Photo @model {
-	photo_id: ID
+	id: ID!
 	location_id: ID!
+    user_id: ID
 	description: String
-	file: S3Object
+	filename: String!
 }
 
 # enum Visibility {
@@ -42,11 +43,11 @@ type Photo @model {
 #     mimeType: String!
 # }
 
-type S3Object {
-    bucket: String!
-    region: String!
-    key: String!
-}
+# type S3Object {
+#     bucket: String!
+#     region: String!
+#     key: String!
+# }
 
 # TODO: should not be in final Beta
 input ChangePublicArtTypeInput {

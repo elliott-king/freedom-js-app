@@ -13,6 +13,9 @@ export function createClient() {
         auth: {
             type: aws_config.aws_appsync_authenticationType,
             jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
+
+            // TODO: is this necessary?
+            // credentials: () => Auth.currentCredentials(),
         },
         // TODO: optional for anything without a file
         complexObjectCredentials: () => Auth.currentCredentials()
