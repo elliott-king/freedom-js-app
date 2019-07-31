@@ -35,6 +35,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin(['index.html']),
         new webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    devtool: "source-map",
 };
 
