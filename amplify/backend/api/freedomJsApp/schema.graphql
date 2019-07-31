@@ -13,13 +13,6 @@ type PublicArt @model{
 	# TODO: need ids...?
 }
 
-# type Photo @model {
-# 	photo_id: ID!
-# 	location_id: ID!
-# 	description: String
-# 	fileuri: AWSURL!
-# }
-
 # TODO: add @auth rule so everyone can view
 type Photo @model {
 	id: ID!
@@ -29,41 +22,13 @@ type Photo @model {
 	filename: String!
 }
 
-# enum Visibility {
-# 	public 
-# 	private
-# }
-
-# input S3ObjectInput {
-#     bucket: String!
-#     region: String!
-#     localUri: String!
-# 	visibility: Visibility
-#     key: String!
-#     mimeType: String!
-# }
-
-# type S3Object {
-#     bucket: String!
-#     region: String!
-#     key: String!
-# }
-
 # TODO: should not be in final Beta
 input ChangePublicArtTypeInput {
 	name: String!
 	type: String!
 }
 
-# input CreatePhotoInput {
-# 	photo_id: ID
-# 	location_id: ID!
-# 	description: String 
-# 	file: S3ObjectInput
-# }
-
 # TODO: make 'reason' an enum
-
 input FlagLocationInput {
 	name: String!
 	reason: String!
