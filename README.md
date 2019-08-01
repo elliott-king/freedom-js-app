@@ -29,12 +29,14 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Store types as list in dynamoDB (currently only one type allowed) |        |
 | Make types an enum in Appsync GraphQL API                         |        |
 
-| Flag public art/event                  | Status                    |
-| -------------------------------------- | ------------------------- |
-| Seperate DynamoDB table                |                           |
-| Authentication for users               | done |
-| Seperate classes for public/private    |                           |
-| Make flags enum in Appsync GraphQL API |                           |
+| Flag public art/event                                                   | Status |
+| ----------------------------------------------------------------------- | ------ |
+| Seperate DynamoDB table                                                 | done   |
+| Authentication for users                                                | done   |
+| Seperate classes for public/private                                     |        |
+| Make flags enum in Appsync GraphQL API                                  |        |
+| Store with location ID instead of just art name                         |        |
+| Show error when user does not select reason (currently only in console) |        |
 
 | Get photos & Info Window                                | Status            |
 | ------------------------------------------------------- | ----------------- |
