@@ -101,7 +101,7 @@ export default class FlagLocationPopup extends React.Component {
                 input: {
                     name: this.props.name,
                     reason: this.state.selectedOption.value,
-                    reason_continued: this.state.reasonContinued
+                    reason_continued: (this.state.reasonContinued ? this.state.reasonContinued : undefined)
                 }
             }
         }).then(( { data: {flagLocation} }) => {
