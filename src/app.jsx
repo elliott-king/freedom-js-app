@@ -48,7 +48,7 @@ class PublicArtUi extends React.Component {
                     onClick={() => searchWithinMapBounds(this.state.filter)}>
                         Public Art Search
                     </button>
-                    <div className="public-art-dropdown">
+                    {/* <div className="public-art-dropdown">
                         <Select
                             menuPlacement="top"
                             options={options}
@@ -56,7 +56,7 @@ class PublicArtUi extends React.Component {
                             defaultValue={options[0]}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
                 </React.Fragment>
             </div>
         )
