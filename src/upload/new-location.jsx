@@ -12,7 +12,7 @@ class PublicArtUploadForm extends React.Component {
             imageFile: "",
             name: "",
             description: "",
-            selectedOption: ""
+            selectedOption: "public-art"
         };
         this.optionChange = this.optionChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -71,11 +71,11 @@ class PublicArtUploadForm extends React.Component {
                         value={this.state.name}
                         onChange={this.nameChange}
                     />
-                    <Select
+                    {/* <Select
                         // TODO: this should not include 'all'
                         options={OPTIONS}
                         onChange={this.optionChange}
-                    />
+                    /> */}
                     <div>
                         <p>Latitude: {this.props.lat}</p>
                         <p>Longitude: {this.props.lng}</p>
