@@ -12,12 +12,20 @@ import aws_config from './aws-exports';
 
 Amplify.configure(aws_config);
 var map = initMap();
-var markers = [];
+var locationMarkers = [];
 
 map.addListener('click', function(event) {
     var latLng = event.latLng;
     var lat = latLng.lat();
     var lng = latLng.lng();
+
+    var newLocationMarker = new google.maps.Marker({
+        position: {lng: lng, lat: lat}, 
+        map: map, 
+        title: "New location",
+        label: "N"
+    });
+    markersCallback([newLocationMarker]);
 
     newPublicArtUpload(lat, lng);
 });
@@ -47,7 +55,7 @@ function deleteMarkers(markers) {
     setMapOnAll(null, markers);
 }
 function markersCallback(new_markers) {
-    deleteMarkers(markers);
-    markers = new_markers
-    showMarkers(markers);
+    deleteMarkers(locationMarkers);
+    locationMarkers = new_markers
+    showMarkers(locationMarkers);
 }
