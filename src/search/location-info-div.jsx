@@ -7,12 +7,9 @@
 import React from 'react';
 import Select from 'react-select';
 
-import { v4 as uuid } from 'uuid';
-
 import gql from 'graphql-tag';
-import { flagLocation, createPhoto } from '../graphql/mutations';
-
-import { Storage, Auth } from 'aws-amplify';
+import { flagLocation } from '../graphql/mutations';
+import { uploadImage } from '../upload/upload-image';
 
 // Options for reporting public art.
 const options = [
@@ -50,38 +47,11 @@ export default class LocationInfoDiv extends React.Component {
 
     uploadNewImage(event) {
         event.preventDefault();
-        let photo_id;
 
         if (this.imageInput.current.files.length > 0) {
             let img_file = this.imageInput.current.files[0];
-            photo_id = uuid();
-            console.log('file to upload:', img_file);
-
-            // First, upload file to AWS S3
-            Storage.put(photo_id + '.png', img_file, {
-                contentType: 'image/png',
-            })
-            .then( () => Auth.currentCredentials())
-            .then( identityId => {
-                // Then, upload metadata to AppSync/DynamoDB
-                this.props.client.mutate({
-                    mutation: gql(createPhoto),
-                    variables: {
-                        input: {
-                            id: photo_id,
-                            location_id: this.props.id,
-                            description: 'First test: this is a photo file',
-                            filename: photo_id + '.png',
-                            user_id: identityId._identityId,
-                        }
-                    }
-                })
-                .then(() => {
-                    console.log("Successfully uploaded new image for", this.props.name, "by user", identityId._identityId);
-                })
-                .catch(err => console.error("Error with uploading image metadata to db.", err));
-            })
-            .catch(err => console.error("Error uploading image to s3.", err));
+            // TODO: update description field.
+            uploadImage(img_file, this.props.id, "Testing: this is a photo file.", this.props.client);
         } // TODO: else log that there is not an image to upload.
     }
 
