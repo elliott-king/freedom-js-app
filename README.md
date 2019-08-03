@@ -5,22 +5,20 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 # Todos
 
 ### Goals for alpha and beta testing:
-| Goal                          | Tag          | Priority | In Progress | Done |
-| ----------------------------- | ------------ | :------: | ----------: | ---: |
-| React Components              | qol, js      |   low    |             |      |
-| Filter public art by class    | js           |   high   |         yes |  MVP |
-| Flag public art               | graphql, js  |   high   |         yes |  MVP |
-| Get photos & show info window | graphql, js  |   high   |         yes |  MVP |
-| UI & QOL improvements         | qol, css, js |   low    |             |      |
+| Goal                          | Tag          | Priority | In Progress |                Done |
+| ----------------------------- | ------------ | :------: | ----------: | ------------------: |
+| React Components              | qol, js      |   low    |             |                     |
+| Filter public art by class    | js           |   high   |         yes | unnecessary for MVP |
+| Flag public art               | graphql, js  |   high   |         yes |                 MVP |
+| Get photos & show info window | graphql, js  |   high   |         yes |                 MVP |
+| Upload new location           | graphql, js  |   high   |         yes |                     |
+| UI & QOL improvements         | qol, css, js |   low    |             |                     |
 
-| React components                                                  | Status |
-| ----------------------------------------------------------------- | ------ |
-| Move to another file                                              |        |
-| Turn map itself into React component (google-maps-react)          |        |
-| Have info window content be component that then contains form     |        |
-| Forms should handle changes in multiple inputs with one method    |        |
-| Each upload submission creates duplicate empty divs               |        |
-| Only create new upload div if the old one does not exist (bugfix) | URGENT |
+| React components                                               | Status |
+| -------------------------------------------------------------- | ------ |
+| Turn map itself into React component (google-maps-react)       |        |
+| Have info window content be component that then contains form  | done   |
+| Forms should handle changes in multiple inputs with one method |        |
 
 | Filter public art by class                                        | Status |
 | ----------------------------------------------------------------- | ------ |
@@ -47,17 +45,27 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Enforce Google Places API from app/site only            | done              |
 | Error if photo doesn't exist: info window does not open | URGENT            |
 
-| UI & QOL improvements                                   | Status          |
-| ------------------------------------------------------- | --------------- |
-| Resize image window to a standard size                  |                 |
-| Place 'Report location' in own div                      |                 |
-| Main dropdown menu size more consistent                 |                 |
-| All code to call AWS client should be in one file (-_-) | done            |
-| Change name "flag form" -> "report form"                |                 |
-| Fix problem with 'amplify publish'                      | HUGELY ANNOYING |
-| Google uses 'lng', ES uses 'lon' -> inconsistent        |                 |
-| Revert aws-appsync package to official npm              | done            |
-| Revert to default network fetch policy                  |                 |
+| Upload new Location                                               | Status |
+| ----------------------------------------------------------------- | ------ |
+| Upload to DB                                                      | URGENT |
+| Should suggest user's current location                            |        |
+| Each upload submission creates duplicate empty divs (bugfix)      |        |
+| Only create new upload div if the old one does not exist (bugfix) | URGENT |
+
+| UI & QOL improvements                                   | Status                       |
+| ------------------------------------------------------- | ---------------------------- |
+| Resize image window to a standard size                  |                              |
+| Place 'Report location' in own div                      |                              |
+| Main dropdown menu size more consistent                 |                              |
+| All code to call AWS client should be in one file (-_-) | done                         |
+| Change name "flag form" -> "report form"                | MVP - not changed in graphql |
+| Fix problem with 'amplify publish'                      | HUGELY ANNOYING              |
+| Google uses 'lng', ES uses 'lon' -> inconsistent        |                              |
+| Revert aws-appsync package to official npm              | done                         |
+| Revert to default network fetch policy (currently always fetches)                 |                              |
+
+| non-code
+| Create Some user journeys |  |
 
 
 ### Possible extensions

@@ -19,6 +19,7 @@ map.addListener('click', function(event) {
     var lat = latLng.lat();
     var lng = latLng.lng();
 
+    // TODO: this should disappear when the 'close' button is clicked in the new div.
     var newLocationMarker = new google.maps.Marker({
         position: {lng: lng, lat: lat}, 
         map: map, 
