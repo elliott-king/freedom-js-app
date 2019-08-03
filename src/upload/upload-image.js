@@ -20,7 +20,7 @@ export function uploadImage(img_file, location_id, description, client) {
                 input: {
                     id: photo_id,
                     location_id: location_id,
-                    description: description,
+                    description: (description ? description : undefined),
                     filename: photo_id + '.png',
                     user_id: identityId._identityId,
                 }
