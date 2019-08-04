@@ -27,7 +27,6 @@ export default class LocationInfoDiv extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            imageFile: "",
             displayStyle: {display: "block"},
             reasonContinued: "",
             selectedOption: "",
