@@ -50,14 +50,14 @@ export default class LocationInfoDiv extends React.Component {
         if (this.imageInput.current.files.length > 0) {
             let img_file = this.imageInput.current.files[0];
             // TODO: update description field.
-            uploadImage(img_file, this.props.id, "Testing: this is a photo file.", this.props.client);
+            uploadImage(img_file, this.props.id, "Testing: this is a photo file.");
         } // TODO: else log that there is not an image to upload.
     }
 
     submitLocationReport(event) {
         event.preventDefault();
 
-        this.props.client.mutate({
+        window.client.mutate({
             mutation: gql(flagLocation),
             variables: {
                 input: {

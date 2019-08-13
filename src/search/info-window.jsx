@@ -7,9 +7,9 @@ import LocationInfoDiv from './location-info-div.jsx';
 
 var previousInfoWindow = false;
 
-function createInfoWindow(id, client, callback) {
+function createInfoWindow(id, callback) {
     
-    client.query({
+    window.client.query({
         query: gql(getPublicArt),
         variables: { id: id},
         fetchPolicy: 'network-only',
@@ -21,7 +21,6 @@ function createInfoWindow(id, client, callback) {
         var content = document.createElement('div');
         ReactDOM.render(
             <LocationInfoDiv
-                client={client}
                 name={getPublicArt.name}
                 id={getPublicArt.id}
                 // TODO: photo resizing: infowindow final size is all over the place.
@@ -41,7 +40,7 @@ function createInfoWindow(id, client, callback) {
     .catch(err => console.error("Problem generating info window:", err));
 }
 
-export function getPublicArtWithinMap(map, filter, client, callback) {
+export function getPublicArtWithinMap(map, filter, callback) {
 
     var bounds = map.getBounds();
     var new_markers = [];
@@ -60,7 +59,7 @@ export function getPublicArtWithinMap(map, filter, client, callback) {
     };
     if (filter != 'all') variables.type = filter;
 
-    client.query({
+    window.client.query({
         query: query,
         variables: variables,
         fetchPolicy: 'network-only'
@@ -81,7 +80,7 @@ export function getPublicArtWithinMap(map, filter, client, callback) {
                     previousInfoWindow.close();
                 }
                 console.log("querying public art:", publicArt.name, publicArt.id);
-                createInfoWindow(publicArt.id, client, function(infoWindow) {
+                createInfoWindow(publicArt.id, function(infoWindow) {
                     previousInfoWindow = infoWindow;
                     previousInfoWindow.open(map, marker);
                 });

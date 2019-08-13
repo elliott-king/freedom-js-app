@@ -4,7 +4,7 @@ import { Storage, Auth } from 'aws-amplify';
 
 import { createPhoto } from '../graphql/mutations';
 
-export function uploadImage(img_file, location_id, description, client) {
+export function uploadImage(img_file, location_id, description) {
     let photo_id = uuid();
     console.log('file to upload:', img_file);
 
@@ -14,7 +14,7 @@ export function uploadImage(img_file, location_id, description, client) {
     }).then( () => Auth.currentCredentials())
     .then( identityId => {
         // Then, upload metadata to AppSync/DynamoDB
-        client.mutate({
+        window.client.mutate({
             mutation: gql(createPhoto),
             variables: {
                 input: {

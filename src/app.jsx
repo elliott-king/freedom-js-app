@@ -6,9 +6,13 @@ import ReactDOM from 'react-dom';
 import LocationSearchDiv from './search/location-search.jsx';
 import {newPublicArtUpload} from './upload/new-location.jsx'
 import {initMap} from './utils/init-map'
+import { createClient } from './utils/client-handler';
 
 import Amplify from 'aws-amplify';
 import aws_config from './aws-exports';
+
+// Make the auth client accessible to everything
+window.client = createClient();
 
 Amplify.configure(aws_config);
 var map = initMap();

@@ -3,14 +3,11 @@ import Select from 'react-select';
 
 import {getPublicArtWithinMap} from './info-window.jsx';
 import {Authenticator} from 'aws-amplify-react';
-import { createClient } from '../utils/client-handler';
 import {OPTIONS} from '../utils/constants';
 
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
 import 'babel-polyfill';
-
-const client = createClient();
 
 class LocationSearchButton extends React.Component {
     constructor(props) {
@@ -31,7 +28,6 @@ class LocationSearchButton extends React.Component {
                     onClick={() => getPublicArtWithinMap(
                         this.props.map,
                         this.state.filter, 
-                        client, 
                         this.props.markersCallback
                     )}> 
                         Public Art Search
