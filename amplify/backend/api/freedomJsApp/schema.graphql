@@ -1,15 +1,12 @@
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model{
-	# location: Location
 	id: ID!
 	location: AWSJSON
 	name: String
 	description: String
-	# type: PublicArtType
+    # date_added
 	type: String
-	# TODO: add @connection between this and 'type Photo'
-	# photos: [AWSJSON]
 	# TODO: need ids...?
     photos: [String]
 }
@@ -37,13 +34,12 @@ input FlagLocationInput {
 }
 
 type Mutation {
-	# createPhoto(input: CreatePhotoInput!): Photo
 	flagLocation(input: FlagLocationInput!): PublicArt
 	changePublicArtType(input: ChangePublicArtTypeInput!): PublicArt
+    addPhoto(location_id: String!, url:String!): PublicArt
 }
 
 type Query {
-	# getImage: S3Object
 	getPublicArtWithinBoundingBox(
 		top_right_gps: AWSJSON!,
 		bottom_left_gps: AWSJSON!,

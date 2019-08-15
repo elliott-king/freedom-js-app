@@ -1,35 +1,33 @@
 import gql from 'graphql-tag';
+import path from 'path';
 import { v4 as uuid } from 'uuid';
 import { Storage, Auth } from 'aws-amplify';
 
-import { createPhoto } from '../graphql/mutations';
+import aws_config from '../aws-exports';
+
+import { addPhoto } from '../graphql/mutations';
 
 export function uploadImage(img_file, location_id, description) {
     let photo_id = uuid();
     console.log('file to upload:', img_file);
 
     // First, upload file to AWS S3
-    Storage.put(photo_id + '.png', img_file, {
+    return Storage.put(photo_id + '.png', img_file, {
         contentType: 'image/png',
-    }).then( () => Auth.currentCredentials())
-    .then( identityId => {
-        // Then, upload metadata to AppSync/DynamoDB
-        window.client.mutate({
-            mutation: gql(createPhoto),
+    // TODO: make this more complex, and make photo its own model in the schema (for more metadata like user_id)
+    }).then( (result) => {
+        console.log("Uploaded image to S3.");
+        console.log(location_id);
+        // This S3 bucket is publically viewable.
+        let img_url = "https://" + path.join(aws_config.aws_user_files_s3_bucket + ".s3.amazonaws.com", "public", result.key);
+        // Second, we put the photo's url in dynamodb.
+        return window.client.mutate({
+            mutation: gql(addPhoto),
             variables: {
-                input: {
-                    id: photo_id,
-                    location_id: location_id,
-                    description: (description ? description : undefined),
-                    filename: photo_id + '.png',
-                    user_id: identityId._identityId,
-                }
+                location_id: location_id,
+                url: img_url
             }
-        })
-        .then(() => {
-            console.log("Successfully uploaded new image for", location_id, "by user", identityId._identityId);
-        })
-        .catch(err => console.error("Error with uploading image metadata to db.", err));
+        });
     })
-    .catch(err => console.error("Error uploading image to s3.", err));
+    .catch(err => console.error("Error uploading image:", err));
 }
