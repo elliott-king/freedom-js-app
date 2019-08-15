@@ -13,6 +13,7 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Get photos & show info window | graphql, js  |   high   |         yes |                 MVP |
 | Upload new location           | graphql, js  |   high   |         yes |                     |
 | UI & QOL improvements         | qol, css, js |   low    |             |                     |
+| Backup data                   |              |  medium  |             |                     |
 
 | React components                                               | Status |
 | -------------------------------------------------------------- | ------ |
@@ -36,33 +37,36 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Store with location ID instead of just art name                         |        |
 | Show error when user does not select reason (currently only in console) |        |
 
-| Get photos & Info Window                                | Status            |
-| ------------------------------------------------------- | ----------------- |
-| Download from DB                                        | done              |
-| Close old info window when a new one is opened          | done              |
-| Upload resized photos to db (400 x 400?)                |                   |
-| Upload photos from app (mobile app only?)               | URGENT FOR PUBLIC |
-| Enforce Google Places API from app/site only            | done              |
-| Error if photo doesn't exist: info window does not open | URGENT            |
+| Get photos & Info Window                                | Status |
+| ------------------------------------------------------- | ------ |
+| Download from DB                                        | done   |
+| Close old info window when a new one is opened          | done   |
+| Upload resized photos to db (400 x 400?)                |        |
+| Enforce Google Places API from app/site only            | done   |
+| Error if photo doesn't exist: info window does not open | URGENT |
 
-| Upload new Location                                               | Status |
+| Upload new Location (and photo)                                   | Status |
 | ----------------------------------------------------------------- | ------ |
-| Upload to DB                                                      | URGENT |
+| Upload to DB                                                      |        |
+| Upload photos from app (mobile app only?)                         | URGENT |
 | Should suggest user's current location                            |        |
 | Each upload submission creates duplicate empty divs (bugfix)      |        |
-| Only create new upload div if the old one does not exist (bugfix) | URGENT |
+| Upload new image should also add link in DynamoDB image list      |        |
+| Only create new upload div if the old one does not exist (bugfix) |        |
+| Upload to ES after dynamodb                                       | URGENT |
+| Ensure 'type' is chosen by user (and checked for)                 |        |
 
-| UI & QOL improvements                                   | Status                       |
-| ------------------------------------------------------- | ---------------------------- |
-| Resize image window to a standard size                  |                              |
-| Place 'Report location' in own div                      |                              |
-| Main dropdown menu size more consistent                 |                              |
-| All code to call AWS client should be in one file (-_-) | done                         |
-| Change name "flag form" -> "report form"                | MVP - not changed in graphql |
-| Fix problem with 'amplify publish'                      | HUGELY ANNOYING              |
-| Google uses 'lng', ES uses 'lon' -> inconsistent        |                              |
-| Revert aws-appsync package to official npm              | done                         |
-| Revert to default network fetch policy (currently always fetches)                 |                              |
+| UI & QOL improvements                                             | Status                       |
+| ----------------------------------------------------------------- | ---------------------------- |
+| Resize image window to a standard size                            |                              |
+| Place 'Report location' in own div                                |                              |
+| Main dropdown menu size more consistent                           |                              |
+| All code to call AWS client should be in one file (-_-)           | done                         |
+| Change name "flag form" -> "report form"                          | MVP - not changed in graphql |
+| Fix problem with 'amplify publish'                                | HUGELY ANNOYING              |
+| Google uses 'lng', ES uses 'lon' -> inconsistent                  |                              |
+| Revert aws-appsync package to official npm                        | done                         |
+| Revert to default network fetch policy (currently always fetches) |                              |
 
 | non-code
 | Create Some user journeys |  |
