@@ -83,8 +83,8 @@ export default class LocationInfoDiv extends React.Component {
     // https://stackoverflow.com/questions/44015876
     renderImg() {
         if (this.props.photos && this.props.photos.length > 0) {
-            var photo = JSON.parse(this.props.photos[0]);
-            return <img src={photo.link}/>
+            var photo = this.props.photos[0];
+            return <img src={photo}/>
         } else {
             return null;
         }

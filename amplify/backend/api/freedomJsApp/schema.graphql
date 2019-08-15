@@ -9,18 +9,19 @@ type PublicArt @model{
 	# type: PublicArtType
 	type: String
 	# TODO: add @connection between this and 'type Photo'
-	photos: [AWSJSON]
+	# photos: [AWSJSON]
 	# TODO: need ids...?
+    photos: [String]
 }
 
 # TODO: add @auth rule so everyone can view
-type Photo @model {
-	id: ID!
-	location_id: ID!
-    user_id: ID
-	description: String
-	filename: String!
-}
+# type Photo @model {
+# 	id: ID!
+# 	location_id: ID!
+#     user_id: ID
+# 	description: String
+# 	filename: String!
+# }
 
 # TODO: should not be in final Beta
 input ChangePublicArtTypeInput {
