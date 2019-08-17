@@ -1,34 +1,66 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
+import gql from 'graphql-tag';
+import { v4 as uuid } from 'uuid';
 
-import {OPTIONS} from '../utils/constants';
+import { uploadImage } from './upload-image';
+import { createPublicArt } from '../graphql/mutations';
 
 class PublicArtUploadForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            imageFile: "",
             name: "",
             description: "",
             selectedOption: "public-art"
         };
-        this.optionChange = this.optionChange.bind(this);
+
+        // To upload images in React, we use the file API.
+        // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
+        this.imageInput = React.createRef();
+
+        // this.optionChange = this.optionChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameChange = this.nameChange.bind(this);
-        this.imageChange = this.imageChange.bind(this);
         this.descriptionChange = this.descriptionChange.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault(); // KTHXWHAT?
 
-        // TODO: need a check on mandatory fields. 
-        // Could just rely on server throwing an error.
-        console.log("Submit location:", this.state);
-        // TODO: nothing actually here yet.
+        // Only create new location if there is an image file.
+        if (this.imageInput.current.files.length > 0 && this.state.name) {
+            let location_id = uuid();
+            let img_file = this.imageInput.current.files[0];
+
+            window.client.mutate({
+                mutation: gql(createPublicArt),
+                variables: {
+                    input: {
+                        id: location_id,
+                        name: this.state.name,
+                        location: JSON.stringify({"lat": this.props.lat, "lng": this.props.lng}),
+                        description: (this.state.description ? this.state.description : undefined),
+                        type: 'sculpture',
+                    }
+                }
+            }).then((response) => {
+                console.log("Successfully uploaded new location", this.state.name, "to dynamodb.");
+                return uploadImage(img_file, location_id, "");
+            }).then((response) => {
+                console.log("Succesffully uploaded image for new location", this.state.name);
+            }).catch((err) => {
+                console.error("Error uploading new location:", err);
+                throw err;
+            });
+        } else if (!this.state.name) {
+            console.warn("New location needs a name.");
+        } else {
+            console.warn("Need image to create new location.");
+        }
 
         // Delete a div from the DOM.
         // https://stackoverflow.com/questions/8404797/
@@ -41,18 +73,15 @@ class PublicArtUploadForm extends React.Component {
         f.parentNode.removeChild(f);
     }
 
-    optionChange(selectedOption) {
-        this.setState({selectedOption: selectedOption});
-    }
+    // optionChange(selectedOption) {
+    //     this.setState({selectedOption: selectedOption});
+    // }
     nameChange(event) {
         this.setState({name: event.target.value});
     }
 
     descriptionChange(event) {
         this.setState({description: event.target.value});
-    }
-    imageChange(event) {
-        this.setState({imageFile: event.target.value});
     }
 
     // center div horizontally & vertically
@@ -83,8 +112,8 @@ class PublicArtUploadForm extends React.Component {
                     <div><h4>Choose image for location</h4>
                         <input 
                             type="file"
-                            value={this.state.imageFile}
-                            onChange={this.imageChange}
+                            accept="image/png"
+                            ref={this.imageInput}
                         />
                     </div>
                     <div>
@@ -95,7 +124,7 @@ class PublicArtUploadForm extends React.Component {
                             onChange={this.descriptionChange}
                         />
                     </div>
-                    <button type="submit" className="btn">Upload location</button>
+                    <button type="submit" className="btn">Upload new location</button>
                     <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
             </div>
@@ -104,14 +133,12 @@ class PublicArtUploadForm extends React.Component {
 }
 
 // TODO: just take in a latLng
-// TODO: upload items to S3
 export function newPublicArtUpload(lat, lng) {
     console.debug("New click event at:", lat, lng);
 
     var publicArtUploadDiv = document.createElement('div');
     document.getElementById('root').appendChild(publicArtUploadDiv);
 
-    // TODO: needs an 'x' exit button.
     ReactDOM.render(
         <PublicArtUploadForm
             lat={lat}
