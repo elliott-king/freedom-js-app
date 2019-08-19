@@ -85,10 +85,11 @@ freedom-js-app.code-workspace
 # Appsync generated
 .graphqlconfig.yml
 .amplifyrc
-amplify/
-!amplify/backend/api/freedomJsApp/schema.graphql
-# src/aws-exports.js
 src/graphql/
+
+# Amplify generated stuff I don't currently want to deal with.
+amplify/backend/auth
+amplify/backend/storage
 
 # Webpack
 dist/
