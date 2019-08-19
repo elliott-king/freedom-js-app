@@ -1,0 +1,14 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S" : "${context.arguments.location_id}" }
+    },
+    "update" : {
+        "expression" : "SET photos = list_append(if_not_exists(photos, :emptyList), :newPhoto)",
+        "expressionValues" : {
+        	":emptyList" : { "L": [] },
+            ":newPhoto" : { "L": [{ "S": "${context.arguments.url}"}] } ,
+        }
+    }
+}

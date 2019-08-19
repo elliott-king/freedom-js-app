@@ -1,0 +1,44 @@
+
+#**
+The 'params' key accepts any valid Elasticsearch DSL expression.
+You must replace the <index>, <type>, and <field> placeholders with actual values.
+
+This request is written using the amplify cli.e
+*#
+{
+  "version":"2017-02-28",
+  "operation":"GET",
+  "path":"/publicart/doc/_search",
+  "params":{
+      "headers":{},
+      "queryString":{},
+      "body":{
+          "from":0,
+          "size":$util.defaultIfNull($ctx.args.limit, 10),
+          "query" : {
+              "bool" : {
+              #if($util.isNullOrEmpty($ctx.args.type))
+                  "must" : { "match_all" : {}},
+              #else
+              #** match_exactly? *#
+                  "must" : { "match" : { "type" : "$ctx.args.type" } },
+              #end
+                  "filter" : {
+                      "geo_bounding_box" : {
+                          "location" : {
+                              "top_right" : {
+                                  "lat" : "$context.arguments.top_right_gps.lat",
+                                  "lon" : "$context.arguments.top_right_gps.lon"
+                              },
+                              "bottom_left" : {
+                                  "lat" : "$context.arguments.bottom_left_gps.lat",
+                                  "lon" : "$context.arguments.bottom_left_gps.lon"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
