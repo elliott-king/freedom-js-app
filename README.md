@@ -21,21 +21,21 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Have info window content be component that then contains form  | done   |
 | Forms should handle changes in multiple inputs with one method |        |
 
-| Filter public art by class                                        | Status |
-| ----------------------------------------------------------------- | ------ |
-| Add options                                                       | done   |
-| Ability to select multiple options                                |        |
-| Store types as list in dynamoDB (currently only one type allowed) |        |
-| Make types an enum in Appsync GraphQL API                         |        |
+| Filter public art by class                                        | Status            |
+| ----------------------------------------------------------------- | ----------------- |
+| Add options                                                       | done              |
+| Ability to select multiple options                                |                   |
+| Store types as list in dynamoDB (currently only one type allowed) | very low priority |
+| Make types an enum in Appsync GraphQL API                         |                   |
 
-| Flag public art/event                                                   | Status |
-| ----------------------------------------------------------------------- | ------ |
-| Seperate DynamoDB table                                                 | done   |
-| Authentication for users                                                | done   |
-| Seperate classes for public/private                                     |        |
-| Make flags enum in Appsync GraphQL API                                  |        |
-| Store with location ID instead of just art name                         |        |
-| Show error when user does not select reason (currently only in console) |        |
+| Flag public art/event                                                   | Status             |
+| ----------------------------------------------------------------------- | ------------------ |
+| Seperate DynamoDB table                                                 | done               |
+| Authentication for users                                                | done               |
+| Seperate classes for public/private                                     | all will be public |
+| Make flags enum in Appsync GraphQL API                                  |                    |
+| Store with location ID instead of just art name                         |                    |
+| Show error when user does not select reason (currently only in console) |                    |
 
 | Get photos & Info Window                                | Status |
 | ------------------------------------------------------- | ------ |
@@ -45,35 +45,43 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Enforce Google Places API from app/site only            | done   |
 | Error if photo doesn't exist: info window does not open | URGENT |
 
-| Upload new Location (and photo)                                   | Status |
-| ----------------------------------------------------------------- | ------ |
-| Upload to DB                                                      |        |
-| Upload photos from app (mobile app only?)                         | URGENT |
-| Should suggest user's current location                            |        |
-| Each upload submission creates duplicate empty divs (bugfix)      |        |
-| Upload new image should also add link in DynamoDB image list      |        |
-| Only create new upload div if the old one does not exist (bugfix) |        |
-| Upload to ES after dynamodb                                       | URGENT |
-| Ensure 'type' is chosen by user (and checked for)                 |        |
+| Upload new Location (and photo)                                        | Status       |
+| ---------------------------------------------------------------------- | ------------ |
+| Upload to DB                                                           | done         |
+| Upload photos from app (mobile app only?)                              | URGENT       |
+| Should suggest user's current location (app only)                      |              |
+| Each upload submission creates duplicate empty divs (bugfix)           | low priority |
+| Upload new image should also add link in DynamoDB image list           | done         |
+| Only create new upload div if the old one does not exist (bugfix)      |              |
+| Upload to ES after dynamodb                                            | URGENT       |
+| Ensure 'type' is chosen by user (and checked for)                      |              |
+| PublicArt in DynamoDb should have version to prevent double writes [0] |              |
+| Should image list be list of 'url' GraphQL type?                       |              |
 
-| UI & QOL improvements                                             | Status                       |
-| ----------------------------------------------------------------- | ---------------------------- |
-| Resize image window to a standard size                            |                              |
-| Place 'Report location' in own div                                |                              |
-| Main dropdown menu size more consistent                           |                              |
-| All code to call AWS client should be in one file (-_-)           | done                         |
-| Change name "flag form" -> "report form"                          | MVP - not changed in graphql |
-| Fix problem with 'amplify publish'                                | HUGELY ANNOYING              |
-| Google uses 'lng', ES uses 'lon' -> inconsistent                  |                              |
-| Revert aws-appsync package to official npm                        | done                         |
-| Revert to default network fetch policy (currently always fetches) |                              |
 
-| non-code
-| Create Some user journeys |  |
+| UI & QOL improvements                                                  | Status                       |
+| ---------------------------------------------------------------------- | ---------------------------- |
+| Resize image window to a standard size                                 |                              |
+| Place 'Report location' in own div                                     |                              |
+| Main dropdown menu size more consistent                                |                              |
+| All code to call AWS client should be in one file (-_-)                | done                         |
+| Change name "flag form" -> "report form"                               | MVP - not changed in graphql |
+| Fix problem with 'amplify publish'                                     | HUGELY ANNOYING              |
+| Google uses 'lng', ES uses 'lon' -> inconsistent                       |                              |
+| Revert aws-appsync package to official npm                             | done                         |
+| Revert to default network fetch policy (currently always fetches)      |                              |
+| Make PublicArt schema @searchable (will then automatically push to ES) | in progress                  |
+| Put Data Sources into api/CustomResources.json for eternal use         |                              |
 
+| non-code                  | Status |
+| ------------------------- | ------ |
+| Create Some user journeys |        |
+
+[0]: https://docs.aws.amazon.com/appsync/latest/devguide/tutorial-dynamodb-resolvers.html#modifying-the-updatepost-resolver-dynamodb-updateitem
 
 ### Possible extensions
 - Use AWS Rekognition to reject images that do not meet decency guidelines
 - Add user auth:
    - credit images
    - allow upload only if user is logged in
+
