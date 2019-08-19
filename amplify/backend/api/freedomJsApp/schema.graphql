@@ -9,7 +9,7 @@ input LocationInput {
 
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
-type PublicArt @model{
+type PublicArt @model @searchable{
 	id: ID!
     location: Location
 	name: String
