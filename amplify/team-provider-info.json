@@ -1,0 +1,19 @@
+{
+    "freedom": {
+        "awscloudformation": {
+            "AuthRoleName": "freedom-js-app-freedom-20190615181511-authRole",
+            "UnauthRoleArn": "arn:aws:iam::888096637450:role/freedom-js-app-freedom-20190615181511-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::888096637450:role/freedom-js-app-freedom-20190615181511-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "freedom-js-app-freedom-20190615181511-deployment",
+            "UnauthRoleName": "freedom-js-app-freedom-20190615181511-unauthRole",
+            "StackName": "freedom-js-app-freedom-20190615181511",
+            "StackId": "arn:aws:cloudformation:us-east-1:888096637450:stack/freedom-js-app-freedom-20190615181511/0c148b00-8fbb-11e9-947a-1204ddd846a2"
+        },
+        "categories": {
+            "auth": {
+                "freedomjsapp28b57bb9": {}
+            }
+        }
+    }
+}

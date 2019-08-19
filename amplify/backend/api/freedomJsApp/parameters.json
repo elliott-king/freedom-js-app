@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "freedomJsApp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authfreedomjsapp28b57bb9",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
