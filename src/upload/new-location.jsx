@@ -42,7 +42,10 @@ class PublicArtUploadForm extends React.Component {
                     input: {
                         id: location_id,
                         name: this.state.name,
-                        location: JSON.stringify({"lat": this.props.lat, "lng": this.props.lng}),
+                        location: {
+                            lat: this.props.lat,
+                            lon: this.props.lng,
+                        },
                         description: (this.state.description ? this.state.description : undefined),
                         type: 'sculpture',
                     }

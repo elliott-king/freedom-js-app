@@ -44,18 +44,18 @@ export function getPublicArtWithinMap(map, filter, callback) {
 
     var bounds = map.getBounds();
     var new_markers = [];
-    console.debug("Bounds: ", bounds.toString());
+    console.log("Bounds: ", bounds.toString());
 
     var query = gql(getPublicArtWithinBoundingBox);
     var variables = {
-        top_right_gps: JSON.stringify({
+        top_right_gps: {
             lat: bounds.getNorthEast().lat(),
-            lng: bounds.getNorthEast().lng()
-        }),
-        bottom_left_gps: JSON.stringify({
+            lon: bounds.getNorthEast().lng()
+        },
+        bottom_left_gps: {
             lat: bounds.getSouthWest().lat(),
-            lng: bounds.getSouthWest().lng()
-        })
+            lon: bounds.getSouthWest().lng()
+        }
     };
     if (filter != 'all') variables.type = filter;
 
@@ -69,7 +69,7 @@ export function getPublicArtWithinMap(map, filter, callback) {
         console.debug(getPublicArtWithinBoundingBox);
 
         for (let publicArt of getPublicArtWithinBoundingBox) {
-            let location = JSON.parse(publicArt.location); 
+            let location = publicArt.location;
 
             // TODO: FIXME, google's format is different than elasticsearch's
             location.lng = location.lon;

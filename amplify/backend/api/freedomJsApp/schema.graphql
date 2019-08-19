@@ -1,11 +1,19 @@
+type Location {
+    lat: Float
+    lon: Float
+}
+input LocationInput {
+    lat: Float
+    lon: Float
+}
+
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model{
 	id: ID!
-	location: AWSJSON
+    location: Location
 	name: String
 	description: String
-    # date_added
 	type: String
 	# TODO: need ids...?
     photos: [String]
@@ -41,8 +49,8 @@ type Mutation {
 
 type Query {
 	getPublicArtWithinBoundingBox(
-		top_right_gps: AWSJSON!,
-		bottom_left_gps: AWSJSON!,
+		top_right_gps: LocationInput!,
+		bottom_left_gps: LocationInput!,
 		limit: Int,
 		type: String
 	): [PublicArt]
