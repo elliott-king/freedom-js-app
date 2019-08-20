@@ -16,6 +16,7 @@ export function initMap() {
     });
 
     // Try HTML5 geolocation
+    // NOTE: this can only be done from secure context (https)
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
