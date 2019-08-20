@@ -8,7 +8,7 @@ import React from 'react';
 import Select from 'react-select';
 
 import gql from 'graphql-tag';
-import { flagLocation } from '../graphql/mutations';
+import { createReported } from '../graphql/mutations';
 import { uploadImage } from '../upload/upload-image';
 
 // Options for reporting public art.
@@ -58,17 +58,17 @@ export default class LocationInfoDiv extends React.Component {
         event.preventDefault();
 
         window.client.mutate({
-            mutation: gql(flagLocation),
+            mutation: gql(createReported),
             variables: {
                 input: {
-                    name: this.props.name,
+                    art_id: this.props.id,
                     reason: this.state.selectedOption.value,
                     reason_continued: (this.state.reasonContinued ? this.state.reasonContinued : undefined)
                 }
             }
-        }).then(( { data: {flagLocation} }) => {
+        }).then(( { data: {createReported} }) => {
             this.setState({reported: this.state.reported + 1});
-            console.debug("reported:", flagLocation);
+            console.debug("reported:", createReported);
         });
     }
 

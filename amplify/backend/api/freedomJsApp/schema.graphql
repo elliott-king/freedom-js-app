@@ -19,14 +19,12 @@ type PublicArt @model @searchable{
     photos: [String]
 }
 
-# TODO: add @auth rule so everyone can view
-# type Photo @model {
-# 	id: ID!
-# 	location_id: ID!
-#     user_id: ID
-# 	description: String
-# 	filename: String!
-# }
+type Reported @model {
+    id: ID
+    art_id: ID!
+    reason: String!
+    reason_continued: String
+}
 
 # TODO: should not be in final Beta
 input ChangePublicArtTypeInput {
