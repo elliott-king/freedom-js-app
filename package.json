@@ -29,7 +29,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
-    "start": "webpack && webpack-dev-server --mode development",
+    "start": "webpack && webpack-dev-server --mode development --port 8080",
     "build": "webpack"
   }
 }
