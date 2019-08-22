@@ -44,3 +44,11 @@ html, body {
     display: inline-block;
     min-width: 80px;
 }
+
+/* TODO: this should be relative units */
+.location-image {
+    max-height: 250px;
+    max-width: 250px;
+    width: auto;
+    height: auto;
+}
