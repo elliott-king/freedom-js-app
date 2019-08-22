@@ -141,12 +141,11 @@ export function newPublicArtUpload(lat, lng) {
 
     var publicArtUploadDiv = document.createElement('div');
 
-    const uploadDiv = document.getElementById('new-upload');
+    const uploadDiv = document.getElementById('sidebar');
     while(uploadDiv.firstChild) {
         uploadDiv.removeChild(uploadDiv.firstChild);
     }
     uploadDiv.appendChild(publicArtUploadDiv);
-    // document.getElementById('new-upload').appendChild(publicArtUploadDiv);
 
     ReactDOM.render(
         <PublicArtUploadForm
