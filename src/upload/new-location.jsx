@@ -140,7 +140,13 @@ export function newPublicArtUpload(lat, lng) {
     console.debug("New click event at:", lat, lng);
 
     var publicArtUploadDiv = document.createElement('div');
-    document.getElementById('root').appendChild(publicArtUploadDiv);
+
+    const uploadDiv = document.getElementById('new-upload');
+    while(uploadDiv.firstChild) {
+        uploadDiv.removeChild(uploadDiv.firstChild);
+    }
+    uploadDiv.appendChild(publicArtUploadDiv);
+    // document.getElementById('new-upload').appendChild(publicArtUploadDiv);
 
     ReactDOM.render(
         <PublicArtUploadForm
