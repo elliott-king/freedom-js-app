@@ -7,18 +7,16 @@ import LocationInfoDiv from './location-info-div.jsx';
 
 var previousInfoWindow = false;
 
-function createInfoWindow(id, callback) {
-    
+function createInfoWindow(id) {
+
     window.client.query({
         query: gql(getPublicArt),
         variables: { id: id},
         fetchPolicy: 'network-only',
     }).then(( {data: {getPublicArt}}) => {
-        console.debug("Creating info window for for:", getPublicArt);
+        console.debug("Generating info for:", getPublicArt);
 
-        // Content of infoWindow is a DOM element, not a string representing HTML.
-        // https://developers.google.com/maps/documentation/javascript/infowindows
-        var content = document.createElement('div');
+        var locationInfo = document.createElement('div');
         ReactDOM.render(
             <LocationInfoDiv
                 name={getPublicArt.name}
@@ -26,17 +24,15 @@ function createInfoWindow(id, callback) {
                 // TODO: photo resizing: infowindow final size is all over the place.
                 photos={getPublicArt.photos}
             />,
-            content
+            locationInfo
         );
-
-        // For some reason, I can't call var infoWindow = new google.maps.InfoWindow().
-        // The creation of the infoWindow creates an error: 
-        // 'function a.addListener() does not exist' ...?
-        // HOWEVER, it works fine if we just return it straight up.
-        return new google.maps.InfoWindow({
-            content: content
-        });
-    }).then(infoWindow => callback(infoWindow))
+        
+        const sidebar = document.getElementById('sidebar');
+        while(sidebar.firstChild) {
+            sidebar.removeChild(sidebar.firstChild);
+        }
+        sidebar.appendChild(locationInfo);
+    })
     .catch(err => console.error("Problem generating info window:", err));
 }
 
@@ -80,10 +76,8 @@ export function getPublicArtWithinMap(map, filter, callback) {
                     previousInfoWindow.close();
                 }
                 console.log("querying public art:", publicArt.name, publicArt.id);
-                createInfoWindow(publicArt.id, function(infoWindow) {
-                    previousInfoWindow = infoWindow;
-                    previousInfoWindow.open(map, marker);
-                });
+                createInfoWindow(publicArt.id);
+                marker.setLabel("A"); // TODO: change color & revert upon new selection.
             });
             new_markers.push(marker);
         }
