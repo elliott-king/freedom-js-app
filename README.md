@@ -8,80 +8,84 @@ https://d3w3kga4a1s0nc.cloudfront.net/
 | Goal                          | Tag          | Priority | In Progress |                Done |
 | ----------------------------- | ------------ | :------: | ----------: | ------------------: |
 | React Components              | qol, js      |   low    |             |                     |
-| Filter public art by class    | js           |   high   |         yes | unnecessary for MVP |
+| Filter public art by class    | js           |   med    |         yes | unnecessary for MVP |
 | Flag public art               | graphql, js  |   high   |         yes |                 MVP |
 | Get photos & show info window | graphql, js  |   high   |         yes |                 MVP |
 | Upload new location           | graphql, js  |   high   |         yes |                     |
 | UI & QOL improvements         | qol, css, js |   low    |             |                     |
-| Backup data                   |              |  medium  |             |                     |
+| Long-term support             |              |  medium  |             |                     |
 
-| React components                                               | Status |
-| -------------------------------------------------------------- | ------ |
-| Turn map itself into React component (google-maps-react)       |        |
-| Have info window content be component that then contains form  | done   |
-| Forms should handle changes in multiple inputs with one method |        |
+| React/Components                                                                | Status |
+| ------------------------------------------------------------------------------- | ------ |
+| Have info window content be component that then contains form                   | done   |
+| Forms should handle changes in multiple inputs with one method                  |        |
+| Info window should be contained w/in google map screen (negates need to scroll) |        |
 
-| Filter public art by class                                        | Status            |
-| ----------------------------------------------------------------- | ----------------- |
-| Add options                                                       | done              |
-| Ability to select multiple options                                |                   |
-| Store types as list in dynamoDB (currently only one type allowed) | very low priority |
-| Make types an enum in Appsync GraphQL API                         |                   |
+| Filter public art by class                                        | Status | Priority |
+| ----------------------------------------------------------------- | ------ | -------- |
+| Add options                                                       |        | low      |
+| Ability to select multiple options                                |        | lowest   |
+| Store types as list in dynamoDB (currently only one type allowed) |        | low      |
+| Make types an enum in Appsync GraphQL API                         |        | med      |
+| Check 'type' is chosen by user when uploading new location        |        | low      |
 
-| Flag public art/event                                                   | Status             |
+| Flag public art/event                                                   | Status |
+| ----------------------------------------------------------------------- | ------ |
+| Seperate DynamoDB table                                                 | done   |
+| Authentication for users                                                | done   |
+| Store with location ID instead of just art name                         | done   |
+| Show error when user does not select reason (currently only in console) |        |
+
+| Get photos & Info Window                                                      | Status                        |
+| ----------------------------------------------------------------------------- | ----------------------------- |
+| Download from DB                                                              | done                          |
+| Close old info window when a new one is opened                                | done                          |
+| Upload resized photos to db (400 x 400?)                                      | done - max dimension of 250px |
+| Enforce Google Places API from app/site only                                  |                               |
+| Error if photo doesn't exist: info window does not open                       | URGENT                        |
+| throttles many requests: photo should only be rendered if infoWindow is shown |                               |
+| leave googleusercontent & store photos from google on S3 (being throttled)    |                               |
+| google places api key currently has zero restrictions                         |                               |
+
+| Upload new Location (and photo)                                         | Status             |
 | ----------------------------------------------------------------------- | ------------------ |
-| Seperate DynamoDB table                                                 | done               |
-| Authentication for users                                                | done               |
-| Seperate classes for public/private                                     | all will be public |
-| Make flags enum in Appsync GraphQL API                                  |                    |
-| Store with location ID instead of just art name                         |                    |
-| Show error when user does not select reason (currently only in console) |                    |
-
-| Get photos & Info Window                                | Status |
-| ------------------------------------------------------- | ------ |
-| Download from DB                                        | done   |
-| Close old info window when a new one is opened          | done   |
-| Upload resized photos to db (400 x 400?)                |        |
-| Enforce Google Places API from app/site only            | done   |
-| Error if photo doesn't exist: info window does not open | URGENT |
-
-| Upload new Location (and photo)                                        | Status       |
-| ---------------------------------------------------------------------- | ------------ |
-| Upload to DB                                                           | done         |
-| Upload photos from app (mobile app only?)                              | URGENT       |
-| Should suggest user's current location (app only)                      |              |
-| Each upload submission creates duplicate empty divs (bugfix)           | low priority |
-| Upload new image should also add link in DynamoDB image list           | done         |
-| Only create new upload div if the old one does not exist (bugfix)      |              |
-| Upload to ES after dynamodb                                            | URGENT       |
-| Ensure 'type' is chosen by user (and checked for)                      |              |
-| PublicArt in DynamoDb should have version to prevent double writes [0] |              |
-| Should image list be list of 'url' GraphQL type?                       |              |
+| Upload to DB                                                            | done               |
+| Upload photos from app (mobile app only?)                               | URGENT             |
+| Should suggest user's current location (app only)                       |                    |
+| Each upload submission creates duplicate empty divs (bugfix)            | low priority       |
+| Upload new image should also add link in DynamoDB image list            | done               |
+| Only create new upload div if the old one does not exist (bugfix)       | done               |
+| Upload to ES after dynamodb                                             | done - @searchable |
+| PublicArt in DynamoDb should have version to [prevent double writes][0] |                    |
+| Should image list be list of 'url' GraphQL type?                        |                    |
 
 
-| UI & QOL improvements                                                  | Status                       |
-| ---------------------------------------------------------------------- | ---------------------------- |
-| Resize image window to a standard size                                 |                              |
-| Place 'Report location' in own div                                     |                              |
-| Main dropdown menu size more consistent                                |                              |
-| All code to call AWS client should be in one file (-_-)                | done                         |
-| Change name "flag form" -> "report form"                               | MVP - not changed in graphql |
-| Fix problem with 'amplify publish'                                     | HUGELY ANNOYING              |
-| Google uses 'lng', ES uses 'lon' -> inconsistent                       |                              |
-| Revert aws-appsync package to official npm                             | done                         |
-| Revert to default network fetch policy (currently always fetches)      |                              |
-| Make PublicArt schema @searchable (will then automatically push to ES) | in progress                  |
-| Put Data Sources into api/CustomResources.json for eternal use         |                              |
+| UI & QOL improvements                                                  | Status                                               |
+| ---------------------------------------------------------------------- | ---------------------------------------------------- |
+| Resize image window to a standard size                                 |                                                      |
+| Place 'Report location' in own div                                     |                                                      |
+| Main dropdown menu size more consistent                                |                                                      |
+| All code to call AWS client should be in one file (-_-)                | done                                                 |
+| Change name "flag form" -> "report form"                               | MVP - not changed in graphql                         |
+| Fix problem with 'amplify publish'                                     | done - using Amplify console                         |
+| Google uses 'lng', ES uses 'lon' -> inconsistent                       |                                                      |
+| Revert aws-appsync package to official npm                             | done                                                 |
+| Revert to default network fetch policy (currently always fetches)      |                                                      |
+| Make PublicArt schema @searchable (will then automatically push to ES) | in progress                                          |
+| Put Data Sources into api/CustomResources.json for eternal use         | done - not necessary if pre-generated by amplify api |
+
+| Long-term Support                                  | Status | Priority              |
+| -------------------------------------------------- | ------ | --------------------- |
+| Backup data - 3 formats, 3 locations               |        | immediately after MVP |
+| Create amplify 'dev' env w/ seperate ES & DynamoDB |        | Necessary for MVP     |
+| Unit tests                                         |        | Immediately after MVP |
 
 | non-code                  | Status |
 | ------------------------- | ------ |
-| Create Some user journeys |        |
+| Create some user journeys |        |
 
 [0]: https://docs.aws.amazon.com/appsync/latest/devguide/tutorial-dynamodb-resolvers.html#modifying-the-updatepost-resolver-dynamodb-updateitem
 
 ### Possible extensions
 - Use AWS Rekognition to reject images that do not meet decency guidelines
-- Add user auth:
-   - credit images
-   - allow upload only if user is logged in
-
+- Use Auth to credit images (like Google does)
