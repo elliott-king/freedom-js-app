@@ -1,6 +1,6 @@
 # Status
 MVP
-https://d3w3kga4a1s0nc.cloudfront.net/
+http://freedom-js-app-20190820123154-hostingbucket-freedom.s3-website-us-east-1.amazonaws.com
 
 # Todos
 
