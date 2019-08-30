@@ -3,13 +3,14 @@ import '../css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import LocationSearchDiv from './search/location-search.jsx';
+import LocationSearchButton from './search/location-search.jsx';
 import {newPublicArtUpload} from './upload/new-location.jsx'
 import {initMap} from './utils/init-map'
 import { createClient } from './utils/client-handler';
 
 import Amplify from 'aws-amplify';
 import aws_config from './aws-exports';
+import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp} from 'aws-amplify-react';
 
 // Make the auth client accessible to everything
 window.client = createClient();
@@ -38,13 +39,31 @@ map.addListener('click', function(event) {
 // Taken from:
 // https://github.com/tomchentw/react-google-maps/issues/818
 var locationSearchDiv = document.createElement('div');
-map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(locationSearchDiv);
+map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationSearchDiv);
+
+function searchButton() {
+    return (
+        <LocationSearchButton 
+            map={map}
+            markersCallback={markersCallback}
+        />
+    )
+} 
+let SearchButtonWithAuthenticator = withAuthenticator(
+    searchButton, 
+    true,
+    [
+        <SignIn/>,
+        <SignUp/>,
+        <ConfirmSignUp/>,
+        <Greetings
+            inGreeting="Welcome"
+            outGreeting="Please sign in or sign up."
+        />
+    ]
+);
 ReactDOM.render(
-    <LocationSearchDiv 
-        map={map}
-        markersCallback={markersCallback}
-    />,
-    locationSearchDiv
+    <SearchButtonWithAuthenticator/>, locationSearchDiv
 );
 
 // Functions to modify the markers on the map.

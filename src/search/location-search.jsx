@@ -2,14 +2,13 @@ import React from 'react';
 import Select from 'react-select';
 
 import {getPublicArtWithinMap} from './info-window.jsx';
-import {Authenticator} from 'aws-amplify-react';
 import {OPTIONS} from '../utils/constants';
 
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
 import 'babel-polyfill';
 
-class LocationSearchButton extends React.Component {
+export default class LocationSearchButton extends React.Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -43,22 +42,6 @@ class LocationSearchButton extends React.Component {
                     </div> */}
                 </React.Fragment>
             </div>
-        )
-    }
-}
-
-export default class LocationSearchDiv extends React.Component {
-
-    render() {
-        return (
-        <div className="public-art-control" index="1">
-            <Authenticator>
-                <LocationSearchButton
-                    map={this.props.map}
-                    markersCallback={this.props.markersCallback}
-                />
-            </Authenticator>
-        </div>
         )
     }
 }

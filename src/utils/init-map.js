@@ -64,7 +64,7 @@ function CenterControl(controlDiv, map) {
 
 
 export function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40, lng: -75},
         zoom: 15,
         streetViewControl: false,
