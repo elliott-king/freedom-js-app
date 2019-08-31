@@ -64,11 +64,20 @@ function CenterControl(controlDiv, map) {
 
 
 export function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    let options = {
         center: {lat: 40, lng: -75},
         zoom: 15,
         streetViewControl: false,
-    });
+    };
+
+    https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        options.zoomControl = false;
+        options.mapTypeControl = false;
+        options.fullscreenControl = false;
+    }
+
+    var map = new google.maps.Map(document.getElementById('map'), options);
 
     // Try HTML5 geolocation
     // NOTE: this can only be done from secure context (https)
