@@ -3,7 +3,7 @@ import '../css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import LocationSearchButton from './search/location-search.jsx';
+import LocationSearchButton from './search/location-search-button.jsx';
 import {newPublicArtUpload} from './upload/new-location.jsx'
 import {initMap} from './utils/init-map'
 import { createClient } from './utils/client-handler';
