@@ -1,9 +1,29 @@
+#root { 
+    /* position: relative; */
+    height: 100%;
+}
 
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
     height: 100%;
+    margin-left: 200px;
 }
+
+/* The sidebar is floated over the map to not interfere.
+https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
+#sidebar {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    /* right: 0; */
+    height: 100%;
+    width: 200px;
+    /* z-index: 99; */
+    background-color: white;
+    overflow: auto;
+}
+
 /* Optional: Makes the sample page fill the window. */
 html, body {
     height: 100%;

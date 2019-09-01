@@ -38,7 +38,6 @@ export default class LocationInfoDiv extends React.Component {
         // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
         this.imageInput = React.createRef();
 
-        this.handleClose = this.handleClose.bind(this);
         this.reportOptionChange = this.reportOptionChange.bind(this);
         this.reportTextChange = this.reportTextChange.bind(this);
         this.submitLocationReport = this.submitLocationReport.bind(this);
@@ -53,12 +52,6 @@ export default class LocationInfoDiv extends React.Component {
             // TODO: update description field.
             uploadImage(img_file, this.props.id, "Testing: this is a photo file.");
         } // TODO: else log that there is not an image to upload.
-    }
-    handleClose(event) {
-        const sidebar = document.getElementById('sidebar');
-        while(sidebar.firstChild) {
-            sidebar.removeChild(sidebar.firstChild);
-        }
     }
 
     submitLocationReport(event) {
@@ -140,7 +133,6 @@ export default class LocationInfoDiv extends React.Component {
                         onChange={this.reportTextChange}
                         />
                     <button type="submit" className="btn">Report Location</button>
-                    <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
                 {this.renderResponseOfReporting()}
             </div>

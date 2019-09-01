@@ -22,7 +22,6 @@ class PublicArtUploadForm extends React.Component {
         this.imageInput = React.createRef();
 
         // this.optionChange = this.optionChange.bind(this);
-        this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameChange = this.nameChange.bind(this);
         this.descriptionChange = this.descriptionChange.bind(this);
@@ -67,11 +66,6 @@ class PublicArtUploadForm extends React.Component {
 
         // Delete a div from the DOM.
         // https://stackoverflow.com/questions/8404797/
-        var f = document.getElementById("public-art-upload-form");
-        f.parentNode.removeChild(f);
-    }
-    handleClose(event) {
-        event.preventDefault();
         var f = document.getElementById("public-art-upload-form");
         f.parentNode.removeChild(f);
     }
@@ -128,7 +122,6 @@ class PublicArtUploadForm extends React.Component {
                         />
                     </div>
                     <button type="submit" className="btn">Upload new location</button>
-                    <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
             </div>
         )
