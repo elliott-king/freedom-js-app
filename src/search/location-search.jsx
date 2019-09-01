@@ -16,7 +16,8 @@ function revealLocationInfo(id) {
     }).then(( {data: {getPublicArt}}) => {
         console.debug("Generating info for:", getPublicArt);
 
-        var locationInfo = document.createElement('div');
+        const sidebar = document.getElementById('sidebar');
+        ReactDOM.unmountComponentAtNode(sidebar);
         ReactDOM.render(
             <LocationInfoDiv
                 name={getPublicArt.name}
@@ -24,14 +25,9 @@ function revealLocationInfo(id) {
                 // TODO: photo resizing: infowindow final size is all over the place.
                 photos={getPublicArt.photos}
             />,
-            locationInfo
+            sidebar
         );
         
-        const sidebar = document.getElementById('sidebar');
-        while(sidebar.firstChild) {
-            sidebar.removeChild(sidebar.firstChild);
-        }
-        sidebar.appendChild(locationInfo);
     })
     .catch(err => console.error("Problem generating info window:", err));
 }

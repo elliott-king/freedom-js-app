@@ -132,20 +132,15 @@ class PublicArtUploadForm extends React.Component {
 export function newPublicArtUpload(lat, lng) {
     console.debug("New click event at:", lat, lng);
 
-    var publicArtUploadDiv = document.createElement('div');
-
-    const uploadDiv = document.getElementById('sidebar');
-    while(uploadDiv.firstChild) {
-        uploadDiv.removeChild(uploadDiv.firstChild);
-    }
-    uploadDiv.appendChild(publicArtUploadDiv);
+    const sidebar = document.getElementById('sidebar');
+    ReactDOM.unmountComponentAtNode(sidebar);
 
     ReactDOM.render(
         <PublicArtUploadForm
             lat={lat}
             lng={lng}
         />,
-        publicArtUploadDiv
+        sidebar
     );
 
 }
