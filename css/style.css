@@ -1,5 +1,11 @@
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #root { 
-    /* position: relative; */
     height: 100%;
 }
 
@@ -7,28 +13,21 @@
 * element that contains the map. */
 #map {
     height: 100%;
-    margin-left: 200px;
+    margin-left: 25%;
 }
 
-/* The sidebar is floated over the map to not interfere.
-https://stackoverflow.com/questions/6037712/how-to-float-a-div-over-google-maps */
 #sidebar {
     position: fixed;
     margin: 0;
     padding: 0;
-    /* right: 0; */
     height: 100%;
-    width: 200px;
-    /* z-index: 99; */
+    width: 25%;
     background-color: white;
     overflow: auto;
 }
 
-/* Optional: Makes the sample page fill the window. */
-html, body {
+#location-content {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 #public-art-upload-form {
@@ -65,10 +64,45 @@ html, body {
     min-width: 80px;
 }
 
-/* TODO: this should be relative units */
+/* Note that percentages are relative to its container div.*/
 .location-image {
-    max-height: 250px;
-    max-width: 250px;
+    max-width: 90%;
+    max-height: 40%;
     width: auto;
     height: auto;
+}
+
+/* Our sidebar will be on left for desktop, bottom for smaller screens.
+https://www.w3schools.com/howto/howto_css_sidebar_responsive.asp for @media info
+https://stackoverflow.com/questions/15147378/ for map size insiration*/
+@media screen and (max-width: 700px) {
+    #root {
+        margin: 0;
+        padding: 0;
+    }
+    #sidebar {
+      width: 100%;
+      height: 35%;
+      position: relative;
+      top:0;
+    }
+    #map {
+        margin-left: 0;
+        height: 65%
+    }
+    #location-content {
+        padding: 0;
+    }
+    #location-content h3 {
+        margin: 0;
+    }
+    .location-head-info {
+        height: 100%;
+    }
+    .location-image {
+        max-width: 40%;
+        max-height: 80%;
+        width: auto;
+        height: auto;
+    }
 }

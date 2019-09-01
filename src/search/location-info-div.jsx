@@ -100,9 +100,11 @@ export default class LocationInfoDiv extends React.Component {
 
     render() {
         return (
-            <div id="content">
-                <h3>{this.props.name}</h3>
-                {this.renderImg()}
+            <div id="location-content">
+                <div className="location-head-info">
+                    <h3>{this.props.name}</h3>
+                    {this.renderImg()}
+                </div>
                 <form 
                     className = "new-image-form"
                     onSubmit={this.uploadNewImage}
