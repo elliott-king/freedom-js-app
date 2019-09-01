@@ -70,7 +70,7 @@ export function initMap() {
         streetViewControl: false,
     };
 
-    https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
+    // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
     if (/Mobi|Android/i.test(navigator.userAgent)) {
         options.zoomControl = false;
         options.mapTypeControl = false;
