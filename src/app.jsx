@@ -57,7 +57,6 @@ let SearchButtonWithAuthenticator = withAuthenticator(searchButton, {
         <ConfirmSignUp/>,
         <Greetings
             inGreeting="Welcome"
-            outGreeting="Please sign in or sign up."
         />
     ],
     // TODO: get rid of phone number somehow?
