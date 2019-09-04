@@ -1,85 +1,104 @@
-import '../css/style.css';
+/* eslint-disable react/jsx-key */
+/* global google */
 
+import '../css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import LocationSearchButton from './search/location-search-button.jsx';
-import {newPublicArtUpload} from './upload/new-location.jsx'
-import {initMap} from './utils/init-map'
-import { createClient } from './utils/client-handler';
+import {newPublicArtUpload} from './upload/new-location.jsx';
+import {initMap} from './utils/init-map';
+import {createClient} from './utils/client-handler';
 
 import Amplify from 'aws-amplify';
+// eslint-disable-next-line camelcase
 import aws_config from './aws-exports';
-import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp} from 'aws-amplify-react';
+import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
+  from 'aws-amplify-react';
 
 // Make the auth client accessible to everything
 window.client = createClient();
 
 Amplify.configure(aws_config);
-var map = initMap();
-var locationMarkers = [];
+const map = initMap();
+let locationMarkers = [];
 
 map.addListener('click', function(event) {
-    var latLng = event.latLng;
-    var lat = latLng.lat();
-    var lng = latLng.lng();
+  const latLng = event.latLng;
+  const lat = latLng.lat();
+  const lng = latLng.lng();
 
-    // TODO: this should disappear when the 'close' button is clicked in the new div.
-    var newLocationMarker = new google.maps.Marker({
-        position: {lng: lng, lat: lat}, 
-        map: map, 
-        title: "New location",
-        label: "N"
-    });
-    markersCallback([newLocationMarker]);
+  // TODO: should disappear when the 'close' button clicked in new-location div.
+  const newLocationMarker = new google.maps.Marker({
+    position: {lng: lng, lat: lat},
+    map: map,
+    title: 'New location',
+    label: 'N',
+  });
+  markersCallback([newLocationMarker]);
 
-    newPublicArtUpload(lat, lng);
+  newPublicArtUpload(lat, lng);
 });
 
 // Taken from:
 // https://github.com/tomchentw/react-google-maps/issues/818
-var locationSearchDiv = document.createElement('div');
+const locationSearchDiv = document.createElement('div');
 map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationSearchDiv);
-
+/**
+ * @returns {LocationSearchButton} A search button with our required parameters.
+ */
 function searchButton() {
-    return (
-        <LocationSearchButton 
-            map={map}
-            markersCallback={markersCallback}
-        />
-    )
-} 
-let SearchButtonWithAuthenticator = withAuthenticator(searchButton, {
-    includeGreetings: true,
-    authenticatorComponents: [
-        <SignIn/>,
-        <SignUp/>,
-        <ConfirmSignUp/>,
-        <Greetings
-            inGreeting="Welcome"
-        />
-    ],
-    // TODO: get rid of phone number somehow?
-    usernameAttributes: 'email'
+  return (
+    <LocationSearchButton
+      map={map}
+      markersCallback={markersCallback}
+    />
+  );
+}
+const SearchButtonWithAuthenticator = withAuthenticator(searchButton, {
+  includeGreetings: true,
+  authenticatorComponents: [
+    <SignIn/>,
+    <SignUp/>,
+    <ConfirmSignUp/>,
+    <Greetings
+      inGreeting="Welcome"
+    />,
+  ],
+  // TODO: get rid of phone number somehow?
+  usernameAttributes: 'email',
 });
 ReactDOM.render(
     <SearchButtonWithAuthenticator/>, locationSearchDiv
 );
 
 // Functions to modify the markers on the map.
+/**
+ * @param  {google.maps.Map} map A google map
+ * @param  {Array} markers The markers to add to the map
+ */
 function setMapOnAll(map, markers) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
 }
+/**
+ * @param  {Array} markers The markers to add to the map
+ */
 function showMarkers(markers) {
-    setMapOnAll(map, markers);
+  setMapOnAll(map, markers);
 }
+/**
+ * @param  {Array} markers The markers to remove from the map
+ */
 function deleteMarkers(markers) {
-    setMapOnAll(null, markers);
+  setMapOnAll(null, markers);
 }
-function markersCallback(new_markers) {
-    deleteMarkers(locationMarkers);
-    locationMarkers = new_markers
-    showMarkers(locationMarkers);
+/**
+ * @param  {Array} newMarkers The new markers for the map
+ */
+function markersCallback(newMarkers) {
+  deleteMarkers(locationMarkers);
+  locationMarkers = newMarkers;
+  showMarkers(locationMarkers);
 }
