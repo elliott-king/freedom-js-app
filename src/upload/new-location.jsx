@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 import gql from 'graphql-tag';
 import { v4 as uuid } from 'uuid';
@@ -133,6 +134,10 @@ class PublicArtUploadForm extends React.Component {
         )
     }
 }
+PublicArtUploadForm.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
+};
 
 // TODO: just take in a latLng
 export function newPublicArtUpload(lat, lng) {

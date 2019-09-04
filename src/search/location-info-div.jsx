@@ -6,6 +6,7 @@
 
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 import gql from 'graphql-tag';
 import { createReported } from '../graphql/mutations';
@@ -148,3 +149,8 @@ export default class LocationInfoDiv extends React.Component {
         )
     }
 }
+LocationInfoDiv.propTypes = {
+  name: PropTypes.number.isRequired,
+  photos: PropTypes.array,
+  id: PropTypes.string.isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import {getPublicArtWithinMap} from './location-search.jsx';
@@ -45,3 +46,7 @@ export default class LocationSearchButton extends React.Component {
         )
     }
 }
+LocationSearchButton.propTypes = {
+  map: PropTypes.object.isRequired,
+  markersCallback: PropTypes.func.isRequired,
+};
