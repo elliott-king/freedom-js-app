@@ -22,6 +22,9 @@
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^2.1.1",
+    "eslint": "^6.3.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.14.3",
     "react-select": "^2.4.3",
     "style-loader": "^0.23.1",
     "webpack": "^4.39.2",
@@ -30,6 +33,7 @@
   },
   "scripts": {
     "start": "webpack && webpack-dev-server --mode development --port 8080",
-    "build": "webpack"
+    "build": "webpack",
+    "lint": "eslint src/**/*.js"
   }
 }
