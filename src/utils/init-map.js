@@ -1,3 +1,5 @@
+import setMapAndSidebarStyle from './set-map-and-sidebar-style'
+
 function handleLocationError(browserHasGeolocation, pos) {
     var infoWindow = new google.maps.InfoWindow();
     infoWindow.setPosition(pos);
@@ -6,7 +8,6 @@ function handleLocationError(browserHasGeolocation, pos) {
                           'Error: your browser does not support geolocation.');
     infoWindow.open(map);
 }
-
 
 function centerMap(map) {
     if (navigator.geolocation) {
@@ -93,5 +94,7 @@ export function initMap() {
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
     }
+
+    setMapAndSidebarStyle(false);
     return map;
 }

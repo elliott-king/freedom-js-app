@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import { uploadImage } from './upload-image';
 import { createPublicArt } from '../graphql/mutations';
+import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
 class PublicArtUploadForm extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class PublicArtUploadForm extends React.Component {
         this.imageInput = React.createRef();
 
         // this.optionChange = this.optionChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameChange = this.nameChange.bind(this);
         this.descriptionChange = this.descriptionChange.bind(this);
@@ -68,6 +70,9 @@ class PublicArtUploadForm extends React.Component {
         // https://stackoverflow.com/questions/8404797/
         var f = document.getElementById("public-art-upload-form");
         f.parentNode.removeChild(f);
+    }
+    handleClose(event) {
+        setMapAndSidebarStyle(false);
     }
 
     // optionChange(selectedOption) {
@@ -122,6 +127,7 @@ class PublicArtUploadForm extends React.Component {
                         />
                     </div>
                     <button type="submit" className="btn">Upload new location</button>
+                    <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
             </div>
         )
@@ -143,4 +149,5 @@ export function newPublicArtUpload(lat, lng) {
         sidebar
     );
 
+    setMapAndSidebarStyle(true);
 }

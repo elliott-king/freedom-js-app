@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import LocationInfoDiv from './location-info-div.jsx';
+import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
 var previousInfoWindow = false;
 
@@ -27,6 +28,7 @@ function revealLocationInfo(id) {
             />,
             sidebar
         );
+        setMapAndSidebarStyle(true);
         
     })
     .catch(err => console.error("Problem generating info window:", err));

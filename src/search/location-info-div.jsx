@@ -10,6 +10,7 @@ import Select from 'react-select';
 import gql from 'graphql-tag';
 import { createReported } from '../graphql/mutations';
 import { uploadImage } from '../upload/upload-image';
+import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
 // Options for reporting public art.
 const options = [
@@ -39,6 +40,7 @@ export default class LocationInfoDiv extends React.Component {
         this.imageInput = React.createRef();
 
         this.reportOptionChange = this.reportOptionChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.reportTextChange = this.reportTextChange.bind(this);
         this.submitLocationReport = this.submitLocationReport.bind(this);
         this.uploadNewImage = this.uploadNewImage.bind(this);
@@ -52,6 +54,10 @@ export default class LocationInfoDiv extends React.Component {
             // TODO: update description field.
             uploadImage(img_file, this.props.id, "Testing: this is a photo file.");
         } // TODO: else log that there is not an image to upload.
+    }
+
+    handleClose(event) {
+        setMapAndSidebarStyle(false);
     }
 
     submitLocationReport(event) {
@@ -135,6 +141,7 @@ export default class LocationInfoDiv extends React.Component {
                         onChange={this.reportTextChange}
                         />
                     <button type="submit" className="btn">Report Location</button>
+                    <button type="button" onClick={this.handleClose} className="close">Close</button>
                 </form>
                 {this.renderResponseOfReporting()}
             </div>
