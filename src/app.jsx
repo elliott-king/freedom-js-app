@@ -49,10 +49,9 @@ function searchButton() {
         />
     )
 } 
-let SearchButtonWithAuthenticator = withAuthenticator(
-    searchButton, 
-    true,
-    [
+let SearchButtonWithAuthenticator = withAuthenticator(searchButton, {
+    includeGreetings: true,
+    authenticatorComponents: [
         <SignIn/>,
         <SignUp/>,
         <ConfirmSignUp/>,
@@ -60,8 +59,10 @@ let SearchButtonWithAuthenticator = withAuthenticator(
             inGreeting="Welcome"
             outGreeting="Please sign in or sign up."
         />
-    ]
-);
+    ],
+    // TODO: get rid of phone number somehow?
+    usernameAttributes: 'email'
+});
 ReactDOM.render(
     <SearchButtonWithAuthenticator/>, locationSearchDiv
 );
