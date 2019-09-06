@@ -69,10 +69,7 @@ class PublicArtUploadForm extends React.Component {
       console.warn('Need image to create new location.');
     }
 
-    // Delete a div from the DOM.
-    // https://stackoverflow.com/questions/8404797/
-    const f = document.getElementById('public-art-upload-form');
-    f.parentNode.removeChild(f);
+    setMapAndSidebarStyle(false);
   }
   handleClose(event) {
     setMapAndSidebarStyle(false);
