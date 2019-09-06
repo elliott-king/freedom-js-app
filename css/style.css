@@ -19,11 +19,64 @@ html, body {
     height: 100%;
 }
 
-#public-art-upload-form {
+.public-art-upload-form-container {
     height: 100%;
     width: 100%;
     margin: auto;
     display: flex;
+}
+
+.public-art-upload-form-container form {
+    width: 100%;
+}
+
+.public-art-upload-form h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* width: 100%; */
+    /* margin: 0 auto; */
+    text-align: center;
+}
+.public-art-upload-form h4 {
+    text-align: center;
+}
+.public-art-upload-form .new-public-art-name {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 1rem;
+}
+.public-art-upload-form .new-public-art-description {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 1rem;
+}
+/* Inline form. */
+/* https://www.w3schools.com/howto/howto_css_inline_form.asp */
+.public-art-upload-form input[type=text] {
+    vertical-align: middle;
+    margin: 10px 0 10px auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+
+    position: relative;
+    float: right;
+}
+
+.new-public-art-image {
+    margin: 10px auto;
+}
+
+.new-public-art-image input[type=file] {
+    text-align: right;
+}
+
+.public-art-upload-form button {
+    margin: 20px auto;
+    display: block;
+    padding: 10px;
+}
+
+.public-art-upload-form button:hover {
+    background-color: #fff;
 }
 
 .public-art-ui {

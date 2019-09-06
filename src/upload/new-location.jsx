@@ -90,40 +90,43 @@ class PublicArtUploadForm extends React.Component {
   // https://stackoverflow.com/questions/22658141
   render() {
     return (
-      <div
-        id="public-art-upload-form"
-        className="public-art-upload-form"
-      >
-        <form onSubmit={this.handleSubmit}>
-          <h3>Upload new public art.</h3>
-          <input type="text"
-            placeholder="Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.nameChange}
-          />
-          {/* <Select
-                        // TODO: this should not include 'all'
-                        options={OPTIONS}
-                        onChange={this.optionChange}
-                    /> */}
-          <div>
-            <p>Latitude: {this.props.lat}</p>
-            <p>Longitude: {this.props.lng}</p>
+      <div className="public-art-upload-form-container">
+        <form onSubmit={this.handleSubmit} className="public-art-upload-form">
+          <h1>New Public Art</h1>
+          <h4 className="new-public-art-location">
+            Location: {this.props.lat.toFixed(2)}, {this.props.lng.toFixed(2)}
+          </h4>
+          <div className="new-public-art-name">
+            <p>Name</p>
+            <input className = "new-public-art-input"
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.nameChange}
+            />
           </div>
-          <div><h4>Choose image for location</h4>
+          <div className="new-public-art-description">
+            <p>Description</p>
+            <input className="new-public-art-input"
+              type="text"
+              placeholder="Optional"
+              name="description"
+              value={this.state.description}
+              onChange={this.descriptionChange}
+            />
+          </div>
+          {/* <Select
+                      // TODO: this should not include 'all'
+                      options={OPTIONS}
+                      onChange={this.optionChange}
+                  /> */}
+          <div className="new-public-art-image">
+            <h4>Choose image for location</h4>
             <input
               type="file"
               accept="image/png"
               ref={this.imageInput}
-            />
-          </div>
-          <div>
-            <input type="text"
-              placeholder="Description"
-              name="description"
-              value={this.state.description}
-              onChange={this.descriptionChange}
             />
           </div>
           <button type="submit" className="btn">Upload new location</button>
