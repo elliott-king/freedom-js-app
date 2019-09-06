@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const smallWindowRatios = {
-  sidebar: '35%',
-  map: '65%',
+  sidebar: '100%',
+  map: '0%',
 };
 const largeWindowRatios = {
   sidebar: '25%',
