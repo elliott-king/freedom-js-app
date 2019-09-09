@@ -47,8 +47,8 @@ class PublicArtUploadForm extends React.Component {
             id: locationId,
             name: this.state.name,
             location: {
-              lat: this.props.lat,
-              lon: this.props.lng,
+              lat: this.stat.lat,
+              lon: this.state.lon,
             },
             description: (this.state.description ? this.state.description : undefined),
             type: 'sculpture',
@@ -58,7 +58,7 @@ class PublicArtUploadForm extends React.Component {
         console.log('Uploaded new location', this.state.name, 'to dynamodb.');
         return uploadImage(imgFile, locationId, '');
       }).then((response) => {
-        console.log('Succesffully uploaded image for new location', this.state.name);
+        console.log('Successfully uploaded image for new location', this.state.name);
       }).catch((err) => {
         console.error('Error uploading new location:', err);
         throw err;
@@ -94,7 +94,7 @@ class PublicArtUploadForm extends React.Component {
         <form onSubmit={this.handleSubmit} className="public-art-upload-form">
           <h1>New Public Art</h1>
           <h4 className="new-public-art-location">
-            Location: {this.props.lat.toFixed(2)}, {this.props.lng.toFixed(2)}
+            Location: {this.state.lat.toFixed(2)}, {this.state.lon.toFixed(2)}
           </h4>
           <div className="new-public-art-name">
             <p>Name</p>
