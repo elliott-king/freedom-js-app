@@ -54,6 +54,7 @@ export default function setMapAndSidebarStyle(sidebarIsPopulated) {
     sidebarDiv.style.overflow = 'auto';
 
     mapDiv.style.height = maxSize;
+    mapDiv.style.width = largeWindowRatios.map;
     mapDiv.style['margin-left'] = largeWindowRatios.sidebar;
   }
 }
