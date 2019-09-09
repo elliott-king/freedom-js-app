@@ -1,3 +1,4 @@
+/* global google */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -10,6 +11,7 @@ import {v4 as uuid} from 'uuid';
 import {uploadImage} from './upload-image';
 import {createPublicArt} from '../graphql/mutations';
 import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
+import {updateMarkers} from '../utils/markers-utils';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -19,6 +21,8 @@ class PublicArtUploadForm extends React.Component {
       name: '',
       description: '',
       selectedOption: 'public-art',
+      lat: this.props.lat,
+      lon: this.props.lng,
     };
 
     // To upload images in React, we use the file API.
@@ -30,6 +34,7 @@ class PublicArtUploadForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
+    this.userLocation = this.userLocation.bind(this);
   }
 
   handleSubmit(event) {
@@ -86,6 +91,29 @@ class PublicArtUploadForm extends React.Component {
     this.setState({description: event.target.value});
   }
 
+  userLocation(event) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=> {
+        this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+
+        const newLocationReplacementMarker = new google.maps.Marker({
+          position: {lng: position.coords.longitude, lat: position.coords.latitude},
+          map: window.map,
+          title: 'New location',
+          label: 'N',
+        });
+        updateMarkers([newLocationReplacementMarker]);
+      }, function(err) {
+        console.warn('Error: geolocation service has failed:', err);
+      });
+    } else {
+      console.warn('Browser does not handle geolocation');
+    }
+  }
+
   // center div horizontally & vertically
   // https://stackoverflow.com/questions/22658141
   render() {
@@ -96,6 +124,11 @@ class PublicArtUploadForm extends React.Component {
           <h4 className="new-public-art-location">
             Location: {this.state.lat.toFixed(2)}, {this.state.lon.toFixed(2)}
           </h4>
+          <button type="button"
+            className="new-public-art-set-location"
+            onClick={this.userLocation}>
+            Use my current location
+          </button>
           <div className="new-public-art-name">
             <p>Name</p>
             <input className = "new-public-art-input"
