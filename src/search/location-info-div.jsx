@@ -154,7 +154,7 @@ export default class LocationInfoDiv extends React.Component {
   }
 }
 LocationInfoDiv.propTypes = {
-  name: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   photos: PropTypes.array,
   id: PropTypes.string.isRequired,
 };
