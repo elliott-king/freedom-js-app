@@ -31,7 +31,7 @@ export function uploadImage(imgFile, locationId, description) {
     return window.client.mutate({
       mutation: gql(addPhoto),
       variables: {
-        locationId: locationId,
+        location_id: locationId,
         url: imgUrl,
       },
     });
