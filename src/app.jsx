@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import LocationSearchButton from './search/location-search-button.jsx';
 import {newPublicArtUpload} from './upload/new-location.jsx';
 import {initMap} from './utils/init-map';
-import {createClient} from './utils/client-handler';
+import {createClient} from './utils/aws-client-handler';
 
 import Amplify from 'aws-amplify';
 // eslint-disable-next-line camelcase
