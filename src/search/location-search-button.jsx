@@ -28,7 +28,7 @@ export default class LocationSearchButton extends React.Component {
           <button className="public-art-button"
             title="Click to find nearby public art."
             onClick={() => getPublicArtWithinMap(
-                this.props.map,
+                window.map,
                 this.state.filter,
                 this.props.markersCallback
             )}>
@@ -49,6 +49,5 @@ export default class LocationSearchButton extends React.Component {
   }
 }
 LocationSearchButton.propTypes = {
-  map: PropTypes.object.isRequired,
   markersCallback: PropTypes.func.isRequired,
 };
