@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom';
 import LocationInfoDiv from './location-info-div.jsx';
 import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
+let prevMarker = null;
+
 /**
  * @param  {string} id ID of location desired
  */
@@ -74,9 +76,14 @@ export function getPublicArtWithinMap(map, filter, callback) {
       const marker = new google.maps.Marker(
           {position: location, map: map, title: publicArt.name});
       marker.addListener('click', () => {
+        if (prevMarker) {
+          prevMarker.setLabel(null);
+        }
+
         console.log('querying public art:', publicArt.name, publicArt.id);
         revealLocationInfo(publicArt.id);
-        marker.setLabel('A'); // TODO: change color & revert upon new selection.
+        marker.setLabel('A');
+        prevMarker = marker;
       });
       newMarkers.push(marker);
     }
