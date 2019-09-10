@@ -37,6 +37,12 @@ class PublicArtUploadForm extends React.Component {
     this.userLocation = this.userLocation.bind(this);
   }
 
+  componentDidMount() {
+    window.updateNewLocationFields = (lat, lon) => {
+      this.setState({lat: lat, lon: lon});
+    };
+  }
+
   handleSubmit(event) {
     event.preventDefault(); // KTHXWHAT?
 
@@ -118,7 +124,7 @@ class PublicArtUploadForm extends React.Component {
   // https://stackoverflow.com/questions/22658141
   render() {
     return (
-      <div className="public-art-upload-form-container">
+      <div id="new-public-art-upload" className="public-art-upload-form-container">
         <form onSubmit={this.handleSubmit} className="public-art-upload-form">
           <h1>New Public Art</h1>
           <h4 className="new-public-art-location">
@@ -184,15 +190,21 @@ export function newPublicArtUpload(lat, lng) {
   console.debug('New click event at:', lat, lng);
 
   const sidebar = document.getElementById('sidebar');
-  ReactDOM.unmountComponentAtNode(sidebar);
+  const currentLocationUpload = document.getElementById('new-public-art-upload');
+  console.log(currentLocationUpload);
 
-  ReactDOM.render(
-      <PublicArtUploadForm
-        lat={lat}
-        lng={lng}
-      />,
-      sidebar
-  );
+  if (currentLocationUpload) {
+    window.updateNewLocationFields(lat, lng);
+  } else {
+    ReactDOM.unmountComponentAtNode(sidebar);
+    ReactDOM.render(
+        <PublicArtUploadForm
+          lat={lat}
+          lng={lng}
+        />,
+        sidebar
+    );
+  }
 
   setMapAndSidebarStyle(true);
 }

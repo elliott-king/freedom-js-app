@@ -31,7 +31,6 @@ export default function setMapAndSidebarStyle(sidebarIsPopulated) {
     mapDiv.style.width = maxSize;
     mapDiv.style['margin-left'] = minSize;
 
-    ReactDOM.unmountComponentAtNode(sidebarDiv);
     sidebarDiv.style.height = minSize;
     sidebarDiv.style.width = minSize;
     return;
