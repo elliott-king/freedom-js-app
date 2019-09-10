@@ -8,8 +8,6 @@ import ReactDOM from 'react-dom';
 import LocationInfoDiv from './location-info-div.jsx';
 import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
-const previousInfoWindow = false;
-
 /**
  * @param  {string} id ID of location desired
  */
@@ -75,10 +73,7 @@ export function getPublicArtWithinMap(map, filter, callback) {
 
       const marker = new google.maps.Marker(
           {position: location, map: map, title: publicArt.name});
-      marker.addListener('click', function() {
-        if (previousInfoWindow) {
-          previousInfoWindow.close();
-        }
+      marker.addListener('click', () => {
         console.log('querying public art:', publicArt.name, publicArt.id);
         revealLocationInfo(publicArt.id);
         marker.setLabel('A'); // TODO: change color & revert upon new selection.
