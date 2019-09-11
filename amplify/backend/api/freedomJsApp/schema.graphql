@@ -7,6 +7,11 @@ input LocationInput {
     lon: Float
 }
 
+enum PublicArtType {
+  mural
+  sculpture
+}
+
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model @searchable{
@@ -14,7 +19,7 @@ type PublicArt @model @searchable{
     location: Location
 	name: String
 	description: String
-	type: String
+  type: PublicArtType
 	# TODO: need ids...?
     photos: [String]
 }
