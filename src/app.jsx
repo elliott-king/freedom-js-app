@@ -42,7 +42,7 @@ window.map.addListener('click', function(event) {
 // Adding custom controls:
 // https://github.com/tomchentw/react-google-maps/issues/818
 const locationSearchDiv = document.createElement('div');
-window.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationSearchDiv);
+window.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(locationSearchDiv);
 ReactDOM.render(
     <LocationSearchButton
       markersCallback={updateMarkers}

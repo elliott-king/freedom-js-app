@@ -15,6 +15,25 @@ html, body {
     height: 100%;
 }
 
+.map-button-ui {
+    background-color: #fff;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    cursor: pointer;
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.map-button-text {
+    color: rgb(25,25,25);
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 38px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 #location-content {
     height: 100%;
 }
@@ -79,32 +98,11 @@ html, body {
     background-color: #fff;
 }
 
-.public-art-ui {
-    background-color: #fff;
-    border: 2px solid #fff;
-    border-radius: 3px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.3);
-    cursor: pointer;
-    margin-bottom: 22px;
-    text-align: center;
-}
-
-.public-art-button {
-    color: rgb(25,25,25);
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 38px;
-    padding-left: 5px;
-    padding-right: 5px;
-    display: inline-block;
-    margin: 5px 0 5px 5px;
-}
-
-.public-art-dropdown {
+/* .public-art-dropdown {
     margin: 5px 5px 5px 0;
     display: inline-block;
     min-width: 80px;
-}
+} */
 
 /* Note that percentages are relative to its container div.*/
 .location-image {

@@ -23,27 +23,26 @@ export default class LocationSearchButton extends React.Component {
   }
   render() {
     return (
-      <div className="public-art-ui">
-        <React.Fragment>
-          <button className="public-art-button"
-            title="Click to find nearby public art."
-            onClick={() => getPublicArtWithinMap(
-                window.map,
-                this.state.filter,
-                this.props.markersCallback
-            )}>
-                        Public Art Search
-          </button>
-          {/* <div className="public-art-dropdown">
-                        <Select
-                            menuPlacement="top"
-                            options={OPTIONS}
-                            isClearable={false}
-                            defaultValue={OPTIONS[0]}
-                            onChange={this.handleChange}
-                        />
-                    </div> */}
-        </React.Fragment>
+      <div
+        className="map-button-ui"
+        title="Find nearby public art"
+        onClick={() => getPublicArtWithinMap(
+            window.map,
+            this.state.filter,
+            this.props.markersCallback
+        )}>
+        <div className="map-button-text">
+          Public Art Search
+        </div>
+        {/* <div className="public-art-dropdown">
+                      <Select
+                          menuPlacement="top"
+                          options={OPTIONS}
+                          isClearable={false}
+                          defaultValue={OPTIONS[0]}
+                          onChange={this.handleChange}
+                      />
+                  </div> */}
       </div>
     );
   }
