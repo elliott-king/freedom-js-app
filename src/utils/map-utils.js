@@ -2,7 +2,8 @@
 
 import setMapAndSidebarStyle from './set-map-and-sidebar-style';
 
-/**
+/** Show error if issue getting geolocation
+ *
  * @param  {boolean} browserHasGeolocation User browser has geolocation enabled
  * @param  {google.maps.LatLng} pos Location to place the error window
  * @param  {google.maps.Map} map A google map
@@ -16,9 +17,7 @@ function handleLocationError(browserHasGeolocation, pos, map) {
   infoWindow.open(map);
 }
 
-/** Centers map on current location.
- *
- */
+/** Centers map on current location. */
 export function centerMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -36,13 +35,11 @@ export function centerMap() {
 
 
 /**
- * The CenterControl adds a control to the map that recenters the map on
- * Chicago.
+ * The CenterControl adds a control to the map that recenters it.
  *
  * @param {Element} controlDiv The div to house this button
- * @param {google.maps.Map} map A Google map
  */
-function addCenterControl(controlDiv, map) {
+function addCenterControl(controlDiv) {
   // Set CSS for the control border.
   const controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -66,7 +63,7 @@ function addCenterControl(controlDiv, map) {
   controlText.innerHTML = 'Center Map';
   controlUI.appendChild(controlText);
 
-  // Setup the click event listeners: simply set the map to Chicago.
+  // Setup the click event listeners: simply recenter the map.
   controlUI.addEventListener('click', function() {
     centerMap();
   });

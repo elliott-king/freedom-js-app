@@ -1,7 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 const smallWindowRatios = {
   sidebar: '100%',
   map: '0%',
@@ -36,7 +32,7 @@ export default function setMapAndSidebarStyle(sidebarIsPopulated) {
     return;
   }
 
-  // For a smaller window, we would like the sidebar above the map.
+  // For a smaller window, we would like the sidebar to consume the viewport.
   if (smallWindow) {
     sidebarDiv.style.width = maxSize;
     sidebarDiv.style.height = smallWindowRatios.sidebar;
@@ -46,7 +42,8 @@ export default function setMapAndSidebarStyle(sidebarIsPopulated) {
 
     mapDiv.style['margin-left'] = '0';
     mapDiv.style.height = smallWindowRatios.map;
-  } else { // For a large window, the sidebar will be on the left.
+  } else {
+    // For a large window, the sidebar will be on the left.
     sidebarDiv.style.position = 'fixed';
     sidebarDiv.style.height = maxSize;
     sidebarDiv.style.width = largeWindowRatios.sidebar;

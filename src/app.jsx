@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 /* global google */
 
 import '../css/style.css';
@@ -15,11 +14,12 @@ import Amplify from 'aws-amplify';
 // eslint-disable-next-line camelcase
 import aws_config from './aws-exports';
 
-// Make the auth client accessible to everything
+// Auth client is global so we can easily call gql queries anywhere.
 window.client = createClient();
-// Map is also accessible to everything.
+// Map global so that markers can be added from anywhere.
 window.map = initMap();
 
+// Required setup for AWS Amplify utilities (API, S3, Auth, etc..)
 Amplify.configure(aws_config);
 
 window.map.addListener('click', function(event) {
@@ -39,7 +39,7 @@ window.map.addListener('click', function(event) {
   newPublicArtUpload(lat, lng);
 });
 
-// Taken from:
+// Adding custom controls:
 // https://github.com/tomchentw/react-google-maps/issues/818
 const locationSearchDiv = document.createElement('div');
 window.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationSearchDiv);

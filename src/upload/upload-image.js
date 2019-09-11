@@ -11,7 +11,7 @@ import {addPhoto} from '../graphql/mutations';
 /**
  * @param  {object} imgFile The image to upload
  * @param  {string} locationId Location for this image
- * @param  {string} description An optional description
+ * @param  {string} description An optional description (CURRENTLY UNUSED)
  * @returns {Promise} The result of adding to S3
  */
 export function uploadImage(imgFile, locationId, description) {

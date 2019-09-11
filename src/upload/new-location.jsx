@@ -42,6 +42,7 @@ class PublicArtUploadForm extends React.Component {
   }
 
   componentDidMount() {
+    // Allow other pieces to change the selected location.
     window.updateNewLocationFields = (lat, lon) => {
       this.setState({lat: lat, lon: lon});
     };
@@ -194,12 +195,12 @@ PublicArtUploadForm.propTypes = {
 export function newPublicArtUpload(lat, lng) {
   console.debug('New click event at:', lat, lng);
 
-  const sidebar = document.getElementById('sidebar');
   const currentLocationUpload = document.getElementById('new-public-art-upload');
 
   if (currentLocationUpload) {
     window.updateNewLocationFields(lat, lng);
   } else {
+    const sidebar = document.getElementById('sidebar');
     ReactDOM.unmountComponentAtNode(sidebar);
 
     const uploadForm = () => {

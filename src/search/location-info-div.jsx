@@ -135,8 +135,6 @@ export default class LocationInfoDiv extends React.Component {
             options={options}
             onChange={this.reportOptionChange}
           />
-          {/* NOTE: commented code creates "Warning: Invalid DOM property `for`. Did you mean `htmlFor`?"
-                    TODO: Consider fixing for screenreaders, etc? */}
           <label>Feel free to expand your reason:</label>
           <input type="text"
             placeholder="Reason Continued"
