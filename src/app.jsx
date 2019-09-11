@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 import LocationSearchButton from './search/location-search-button.jsx';
 import {newPublicArtUpload} from './upload/new-location.jsx';
-import {initMap} from './utils/init-map';
+import {initMap} from './utils/map-utils';
 import {createClient} from './utils/aws-client-handler';
 import {updateMarkers} from './utils/markers-utils';
 

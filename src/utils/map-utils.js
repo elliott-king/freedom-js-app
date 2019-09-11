@@ -18,20 +18,19 @@ function handleLocationError(browserHasGeolocation, pos, map) {
 
 /** Centers map on current location.
  *
- * @param {google.maps.Map} map A google map
  */
-function centerMap(map) {
+export function centerMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       const pos = new google.maps.LatLng(
           position.coords.latitude, position.coords.longitude);
       console.log('Your position: ', pos.toString());
-      map.setCenter(pos);
+      window.map.setCenter(pos);
     }, function() {
-      handleLocationError(true, map.getCenter());
+      handleLocationError(true, window.map.getCenter());
     });
   } else {
-    handleLocationError(false, map.getCenter());
+    handleLocationError(false, window.map.getCenter());
   }
 }
 
@@ -69,7 +68,7 @@ function addCenterControl(controlDiv, map) {
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', function() {
-    centerMap(map);
+    centerMap();
   });
 }
 
@@ -100,7 +99,7 @@ export function initMap() {
   // Try HTML5 geolocation
   // NOTE: this can only be done from secure context (https)
   if (navigator.geolocation) {
-    centerMap(map);
+    centerMap();
 
     // Create the DIV to hold the control and call the CenterControl()
     // constructor passing in this DIV.

@@ -12,6 +12,7 @@ import {uploadImage} from './upload-image';
 import {createPublicArt} from '../graphql/mutations';
 import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
+import {centerMap} from '../utils/map-utils';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ class PublicArtUploadForm extends React.Component {
           label: 'N',
         });
         updateMarkers([newLocationReplacementMarker]);
+        centerMap();
       }, function(err) {
         console.warn('Error: geolocation service has failed:', err);
       });
@@ -191,7 +193,6 @@ export function newPublicArtUpload(lat, lng) {
 
   const sidebar = document.getElementById('sidebar');
   const currentLocationUpload = document.getElementById('new-public-art-upload');
-  console.log(currentLocationUpload);
 
   if (currentLocationUpload) {
     window.updateNewLocationFields(lat, lng);
