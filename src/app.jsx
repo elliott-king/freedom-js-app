@@ -14,8 +14,6 @@ import {updateMarkers} from './utils/markers-utils';
 import Amplify from 'aws-amplify';
 // eslint-disable-next-line camelcase
 import aws_config from './aws-exports';
-import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
-  from 'aws-amplify-react';
 
 // Make the auth client accessible to everything
 window.client = createClient();
@@ -45,29 +43,9 @@ window.map.addListener('click', function(event) {
 // https://github.com/tomchentw/react-google-maps/issues/818
 const locationSearchDiv = document.createElement('div');
 window.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationSearchDiv);
-/**
- * @returns {LocationSearchButton} A search button with our required parameters.
- */
-function searchButton() {
-  return (
+ReactDOM.render(
     <LocationSearchButton
       markersCallback={updateMarkers}
-    />
-  );
-}
-const SearchButtonWithAuthenticator = withAuthenticator(searchButton, {
-  includeGreetings: true,
-  authenticatorComponents: [
-    <SignIn/>,
-    <SignUp/>,
-    <ConfirmSignUp/>,
-    <Greetings
-      inGreeting="Welcome"
     />,
-  ],
-  // TODO: get rid of phone number somehow?
-  usernameAttributes: 'email',
-});
-ReactDOM.render(
-    <SearchButtonWithAuthenticator/>, locationSearchDiv
+    locationSearchDiv
 );
