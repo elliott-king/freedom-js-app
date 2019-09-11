@@ -63,7 +63,7 @@ class PublicArtUploadForm extends React.Component {
             id: locationId,
             name: this.state.name,
             location: {
-              lat: this.stat.lat,
+              lat: this.state.lat,
               lon: this.state.lon,
             },
             description: (this.state.description ? this.state.description : undefined),
