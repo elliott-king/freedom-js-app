@@ -13,13 +13,14 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Get photos & show info window | graphql, js  |   high   |         yes |                 MVP |
 | Upload new location           | graphql, js  |   high   |         yes |                     |
 | UI & QOL improvements         | qol, css, js |   low    |             |                     |
+| Login process                 | UX           |  medium  |             |                     |
 | Long-term support             |              |  medium  |             |                     |
 
-| React/Components                                                                | Status |
-| ------------------------------------------------------------------------------- | ------ |
-| Have info window content be component that then contains form                   | done   |
-| Forms should handle changes in multiple inputs with one method                  |        |
-| Info window should be contained w/in google map screen (negates need to scroll) |        |
+| React/Components                                                                | Status         |
+| ------------------------------------------------------------------------------- | -------------- |
+| Have info window content be component that then contains form                   | done           |
+| Forms should handle changes in multiple inputs with one method                  |                |
+| Info window should be contained w/in google map screen (negates need to scroll) | done (sidebar) |
 
 | Filter public art by class                                        | Status | Priority |
 | ----------------------------------------------------------------- | ------ | -------- |
@@ -43,7 +44,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Upload resized photos to db (400 x 400?)                                      | done - max dimension of 250px |
 | Enforce Google Places API from app/site only                                  |                               |
 | Error if photo doesn't exist: info window does not open                       | URGENT                        |
-| throttles many requests: photo should only be rendered if infoWindow is shown |                               |
+| throttles many requests: photo should only be rendered if infoWindow is shown | unsure of problem             |
 | leave googleusercontent & store photos from google on S3 (being throttled)    |                               |
 | google places api key currently has zero restrictions                         |                               |
 
@@ -58,6 +59,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Upload to ES after dynamodb                                             | done - @searchable |
 | PublicArt in DynamoDb should have version to [prevent double writes][0] |                    |
 | Should image list be list of 'url' GraphQL type?                        |                    |
+| If 'close' button clicked, then sidebar reopened, image should remain   | done               |
 
 
 | UI & QOL improvements                                                  | Status                       |
@@ -75,8 +77,12 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Put Data Sources into api/CustomResources.json for eternal use         | done - mostly pre-generated  |
 | Consider making sidebar collapsible                                    | done                         |
 | Collapsing sidebar should not move center of map                       |                              |
-| Sign up should not care about phone number                             |                              |
-| Sign up should show error messages                                     | HIGH PRIORITY                |
+
+| Login Process (currently run by AWS)                         | Status        |
+| ------------------------------------------------------------ | ------------- |
+| User should only have to login to upload new image           |               |
+| Sign up should not care about phone number                   |               |
+| Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
 
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |
