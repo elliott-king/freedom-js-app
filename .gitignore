@@ -85,7 +85,7 @@ freedom-js-app.code-workspace
 # Appsync generated
 # .graphqlconfig.yml
 # .amplifyrc
-src/graphql/
+# src/graphql/
 
 # Amplify generated stuff I don't currently want to deal with.
 # amplify/backend/auth
