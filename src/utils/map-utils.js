@@ -85,6 +85,7 @@ export function initMap() {
     center: {lat: 40, lng: -75},
     zoom: 15,
     streetViewControl: false,
+    clickableIcons: false,
   };
 
   // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
