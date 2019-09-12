@@ -16,6 +16,7 @@ import {createPublicArt} from '../graphql/mutations';
 import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
 import {centerMap} from '../utils/map-utils';
+import {SIMPLE_OPTIONS} from '../utils/constants';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class PublicArtUploadForm extends React.Component {
     this.state = {
       name: '',
       description: '',
-      selectedOption: 'public-art',
+      selectedOption: 'sculpture',
       lat: this.props.lat,
       lon: this.props.lng,
     };
@@ -33,7 +34,7 @@ class PublicArtUploadForm extends React.Component {
     // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
     this.imageInput = React.createRef();
 
-    // this.optionChange = this.optionChange.bind(this);
+    this.optionChange = this.optionChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
@@ -67,7 +68,8 @@ class PublicArtUploadForm extends React.Component {
               lon: this.state.lon,
             },
             description: (this.state.description ? this.state.description : undefined),
-            type: 'sculpture',
+            // TODO: we should add a default type.
+            type: this.state.selectedOption.value,
           },
         },
       }).then((response) => {
@@ -91,9 +93,9 @@ class PublicArtUploadForm extends React.Component {
     setMapAndSidebarStyle(false);
   }
 
-  // optionChange(selectedOption) {
-  //     this.setState({selectedOption: selectedOption});
-  // }
+  optionChange(selectedOption) {
+    this.setState({selectedOption: selectedOption});
+  }
   nameChange(event) {
     this.setState({name: event.target.value});
   }
@@ -161,11 +163,10 @@ class PublicArtUploadForm extends React.Component {
               onChange={this.descriptionChange}
             />
           </div>
-          {/* <Select
-                      // TODO: this should not include 'all'
-                      options={OPTIONS}
-                      onChange={this.optionChange}
-                  /> */}
+          <Select
+            options={SIMPLE_OPTIONS}
+            onChange={this.optionChange}
+          />
           <div className="new-public-art-image">
             <h4>Choose image for location</h4>
             <input
