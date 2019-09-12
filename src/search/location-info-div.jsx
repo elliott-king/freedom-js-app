@@ -18,6 +18,8 @@ const options = [
   {value: 'not-public-art', label: 'Location is not public art'},
   {value: 'wrong-photo', label: 'Photo incorrect'},
   {value: 'place-dne', label: 'Location does not exist'},
+  {value: 'wrong-location-type', label: 'Mislabeled location type'},
+  {value: 'nsfw', label: 'Location has inappropriate or offensive content'},
 ];
 
 
