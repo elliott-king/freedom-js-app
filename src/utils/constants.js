@@ -1,6 +1,10 @@
-export const OPTIONS = [
-  {value: 'all', label: 'All'},
-  {value: 'public-art', label: 'Public Art'},
+export const SIMPLE_OPTIONS = [
   {value: 'sculpture', label: 'Sculpture'},
-  {value: 'monument', label: 'Monument'},
+  {value: 'mural', label: 'Mural'},
 ];
+
+const additionalOptions = [
+  {value: 'all', label: 'Any'},
+];
+
+export const ALL_OPTIONS = additionalOptions.concat(SIMPLE_OPTIONS);

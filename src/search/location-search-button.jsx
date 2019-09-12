@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 import {getPublicArtWithinMap} from './location-search.jsx';
 // eslint-disable-next-line no-unused-vars
-import {OPTIONS} from '../utils/constants';
+import {ALL_OPTIONS} from '../utils/constants';
 
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
@@ -25,24 +25,24 @@ export default class LocationSearchButton extends React.Component {
     return (
       <div
         className="map-button-ui"
-        title="Find nearby public art"
-        onClick={() => getPublicArtWithinMap(
-            window.map,
-            this.state.filter,
-            this.props.markersCallback
-        )}>
-        <div className="map-button-text">
+        title="Find nearby public art">
+        <div className="public-art-dropdown">
+          <Select
+            menuPlacement="top"
+            options={ALL_OPTIONS}
+            isClearable={false}
+            defaultValue={ALL_OPTIONS[0]}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="map-button-text"
+          onClick={() => getPublicArtWithinMap(
+              window.map,
+              this.state.filter,
+              this.props.markersCallback
+          )}>
           Public Art Search
         </div>
-        {/* <div className="public-art-dropdown">
-                      <Select
-                          menuPlacement="top"
-                          options={OPTIONS}
-                          isClearable={false}
-                          defaultValue={OPTIONS[0]}
-                          onChange={this.handleChange}
-                      />
-                  </div> */}
       </div>
     );
   }
