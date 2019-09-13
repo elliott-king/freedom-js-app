@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line no-unused-vars
 import Select from 'react-select';
+import DatePicker from 'react-date-picker';
 import gql from 'graphql-tag';
 import {v4 as uuid} from 'uuid';
 import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
@@ -26,6 +26,9 @@ class PublicArtUploadForm extends React.Component {
       name: '',
       description: '',
       selectedOption: 'sculpture',
+      permanent: true,
+      start: new Date(),
+      end: new Date(),
       lat: this.props.lat,
       lon: this.props.lng,
     };
@@ -34,6 +37,7 @@ class PublicArtUploadForm extends React.Component {
     // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
     this.imageInput = React.createRef();
 
+    this.checkboxChange = this.checkboxChange.bind(this);
     this.optionChange = this.optionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
@@ -56,21 +60,28 @@ class PublicArtUploadForm extends React.Component {
       const locationId = uuid();
       const imgFile = this.imageInput.current.files[0];
 
+      const input = {
+        id: locationId,
+        name: this.state.name,
+        location: {
+          lat: this.state.lat,
+          lon: this.state.lon,
+        },
+        description: (this.state.description ? this.state.description : undefined),
+        permanent: this.state.permanent,
+        // TODO: we should add a default type.
+        type: this.state.selectedOption.value,
+      };
+      if (!this.state.permanent) {
+        input.date_range = {
+          start: this.state.start.toISOString().substr(0, 10),
+          end: this.state.end.toISOString().substr(0, 10),
+        };
+      }
+
       window.client.mutate({
         mutation: gql(createPublicArt),
-        variables: {
-          input: {
-            id: locationId,
-            name: this.state.name,
-            location: {
-              lat: this.state.lat,
-              lon: this.state.lon,
-            },
-            description: (this.state.description ? this.state.description : undefined),
-            // TODO: we should add a default type.
-            type: this.state.selectedOption.value,
-          },
-        },
+        variables: {input: input},
       }).then((response) => {
         console.log('Uploaded new location', this.state.name, 'to dynamodb.');
         return uploadImage(imgFile, locationId, '');
@@ -95,9 +106,32 @@ class PublicArtUploadForm extends React.Component {
   nameChange(event) {
     this.setState({name: event.target.value});
   }
+  checkboxChange(event) {
+    this.setState({permanent: event.target.checked});
+  }
 
   descriptionChange(event) {
     this.setState({description: event.target.value});
+  }
+
+  // Date picker should only show if 'permanent' box is unchecked.
+  renderDateSelectors() {
+    if (!this.state.permanent) {
+      return (
+        <React.Fragment>
+          <DatePicker
+            onChange={(val) => this.setState({start: val})}
+            value={this.state.start}
+          />
+          <DatePicker
+            onChange={(val) => this.setState({end: val})}
+            value={this.state.end}
+          />
+        </React.Fragment>
+      );
+    } else {
+      return null;
+    }
   }
 
   userLocation(event) {
@@ -163,6 +197,14 @@ class PublicArtUploadForm extends React.Component {
             options={SIMPLE_OPTIONS}
             onChange={this.optionChange}
           />
+          <input
+            type="checkbox"
+            label="Permanent piece"
+            checked={this.state.permanent}
+            onChange={this.checkboxChange}
+          />
+          <span>Permanent piece</span>
+          {this.renderDateSelectors()}
           <div className="new-public-art-image">
             <h4>Choose image for location</h4>
             <input
