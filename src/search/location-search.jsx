@@ -29,6 +29,8 @@ function revealLocationInfo(id) {
           id={getPublicArt.id}
           // TODO: photo resizing: infowindow final size is all over the place.
           photos={getPublicArt.photos}
+          permanent={getPublicArt.permanent}
+          dates={getPublicArt.date_range}
         />,
         sidebar
     );

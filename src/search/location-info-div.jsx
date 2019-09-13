@@ -99,6 +99,16 @@ export default class LocationInfoDiv extends React.Component {
     }
   }
 
+  renderDates() {
+    const s = new Date(this.props.dates.start).toDateString();
+    const e = new Date(this.props.dates.start).toDateString();
+    if (!this.props.permanent) {
+      return (
+        <p>{s} - {e}</p>
+      );
+    }
+  }
+
   renderResponseOfReporting() {
     if (this.state.reported > 0) {
       return (<p id="location-reported">
@@ -116,6 +126,7 @@ export default class LocationInfoDiv extends React.Component {
         <div className="location-head-info">
           <h3>{this.props.name}</h3>
           {this.renderImg()}
+          {this.renderDates()}
         </div>
         <form
           className = "new-image-form"
@@ -132,7 +143,7 @@ export default class LocationInfoDiv extends React.Component {
         <form style={this.state.displayStyle}
           className="report-location-popup"
           onSubmit={this.submitLocationReport}>
-          <h4>Report location: {this.props.name}</h4>
+          <h4>Report Location</h4>
           <Select
             options={options}
             onChange={this.reportOptionChange}
@@ -157,4 +168,6 @@ LocationInfoDiv.propTypes = {
   name: PropTypes.string.isRequired,
   photos: PropTypes.array,
   id: PropTypes.string.isRequired,
+  permanent: PropTypes.bool,
+  dates: PropTypes.object,
 };
