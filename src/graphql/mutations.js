@@ -12,6 +12,11 @@ export const flagLocation = `mutation FlagLocation($input: FlagLocationInput!) {
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -26,6 +31,11 @@ export const changePublicArtType = `mutation ChangePublicArtType($input: ChangeP
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -40,6 +50,11 @@ export const addPhoto = `mutation AddPhoto($location_id: String!, $url: String!)
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -54,6 +69,11 @@ export const createPublicArt = `mutation CreatePublicArt($input: CreatePublicArt
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -68,6 +88,11 @@ export const updatePublicArt = `mutation UpdatePublicArt($input: UpdatePublicArt
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -82,6 +107,11 @@ export const deletePublicArt = `mutation DeletePublicArt($input: DeletePublicArt
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;

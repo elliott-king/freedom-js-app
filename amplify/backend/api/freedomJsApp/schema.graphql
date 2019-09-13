@@ -6,22 +6,31 @@ input LocationInput {
     lat: Float
     lon: Float
 }
+type DateRange {
+    start: AWSDate
+    end: AWSDate
+}
 
 enum PublicArtType {
-  mural
-  sculpture
+    mural
+    sculpture
 }
 
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model @searchable{
-	id: ID!
+    id: ID!
     location: Location
-	name: String
-	description: String
-  type: PublicArtType
-	# TODO: need ids...?
-    photos: [String]
+    name: String
+    description: String
+    type: PublicArtType
+
+    # TODO: need ids...?
+    photos: [String] 
+
+    # Some public art is up for a limited time.
+    permanent: Boolean
+    date_range: DateRange
 }
 
 type Reported @model {

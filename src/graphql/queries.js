@@ -22,6 +22,11 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -40,6 +45,11 @@ export const getPublicArt = `query GetPublicArt($id: ID!) {
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -59,6 +69,11 @@ export const listPublicArts = `query ListPublicArts(
       description
       type
       photos
+      permanent
+      date_range {
+        start
+        end
+      }
     }
     nextToken
   }
@@ -111,6 +126,11 @@ export const searchPublicArts = `query SearchPublicArts(
       description
       type
       photos
+      permanent
+      date_range {
+        start
+        end
+      }
     }
     nextToken
   }

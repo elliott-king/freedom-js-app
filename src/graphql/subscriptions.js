@@ -12,6 +12,11 @@ export const onCreatePublicArt = `subscription OnCreatePublicArt {
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -26,6 +31,11 @@ export const onUpdatePublicArt = `subscription OnUpdatePublicArt {
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
@@ -40,6 +50,11 @@ export const onDeletePublicArt = `subscription OnDeletePublicArt {
     description
     type
     photos
+    permanent
+    date_range {
+      start
+      end
+    }
   }
 }
 `;
