@@ -27,7 +27,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Add options                                                       |        | low      |
 | Ability to select multiple options                                |        | lowest   |
 | Store types as list in dynamoDB (currently only one type allowed) |        | low      |
-| Make types an enum in Appsync GraphQL API                         |        | med      |
+| Make types an enum in Appsync GraphQL API                         |        | done     |
 | Check 'type' is chosen by user when uploading new location        |        | low      |
 
 | Flag public art/event                                                   | Status |
@@ -43,16 +43,16 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Close old info window when a new one is opened                                | done                          |
 | Upload resized photos to db (400 x 400?)                                      | done - max dimension of 250px |
 | Enforce Google Places API from app/site only                                  |                               |
-| Error if photo doesn't exist: info window does not open                       | URGENT                        |
-| throttles many requests: photo should only be rendered if infoWindow is shown | unsure of problem             |
-| leave googleusercontent & store photos from google on S3 (being throttled)    |                               |
+| Error if photo doesn't exist: info window does not open                       | done (?)                      |
+| throttles many requests: photo should only be rendered if infoWindow is shown | done (?)                      |
+| leave googleusercontent & store photos from google on S3 (being throttled)    | done                          |
 | google places api key currently has zero restrictions                         |                               |
 
 | Upload new Location (and photo)                                         | Status             |
 | ----------------------------------------------------------------------- | ------------------ |
 | Upload to DB                                                            | done               |
 | Upload photos from app (mobile app only?)                               | URGENT             |
-| Should suggest user's current location (app only)                       |                    |
+| Should suggest user's current location                                  | done               |
 | Each upload submission creates duplicate empty divs (bugfix)            | low priority       |
 | Upload new image should also add link in DynamoDB image list            | done               |
 | Only create new upload div if the old one does not exist (bugfix)       | done               |
@@ -60,6 +60,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | PublicArt in DynamoDb should have version to [prevent double writes][0] |                    |
 | Should image list be list of 'url' GraphQL type?                        |                    |
 | If 'close' button clicked, then sidebar reopened, image should remain   | done               |
+| If any part of image upload fails, entire thing should fail             |                    |
 
 
 | UI & QOL improvements                                                  | Status                       |
@@ -80,7 +81,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
-| User should only have to login to upload new image           |               |
+| User should only have to login to upload new image           | done          |
 | Sign up should not care about phone number                   |               |
 | Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
 
@@ -89,6 +90,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Backup data - 3 formats, 3 locations               |        | immediately after MVP |
 | Create amplify 'dev' env w/ seperate ES & DynamoDB |        | Necessary for MVP     |
 | Unit tests                                         |        | Immediately after MVP |
+| Fix history API usage (back button leaves sidebar) |        |                       |
 
 | non-code                  | Status |
 | ------------------------- | ------ |
