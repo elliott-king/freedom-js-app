@@ -35,7 +35,6 @@ class PublicArtUploadForm extends React.Component {
     this.imageInput = React.createRef();
 
     this.optionChange = this.optionChange.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
@@ -87,9 +86,6 @@ class PublicArtUploadForm extends React.Component {
       console.warn('Need image to create new location.');
     }
 
-    setMapAndSidebarStyle(false);
-  }
-  handleClose(event) {
     setMapAndSidebarStyle(false);
   }
 
@@ -176,8 +172,6 @@ class PublicArtUploadForm extends React.Component {
             />
           </div>
           <button type="submit" className="btn">Upload new location</button>
-          <button type="button" onClick={this.handleClose}
-            className="close">Close</button>
         </form>
       </div>
     );
@@ -204,6 +198,10 @@ export function newPublicArtUpload(lat, lng) {
     const sidebar = document.getElementById('sidebar');
     ReactDOM.unmountComponentAtNode(sidebar);
 
+    const handleClose = (event) => {
+      setMapAndSidebarStyle(false);
+    };
+
     const uploadForm = () => {
       return (
         <PublicArtUploadForm
@@ -227,7 +225,14 @@ export function newPublicArtUpload(lat, lng) {
       usernameAttributes: 'email',
     });
 
-    ReactDOM.render(<UploadFormWithAuthenticator/>, sidebar);
+    ReactDOM.render(
+        (<React.Fragment>
+          <UploadFormWithAuthenticator/>
+          <button type="button" onClick={handleClose}
+            className="close">Close</button>
+        </React.Fragment>),
+        sidebar
+    );
   }
 
   setMapAndSidebarStyle(true);
