@@ -20,6 +20,7 @@ const options = [
   {value: 'place-dne', label: 'Location does not exist'},
   {value: 'wrong-location-type', label: 'Mislabeled location type'},
   {value: 'nsfw', label: 'Location has inappropriate or offensive content'},
+  {value: 'bad-date-range', label: 'Date range is incorrect.'},
 ];
 
 
@@ -100,12 +101,14 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDates() {
-    const s = new Date(this.props.dates.start).toDateString();
-    const e = new Date(this.props.dates.start).toDateString();
     if (!this.props.permanent) {
+      const s = new Date(this.props.dates.start).toDateString();
+      const e = new Date(this.props.dates.start).toDateString();
       return (
         <p>{s} - {e}</p>
       );
+    } else {
+      return null;
     }
   }
 

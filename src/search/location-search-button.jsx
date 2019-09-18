@@ -11,34 +11,52 @@ import {ALL_OPTIONS} from '../utils/constants';
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
 import 'babel-polyfill';
 
+const permanencyOptions = [
+  {value: true, label: 'Permanent installation'},
+  {value: false, label: 'Temporary installation'},
+];
+
 export default class LocationSearchButton extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = {filter: 'all'};
+    this.typeChange = this.typeChange.bind(this);
+    this.permanentChange = this.permanentChange.bind(this);
+    this.state = {filter: 'all', permanent: true};
   }
 
-  handleChange(selectedOption) {
+  typeChange(selectedOption) {
     this.setState({filter: selectedOption.value});
   }
+  permanentChange(selectedOption) {
+    this.setState({permanent: selectedOption.value});
+  }
+
   render() {
     return (
       <div
         className="map-button-ui"
         title="Find nearby public art">
-        <div className="public-art-dropdown">
+        <div className="public-art-dropdowns">
           <Select
             menuPlacement="top"
             options={ALL_OPTIONS}
             isClearable={false}
             defaultValue={ALL_OPTIONS[0]}
-            onChange={this.handleChange}
+            onChange={this.typeChange}
+          />
+          <Select
+            menuPlacement="top"
+            options={permanencyOptions}
+            isClearable={false}
+            defaultValue={permanencyOptions[0]}
+            onChange={this.permanentChange}
           />
         </div>
         <div className="map-button-text"
           onClick={() => getPublicArtWithinMap(
               window.map,
               this.state.filter,
+              this.state.permanent,
               this.props.markersCallback
           )}>
           Public Art Search
