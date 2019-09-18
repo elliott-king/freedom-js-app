@@ -5,12 +5,14 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
   $top_right_gps: LocationInput!
   $bottom_left_gps: LocationInput!
   $limit: Int
+  $permanent: Boolean
   $type: String
 ) {
   getPublicArtWithinBoundingBox(
     top_right_gps: $top_right_gps
     bottom_left_gps: $bottom_left_gps
     limit: $limit
+    permanent: $permanent
     type: $type
   ) {
     id

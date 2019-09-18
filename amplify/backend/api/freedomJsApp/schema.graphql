@@ -29,7 +29,7 @@ type PublicArt @model @searchable{
     photos: [String] 
 
     # Some public art is up for a limited time.
-    permanent: Boolean
+    permanent: Boolean!
     date_range: DateRange
 }
 
@@ -64,6 +64,7 @@ type Query {
 		top_right_gps: LocationInput!,
 		bottom_left_gps: LocationInput!,
 		limit: Int,
+        permanent: Boolean,
 		type: String
 	): [PublicArt]
 
