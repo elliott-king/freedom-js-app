@@ -4,7 +4,7 @@ export const SIMPLE_OPTIONS = [
 ];
 
 const additionalOptions = [
-  {value: 'all', label: 'Any'},
+  {value: 'all', label: 'Any type'},
 ];
 
 export const ALL_OPTIONS = additionalOptions.concat(SIMPLE_OPTIONS);

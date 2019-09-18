@@ -40,7 +40,6 @@ html, body {
 }
 
 .public-art-upload-form-container {
-    height: 100%;
     width: 100%;
     margin: auto;
     display: flex;
@@ -93,6 +92,15 @@ html, body {
     margin: 20px auto;
     display: block;
     padding: 10px;
+}
+
+.close {
+    margin: auto auto;
+    display: block;
+    padding: 10px;
+}
+.close :hover {
+    background-color: #fff;
 }
 
 .public-art-upload-form button:hover {

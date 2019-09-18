@@ -203,7 +203,7 @@ class PublicArtUploadForm extends React.Component {
             checked={this.state.permanent}
             onChange={this.checkboxChange}
           />
-          <span>Permanent piece</span>
+          <div>Permanent piece</div>
           {this.renderDateSelectors()}
           <div className="new-public-art-image">
             <h4>Choose image for location</h4>
