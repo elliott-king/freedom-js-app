@@ -35,6 +35,7 @@ html, body {
     padding-right: 5px;
 }
 
+
 #location-content {
     height: 100%;
 }
@@ -107,11 +108,9 @@ html, body {
     background-color: #fff;
 }
 
-/* .public-art-dropdown {
-    margin: 5px 5px 5px 0;
-    display: inline-block;
-    min-width: 80px;
-} */
+.public-art-dropdowns {
+    width: 175px;
+}
 
 /* Note that percentages are relative to its container div.*/
 .location-image {
