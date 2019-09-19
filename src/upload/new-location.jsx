@@ -87,6 +87,9 @@ class PublicArtUploadForm extends React.Component {
         return uploadImage(imgFile, locationId, '');
       }).then((response) => {
         console.log('Successfully uploaded image for new location', this.state.name);
+        // Finally, remove both the sidebar and the marker.
+        setMapAndSidebarStyle(false);
+        updateMarkers([]);
       }).catch((err) => {
         console.error('Error uploading new location:', err);
         throw err;
@@ -96,8 +99,6 @@ class PublicArtUploadForm extends React.Component {
     } else {
       console.warn('Need image to create new location.');
     }
-
-    setMapAndSidebarStyle(false);
   }
 
   optionChange(selectedOption) {
