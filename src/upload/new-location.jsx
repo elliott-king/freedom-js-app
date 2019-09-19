@@ -58,7 +58,7 @@ class PublicArtUploadForm extends React.Component {
     // Only create new location if there is an image file.
     if (this.imageInput.current.files.length > 0 &&
       this.state.name &&
-      this.selectedOption) {
+      this.state.selectedOption) {
       const locationId = uuid();
       const imgFile = this.imageInput.current.files[0];
 
