@@ -5,8 +5,8 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
   $top_right_gps: LocationInput!
   $bottom_left_gps: LocationInput!
   $limit: Int
-  $permanent: Boolean
-  $type: String
+  $permanent: Boolean!
+  $type: PublicArtType
 ) {
   getPublicArtWithinBoundingBox(
     top_right_gps: $top_right_gps

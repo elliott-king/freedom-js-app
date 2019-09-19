@@ -20,10 +20,10 @@ enum PublicArtType {
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
 type PublicArt @model @searchable{
     id: ID!
-    location: Location
-    name: String
+    location: Location!
+    name: String!
     description: String
-    type: PublicArtType
+    type: PublicArtType!
 
     # TODO: need ids...?
     photos: [String] 
@@ -64,8 +64,8 @@ type Query {
 		top_right_gps: LocationInput!,
 		bottom_left_gps: LocationInput!,
 		limit: Int,
-        permanent: Boolean,
-		type: String
+        permanent: Boolean!,
+		type: PublicArtType
 	): [PublicArt]
 
     whoAmI: String
