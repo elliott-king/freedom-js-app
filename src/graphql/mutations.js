@@ -39,7 +39,7 @@ export const changePublicArtType = `mutation ChangePublicArtType($input: ChangeP
   }
 }
 `;
-export const addPhoto = `mutation AddPhoto($location_id: String!, $url: String!) {
+export const addPhoto = `mutation AddPhoto($location_id: String!, $url: AWSURL!) {
   addPhoto(location_id: $location_id, url: $url) {
     id
     location {

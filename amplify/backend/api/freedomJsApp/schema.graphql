@@ -26,7 +26,7 @@ type PublicArt @model @searchable{
     type: PublicArtType!
 
     # TODO: need ids...?
-    photos: [String] 
+    photos: [AWSURL] 
 
     # Some public art is up for a limited time.
     permanent: Boolean!
@@ -56,7 +56,7 @@ input FlagLocationInput {
 type Mutation {
 	flagLocation(input: FlagLocationInput!): PublicArt
 	changePublicArtType(input: ChangePublicArtTypeInput!): PublicArt
-    addPhoto(location_id: String!, url:String!): PublicArt
+    addPhoto(location_id: String!, url:AWSURL!): PublicArt
 }
 
 type Query {
