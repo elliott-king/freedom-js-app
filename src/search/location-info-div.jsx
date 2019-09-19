@@ -66,6 +66,10 @@ export default class LocationInfoDiv extends React.Component {
   submitLocationReport(event) {
     event.preventDefault();
 
+    if (!this.state.selectedOption) {
+      window.alert('Please choose a reason to report from the dropdown.');
+      console.warn('Please choose a reason to report from the dropdown.');
+    }
     window.client.mutate({
       mutation: gql(createReported),
       variables: {

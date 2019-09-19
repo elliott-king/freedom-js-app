@@ -28,7 +28,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Ability to select multiple options                                |        | lowest   |
 | Store types as list in dynamoDB (currently only one type allowed) |        | low      |
 | Make types an enum in Appsync GraphQL API                         | done   |          |
-| Check 'type' is chosen by user when uploading new location        |        | low      |
+| Check 'type' is chosen by user when uploading new location        | done   | low      |
 
 | Flag public art/event                                                   | Status |
 | ----------------------------------------------------------------------- | ------ |

@@ -25,7 +25,7 @@ class PublicArtUploadForm extends React.Component {
     this.state = {
       name: '',
       description: '',
-      selectedOption: 'sculpture',
+      selectedOption: '',
       permanent: true,
       start: new Date(),
       end: new Date(),
@@ -56,7 +56,9 @@ class PublicArtUploadForm extends React.Component {
     event.preventDefault(); // KTHXWHAT?
 
     // Only create new location if there is an image file.
-    if (this.imageInput.current.files.length > 0 && this.state.name) {
+    if (this.imageInput.current.files.length > 0 &&
+      this.state.name &&
+      this.selectedOption) {
       const locationId = uuid();
       const imgFile = this.imageInput.current.files[0];
 
@@ -94,6 +96,9 @@ class PublicArtUploadForm extends React.Component {
         console.error('Error uploading new location:', err);
         throw err;
       });
+    } else if (!this.state.selectedOption) {
+      window.alert('Please choose the type of public art');
+      console.warn('Please choose the type of public art');
     } else if (!this.state.name) {
       console.warn('New location needs a name.');
     } else {
