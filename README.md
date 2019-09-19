@@ -24,10 +24,10 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 
 | Filter public art by class                                        | Status | Priority |
 | ----------------------------------------------------------------- | ------ | -------- |
-| Add options                                                       |        | low      |
+| Add options                                                       | done   | medium   |
 | Ability to select multiple options                                |        | lowest   |
 | Store types as list in dynamoDB (currently only one type allowed) |        | low      |
-| Make types an enum in Appsync GraphQL API                         |        | done     |
+| Make types an enum in Appsync GraphQL API                         | done   |          |
 | Check 'type' is chosen by user when uploading new location        |        | low      |
 
 | Flag public art/event                                                   | Status |
@@ -42,11 +42,12 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Download from DB                                                              | done                          |
 | Close old info window when a new one is opened                                | done                          |
 | Upload resized photos to db (400 x 400?)                                      | done - max dimension of 250px |
-| Enforce Google Places API from app/site only                                  |                               |
+| Enforce Google Places API from app/site only - key has no restrictions        |                               |
 | Error if photo doesn't exist: info window does not open                       | done (?)                      |
 | throttles many requests: photo should only be rendered if infoWindow is shown | done (?)                      |
 | leave googleusercontent & store photos from google on S3 (being throttled)    | done                          |
-| google places api key currently has zero restrictions                         |                               |
+| search should ignore non-permenent locations that are out of date             | done                          |
+| search type should be enum                                                    | done                          |
 
 | Upload new Location (and photo)                                         | Status             |
 | ----------------------------------------------------------------------- | ------------------ |
@@ -61,6 +62,8 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Should image list be list of 'url' GraphQL type?                        |                    |
 | If 'close' button clicked, then sidebar reopened, image should remain   | done               |
 | If any part of image upload fails, entire thing should fail             |                    |
+| Remove pin after upload                                                 | done               |
+| Make most graphql fields mandatory                                      | done               |
 
 
 | UI & QOL improvements                                                  | Status                       |
