@@ -100,9 +100,11 @@ class PublicArtUploadForm extends React.Component {
       window.alert('Please choose the type of public art');
       console.warn('Please choose the type of public art');
     } else if (!this.state.name) {
+      window.alert('New location needs a name.');
       console.warn('New location needs a name.');
     } else {
-      console.warn('Need image to create new location.');
+      window.alert('Need image to create a new location');
+      console.warn('Need image to create a new location.');
     }
   }
 
@@ -157,9 +159,11 @@ class PublicArtUploadForm extends React.Component {
         updateMarkers([newLocationReplacementMarker]);
         centerMap();
       }, function(err) {
+        window.alert('Error: geolocation service has failed:', err);
         console.warn('Error: geolocation service has failed:', err);
       });
     } else {
+      window.alert('Browser does not handle geolocation');
       console.warn('Browser does not handle geolocation');
     }
   }
