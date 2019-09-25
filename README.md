@@ -35,7 +35,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Seperate DynamoDB table                                                 | done   |
 | Authentication for users                                                | done   |
 | Store with location ID instead of just art name                         | done   |
-| Show error when user does not select reason (currently only in console) |        |
+| Show error when user does not select reason (currently only in console) | done   |
 
 | Get photos & Info Window                                                      | Status                        |
 | ----------------------------------------------------------------------------- | ----------------------------- |
@@ -48,6 +48,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | leave googleusercontent & store photos from google on S3 (being throttled)    | done                          |
 | search should ignore non-permenent locations that are out of date             | done                          |
 | search type should be enum                                                    | done                          |
+| ES console - Invalid host header requests?                                    |                               |
 
 | Upload new Location (and photo)                                         | Status             |
 | ----------------------------------------------------------------------- | ------------------ |
@@ -59,7 +60,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Only create new upload div if the old one does not exist (bugfix)       | done               |
 | Upload to ES after dynamodb                                             | done - @searchable |
 | PublicArt in DynamoDb should have version to [prevent double writes][0] |                    |
-| Should image list be list of 'url' GraphQL type?                        |                    |
+| Should image list be list of 'AWSURL' AppSync type?                     | done               |
 | If 'close' button clicked, then sidebar reopened, image should remain   | done               |
 | If any part of image upload fails, entire thing should fail             |                    |
 | Remove pin after upload                                                 | done               |
@@ -68,7 +69,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 
 | UI & QOL improvements                                                  | Status                       |
 | ---------------------------------------------------------------------- | ---------------------------- |
-| Resize image window to a standard size                                 |                              |
+| Resize image window to a standard size                                 | done                         |
 | Place 'Report location' in own div                                     |                              |
 | Main dropdown menu size more consistent                                |                              |
 | All code to call AWS client should be in one file (-_-)                | done                         |
@@ -81,6 +82,8 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Put Data Sources into api/CustomResources.json for eternal use         | done - mostly pre-generated  |
 | Consider making sidebar collapsible                                    | done                         |
 | Collapsing sidebar should not move center of map                       |                              |
+| Host on a readable url                                                 | URGENT                       |
+| Bottom button should not truncate text                                 |                              |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
@@ -91,9 +94,9 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |
 | Backup data - 3 formats, 3 locations               |        | immediately after MVP |
-| Create amplify 'dev' env w/ seperate ES & DynamoDB |        | Necessary for MVP     |
+| Create amplify 'dev' env w/ seperate ES & DynamoDB |        | immediately after MVP |
 | Unit tests                                         |        | Immediately after MVP |
-| Fix history API usage (back button leaves sidebar) |        |                       |
+| Make history API usage more elegant                |        | mid/low               |
 
 | non-code                  | Status |
 | ------------------------- | ------ |
