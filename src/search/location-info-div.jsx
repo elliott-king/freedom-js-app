@@ -69,21 +69,22 @@ export default class LocationInfoDiv extends React.Component {
     if (!this.state.selectedOption) {
       window.alert('Please choose a reason to report from the dropdown.');
       console.warn('Please choose a reason to report from the dropdown.');
-    }
-    window.client.mutate({
-      mutation: gql(createReported),
-      variables: {
-        input: {
-          art_id: this.props.id,
-          reason: this.state.selectedOption.value,
-          reason_continued: (this.state.reasonContinued ?
+    } else {
+      window.client.mutate({
+        mutation: gql(createReported),
+        variables: {
+          input: {
+            art_id: this.props.id,
+            reason: this.state.selectedOption.value,
+            reason_continued: (this.state.reasonContinued ?
             this.state.reasonContinued : undefined),
+          },
         },
-      },
-    }).then(( {data: {createReported}}) => {
-      this.setState({reported: this.state.reported + 1});
-      console.debug('reported:', createReported);
-    });
+      }).then(( {data: {createReported}}) => {
+        this.setState({reported: this.state.reported + 1});
+        console.debug('reported:', createReported);
+      });
+    }
   }
 
   reportOptionChange(selectedOption) {
