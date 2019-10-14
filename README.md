@@ -1,5 +1,6 @@
 # Status
 MVP
+freedom.cannibaltaylor.com
 https://master.d32yf79oq8yspa.amplifyapp.com/
 
 # Todos
@@ -82,7 +83,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Put Data Sources into api/CustomResources.json for eternal use         | done - mostly pre-generated  |
 | Consider making sidebar collapsible                                    | done                         |
 | Collapsing sidebar should not move center of map                       |                              |
-| Host on a readable url                                                 | URGENT                       |
+| Host on a readable url                                                 | done                         |
 | Bottom button should not truncate text                                 |                              |
 
 | Login Process (currently run by AWS)                         | Status        |
