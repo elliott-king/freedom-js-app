@@ -3,6 +3,11 @@
 		"freedomjsapp28b57bb9": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation"
+		},
+		"freedomjsappfbd71038fbd71038": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
 		}
 	},
 	"storage": {
@@ -16,7 +21,15 @@
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
-				"securityType": "AMAZON_COGNITO_USER_POOLS"
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authfreedomjsappfbd71038fbd71038"
+						}
+					}
+				}
 			}
 		}
 	},
