@@ -26,7 +26,6 @@ export function centerMap() {
           position.coords.latitude, position.coords.longitude);
       console.log('Your position: ', pos.toString());
       window.map.setCenter(pos);
-      updateUserLocationMarker(pos);
     }, function() {
       handleLocationError(true, window.map.getCenter());
     });
@@ -88,6 +87,11 @@ export function initMap() {
   // NOTE: this can only be done from secure context (https)
   if (navigator.geolocation) {
     centerMap();
+
+    navigator.geolocation.watchPosition((pos) => {
+      pos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      updateUserLocationMarker(pos);
+    }, (err) => console.log('Error with user position update:', err));
 
     // Create the DIV to hold the control and call the CenterControl()
     // constructor passing in this DIV.
