@@ -1,6 +1,7 @@
 /* global google */
 
 import setMapAndSidebarStyle from './set-map-and-sidebar-style';
+import {updateUserLocationMarker} from './markers-utils';
 
 /** Show error if issue getting geolocation
  *
@@ -25,6 +26,7 @@ export function centerMap() {
           position.coords.latitude, position.coords.longitude);
       console.log('Your position: ', pos.toString());
       window.map.setCenter(pos);
+      updateUserLocationMarker(pos);
     }, function() {
       handleLocationError(true, window.map.getCenter());
     });
