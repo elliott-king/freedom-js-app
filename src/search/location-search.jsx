@@ -14,7 +14,7 @@ let prevMarker = null;
  * @param  {string} id ID of location desired
  */
 function revealLocationInfo(id) {
-  window.client.query({
+  window.keyClient.query({
     query: gql(getPublicArt),
     variables: {id: id},
     fetchPolicy: 'network-only',
@@ -64,7 +64,7 @@ export function getPublicArtWithinMap(map, filter, isPermanent, callback) {
   if (filter != 'all') variables.type = filter;
   console.log('GetWithinBounds variables', variables);
 
-  window.client.query({
+  window.keyClient.query({
     query: query,
     variables: variables,
     fetchPolicy: 'network-only',
@@ -94,6 +94,6 @@ export function getPublicArtWithinMap(map, filter, isPermanent, callback) {
     }
     callback(newMarkers);
   }).catch((e) => {
-    console.error(e.toString());
+    console.error('Error searching: ' + e.toString());
   });
 }

@@ -81,7 +81,7 @@ class PublicArtUploadForm extends React.Component {
         };
       }
 
-      window.client.mutate({
+      window.cognitoClient.mutate({
         mutation: gql(createPublicArt),
         variables: {input: input},
       }).then((response) => {

@@ -1,4 +1,4 @@
-type Location {
+type Location @aws_api_key @aws_cognito_user_pools{
     lat: Float
     lon: Float
 }
@@ -18,7 +18,7 @@ enum PublicArtType {
 
 # TODO: consider making @searchable
 # https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
-type PublicArt @model @searchable{
+type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
     id: ID!
     location: Location!
     name: String!
@@ -59,7 +59,7 @@ type Mutation {
     addPhoto(location_id: String!, url:AWSURL!): PublicArt
 }
 
-type Query {
+type Query @aws_api_key{
 	getPublicArtWithinBoundingBox(
 		top_right_gps: LocationInput!,
 		bottom_left_gps: LocationInput!,

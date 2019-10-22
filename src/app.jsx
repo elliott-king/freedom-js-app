@@ -14,13 +14,15 @@ import Amplify from 'aws-amplify';
 // eslint-disable-next-line camelcase
 import aws_config from './aws-exports';
 
-// Auth client is global so we can easily call gql queries anywhere.
-window.client = createClient();
-// Map global so that markers can be added from anywhere.
-window.map = initMap();
-
 // Required setup for AWS Amplify utilities (API, S3, Auth, etc..)
 Amplify.configure(aws_config);
+
+// Auth clients are global so we can easily call gql queries anywhere.
+console.debug('creating client...');
+createClient();
+// Map global so that markers can be added from anywhere.
+console.debug('initializing map...');
+window.map = initMap();
 
 window.map.addListener('click', function(event) {
   const latLng = event.latLng;

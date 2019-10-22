@@ -19,6 +19,11 @@ export function uploadImage(imgFile, locationId, description) {
   // TODO: Eventually will want more metadata with photo (like user_id)
   // We should make photo its own model in the schema
 
+  // NOTE: this sometimes has issues with auth/iam/user pools.
+  // If we get an error "missing credentials in config" and
+  // [debug] log "Failed to load credentials":
+  // https://stackoverflow.com/questions/44043289/
+
   // First, upload file to AWS S3
   return Storage.put(photoId + '.png', imgFile, {
     contentType: 'image/png',
@@ -28,12 +33,14 @@ export function uploadImage(imgFile, locationId, description) {
         aws_config.aws_user_files_s3_bucket + '.s3.amazonaws.com', 'public', result.key);
 
     // Second, we put the photo's url in dynamodb.
-    return window.client.mutate({
+    return window.cognitoClient.mutate({
       mutation: gql(addPhoto),
       variables: {
         location_id: locationId,
         url: imgUrl,
       },
-    });
-  }).catch((err) => console.error('Error uploading image:', err));
+    }).then(({data: {addPhoto}}) => {
+      console.debug('Successfully uploaded image to DynamoDB', addPhoto.id);
+    }).catch((err) => console.error('Error putting image in DynamoDB:', err));
+  }).catch((err) => console.error('Error putting image in S3:', err));
 }

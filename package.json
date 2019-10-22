@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "AWS Freedom JavaScript Example",
   "dependencies": {
-    "aws-amplify": "^1.1.36",
-    "aws-amplify-react": "^2.3.12",
+    "aws-amplify": "^1.2.2",
+    "aws-amplify-react": "^2.5.2",
     "aws-appsync": "^1.8.1",
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.2.8",

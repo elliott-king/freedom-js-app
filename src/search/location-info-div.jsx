@@ -70,7 +70,7 @@ export default class LocationInfoDiv extends React.Component {
       window.alert('Please choose a reason to report from the dropdown.');
       console.warn('Please choose a reason to report from the dropdown.');
     } else {
-      window.client.mutate({
+      window.cognitoClient.mutate({
         mutation: gql(createReported),
         variables: {
           input: {
@@ -83,7 +83,7 @@ export default class LocationInfoDiv extends React.Component {
       }).then(( {data: {createReported}}) => {
         this.setState({reported: this.state.reported + 1});
         console.debug('reported:', createReported);
-      });
+      }).catch((e) => console.log('Error reporting location:', e));
     }
   }
 
