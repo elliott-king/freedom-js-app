@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "freedom_js_appfbd71038_identitypool_fbd71038",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "freedofbd71038",
-    "userPoolName": "freedom_js_appfbd71038_userpool_fbd71038",
+    "identityPoolName": "freedom_js_app80c901e1_identitypool_80c901e1",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "freedo80c901e1",
+    "userPoolName": "freedom_js_app80c901e1_userpool_80c901e1",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,11 +28,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "freedofbd71038_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "freedo80c901e1_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "freedomjsappfbd71038fbd71038",
+    "resourceName": "freedomauth102019",
     "thirdPartyAuth": false,
     "usernameAttributes": [
         "email"

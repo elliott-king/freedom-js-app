@@ -1,4 +1,4 @@
-// eslint-disable
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBox(
@@ -110,7 +110,7 @@ export const searchPublicArts = `query SearchPublicArts(
   $filter: SearchablePublicArtFilterInput
   $sort: SearchablePublicArtSortInput
   $limit: Int
-  $nextToken: Int
+  $nextToken: String
 ) {
   searchPublicArts(
     filter: $filter

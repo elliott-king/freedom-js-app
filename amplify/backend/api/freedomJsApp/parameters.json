@@ -3,8 +3,9 @@
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
-            "authfreedomjsappfbd71038fbd71038",
+            "authfreedomauth102019",
             "Outputs.UserPoolId"
         ]
-    }
+    },
+    "CreateAPIKey": 0
 }
