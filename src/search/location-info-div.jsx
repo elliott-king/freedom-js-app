@@ -23,10 +23,6 @@ const options = [
   {value: 'bad-date-range', label: 'Date range is incorrect.'},
 ];
 
-
-// TODO: would like to make form appear/disappear.
-// See style changes in response to state change:
-// https://stackoverflow.com/questions/33593478
 export default class LocationInfoDiv extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +52,10 @@ export default class LocationInfoDiv extends React.Component {
       const imgFile = this.imageInput.current.files[0];
       // TODO: update description field.
       uploadImage(imgFile, this.props.id, 'Testing: this is a photo file.');
-    } // TODO: else log that there is not an image to upload.
+    } else {
+      window.alert('Please choose an image to upload.');
+      console.warn('Please choose an image to upload.');
+    }
   }
 
   handleClose(event) {

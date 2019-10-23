@@ -22,6 +22,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Have info window content be component that then contains form                   | done           |
 | Forms should handle changes in multiple inputs with one method                  |                |
 | Info window should be contained w/in google map screen (negates need to scroll) | done (sidebar) |
+| Currently queries a location and fills the sidebar in one function (separate)   |                |
 
 | Filter public art by class                                        | Status | Priority |
 | ----------------------------------------------------------------- | ------ | -------- |
@@ -51,21 +52,22 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | search type should be enum                                                    | done                          |
 | ES console - Invalid host header requests?                                    |                               |
 
-| Upload new Location (and photo)                                         | Status             |
-| ----------------------------------------------------------------------- | ------------------ |
-| Upload to DB                                                            | done               |
-| Upload photos from app (mobile app only?)                               | URGENT             |
-| Should suggest user's current location                                  | done               |
-| Each upload submission creates duplicate empty divs (bugfix)            | low priority       |
-| Upload new image should also add link in DynamoDB image list            | done               |
-| Only create new upload div if the old one does not exist (bugfix)       | done               |
-| Upload to ES after dynamodb                                             | done - @searchable |
-| PublicArt in DynamoDb should have version to [prevent double writes][0] |                    |
-| Should image list be list of 'AWSURL' AppSync type?                     | done               |
-| If 'close' button clicked, then sidebar reopened, image should remain   | done               |
-| If any part of image upload fails, entire thing should fail             |                    |
-| Remove pin after upload                                                 | done               |
-| Make most graphql fields mandatory                                      | done               |
+| Upload new Location (and photo)                                               | Status             |
+| ----------------------------------------------------------------------------- | ------------------ |
+| Upload to DB                                                                  | done               |
+| Upload photos from app (mobile app only?)                                     | URGENT             |
+| Should suggest user's current location                                        | done               |
+| Each upload submission creates duplicate empty divs (bugfix)                  | low priority       |
+| Upload new image should also add link in DynamoDB image list                  | done               |
+| Only create new upload div if the old one does not exist (bugfix)             | done               |
+| Upload to ES after dynamodb                                                   | done - @searchable |
+| PublicArt in DynamoDb should have version to [prevent double writes][0]       |                    |
+| Should image list be list of 'AWSURL' AppSync type?                           | done               |
+| If 'close' button clicked, then sidebar reopened, image should remain         | done               |
+| If any part of image upload fails, entire thing should fail                   |                    |
+| Remove pin after upload                                                       | done               |
+| Make most graphql fields mandatory                                            | done               |
+| Unauthenticated, rejected uploads should notify the user why they have failed | URGENT             |
 
 
 | UI & QOL improvements                                                  | Status                       |
@@ -85,12 +87,14 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Collapsing sidebar should not move center of map                       |                              |
 | Host on a readable url                                                 | done                         |
 | Bottom button should not truncate text                                 |                              |
+| Make sure all requests/queries have error catching                     |                              |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
 | User should only have to login to upload new image           | done          |
 | Sign up should not care about phone number                   |               |
 | Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
+| Log in should be self contained (not in art upload div)      |               |
 
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |

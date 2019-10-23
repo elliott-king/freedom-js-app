@@ -10,7 +10,8 @@ import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
 
 let prevMarker = null;
 
-/**
+/** Queries api for a given location and renders it in the sidebar.
+ *
  * @param  {string} id ID of location desired
  */
 function revealLocationInfo(id) {
@@ -27,7 +28,6 @@ function revealLocationInfo(id) {
         <LocationInfoDiv
           name={getPublicArt.name}
           id={getPublicArt.id}
-          // TODO: photo resizing: infowindow final size is all over the place.
           photos={getPublicArt.photos}
           permanent={getPublicArt.permanent}
           dates={getPublicArt.date_range}

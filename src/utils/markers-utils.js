@@ -2,7 +2,6 @@
 let locationMarkers = [];
 let currentUserLocationMarker;
 
-// Functions to modify the markers on the map.
 /**
  * @param  {google.maps.Map} map A google map
  * @param  {Array} markers The markers to add to the map

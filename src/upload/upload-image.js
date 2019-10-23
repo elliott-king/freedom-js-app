@@ -19,7 +19,7 @@ export function uploadImage(imgFile, locationId, description) {
   // TODO: Eventually will want more metadata with photo (like user_id)
   // We should make photo its own model in the schema
 
-  // NOTE: this sometimes has issues with auth/iam/user pools.
+  // NOTE: this process sometimes has issues with auth/iam/user pools.
   // If we get an error "missing credentials in config" and
   // [debug] log "Failed to load credentials":
   // https://stackoverflow.com/questions/44043289/

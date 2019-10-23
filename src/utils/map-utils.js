@@ -36,7 +36,7 @@ export function centerMap() {
 
 
 /**
- * The CenterControl adds a control to the map that recenters it.
+ * The CenterControl adds a control to the map that will recenter it.
  *
  * @param {Element} controlDiv The div to house this button
  */
@@ -83,7 +83,7 @@ export function initMap() {
 
   const map = new google.maps.Map(document.getElementById('map'), options);
 
-  // Try HTML5 geolocation
+  // Only certain (modern) browsers have HTML5 geolocation
   // NOTE: this can only be done from secure context (https)
   if (navigator.geolocation) {
     centerMap();
@@ -93,8 +93,7 @@ export function initMap() {
       updateUserLocationMarker(pos);
     }, (err) => console.log('Error with user position update:', err));
 
-    // Create the DIV to hold the control and call the CenterControl()
-    // constructor passing in this DIV.
+    // Create the DIV to hold the 'center map' map control and populate it.
     const centerControlDiv = document.createElement('div');
     addCenterControl(centerControlDiv, map);
 

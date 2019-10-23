@@ -17,10 +17,11 @@ import aws_config from './aws-exports';
 // Required setup for AWS Amplify utilities (API, S3, Auth, etc..)
 Amplify.configure(aws_config);
 
-// Auth clients are global so we can easily call gql queries anywhere.
+// We create global auth clients so anything can call gql queries
 console.debug('creating client...');
 createClient();
-// Map global so that markers can be added from anywhere.
+
+// Map global so that markers can be added from anywhere
 console.debug('initializing map...');
 window.map = initMap();
 

@@ -39,7 +39,7 @@ class PublicArtUploadForm extends React.Component {
 
     this.checkboxChange = this.checkboxChange.bind(this);
     this.optionChange = this.optionChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.uploadHandler = this.uploadHandler.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
     this.userLocation = this.userLocation.bind(this);
@@ -52,10 +52,9 @@ class PublicArtUploadForm extends React.Component {
     };
   }
 
-  handleSubmit(event) {
+  uploadHandler(event) {
     event.preventDefault(); // KTHXWHAT?
 
-    // Only create new location if there is an image file.
     if (this.imageInput.current.files.length > 0 &&
       this.state.name &&
       this.state.selectedOption) {
@@ -89,6 +88,7 @@ class PublicArtUploadForm extends React.Component {
         return uploadImage(imgFile, locationId, '');
       }).then((response) => {
         console.log('Successfully uploaded image for new location', this.state.name);
+
         // Finally, remove both the sidebar and the marker.
         setMapAndSidebarStyle(false);
         updateMarkers([]);
@@ -122,7 +122,6 @@ class PublicArtUploadForm extends React.Component {
     this.setState({description: event.target.value});
   }
 
-  // Date picker should only show if 'permanent' box is unchecked.
   renderDateSelectors() {
     if (!this.state.permanent) {
       return (
@@ -173,7 +172,7 @@ class PublicArtUploadForm extends React.Component {
   render() {
     return (
       <div id="new-public-art-upload" className="public-art-upload-form-container">
-        <form onSubmit={this.handleSubmit} className="public-art-upload-form">
+        <form onSubmit={this.uploadHandler} className="public-art-upload-form">
           <h1>New Public Art</h1>
           <h4 className="new-public-art-location">
             Location: {this.state.lat.toFixed(2)}, {this.state.lon.toFixed(2)}
