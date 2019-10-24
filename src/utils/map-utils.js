@@ -1,4 +1,9 @@
+/* eslint-disable react/jsx-key */
 /* global google */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Authenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
+  from 'aws-amplify-react';
 
 import setMapAndSidebarStyle from './set-map-and-sidebar-style';
 import {updateUserLocationMarker} from './markers-utils';
@@ -34,13 +39,60 @@ export function centerMap() {
   }
 }
 
+/** Opens login form in sidebar */
+function showLoginForm() {
+  const sidebar = document.getElementById('sidebar');
+  ReactDOM.unmountComponentAtNode(sidebar);
 
-/**
- * The CenterControl adds a control to the map that will recenter it.
- *
- * @param {Element} controlDiv The div to house this button
+  ReactDOM.render(
+      (<React.Fragment>
+        <Authenticator
+          includeGreetings={true}
+          usernameAttributes='email'
+          authenticatorComponents={[
+            <SignIn/>,
+            <SignUp/>,
+            <ConfirmSignUp/>,
+            <Greetings
+              inGreeting="Welcome"
+            />,
+          ]}
+        />
+        <button type="button" onClick={() => setMapAndSidebarStyle(false)}
+          className="close">Close</button>
+      </React.Fragment>),
+      sidebar
+  );
+
+  setMapAndSidebarStyle(true);
+}
+
+/** @returns {Element} A button that will show the login form
  */
-function addCenterControl(controlDiv) {
+function createLoginControl() {
+  const controlDiv = document.createElement('div');
+  const controlUI = document.createElement('div');
+  controlUI.setAttribute('class', 'map-button-ui');
+  // TODO: Set control title depending on login status
+  controlUI.title = 'temp';
+  controlDiv.append(controlUI);
+
+  // Set CSS from control interior
+  const controlText = document.createElement('div');
+  controlText.setAttribute('class', 'map-button-text');
+  controlText.setAttribute('id', 'login-text');
+  controlText.innerHTML = 'temp';
+  controlUI.appendChild(controlText);
+
+  // Setup click event listener to show login form
+  controlUI.addEventListener('click', showLoginForm);
+  return controlDiv;
+}
+
+/** @returns {Element} A button that will center the map
+ */
+function createCenterControl() {
+  const controlDiv = document.createElement('div');
   const controlUI = document.createElement('div');
   controlUI.setAttribute('class', 'map-button-ui');
   controlUI.title = 'Recenter the map';
@@ -56,6 +108,8 @@ function addCenterControl(controlDiv) {
   controlUI.addEventListener('click', function() {
     centerMap();
   });
+
+  return controlDiv;
 }
 
 
@@ -94,12 +148,15 @@ export function initMap() {
     }, (err) => console.log('Error with user position update:', err));
 
     // Create the DIV to hold the 'center map' map control and populate it.
-    const centerControlDiv = document.createElement('div');
-    addCenterControl(centerControlDiv, map);
-
+    const centerControlDiv = createCenterControl();
     centerControlDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
   }
+
+  // Create the DIV to hold the login button.
+  const loginControlDiv = createLoginControl();
+  loginControlDiv.index = 2;
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(loginControlDiv);
 
   setMapAndSidebarStyle(false);
   return map;
