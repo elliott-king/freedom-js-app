@@ -5,8 +5,10 @@ import ReactDOM from 'react-dom';
 import {Authenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
   from 'aws-amplify-react';
 
+import LocationSearchButton from '../search/location-search-button.jsx';
+import {newPublicArtUpload} from '../upload/new-location.jsx';
+import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 import setMapAndSidebarStyle from './set-map-and-sidebar-style';
-import {updateUserLocationMarker} from './markers-utils';
 
 /** Show error if issue getting geolocation
  *
@@ -157,6 +159,35 @@ export function initMap() {
   const loginControlDiv = createLoginControl();
   loginControlDiv.index = 2;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(loginControlDiv);
+
+  // Create div that holds search button
+  // Adding custom controls:
+  // https://github.com/tomchentw/react-google-maps/issues/818
+  const locationSearchDiv = document.createElement('div');
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(locationSearchDiv);
+  ReactDOM.render(
+      <LocationSearchButton
+        markersCallback={updateMarkers}
+      />,
+      locationSearchDiv
+  );
+
+  map.addListener('click', function(event) {
+    const latLng = event.latLng;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    // TODO: should disappear when the 'close' button clicked in new-location div.
+    const newLocationMarker = new google.maps.Marker({
+      position: {lng: lng, lat: lat},
+      map: map,
+      title: 'New location',
+      label: 'N',
+    });
+    updateMarkers([newLocationMarker]);
+
+    newPublicArtUpload(lat, lng);
+  });
 
   setMapAndSidebarStyle(false);
   return map;
