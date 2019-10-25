@@ -4,6 +4,7 @@
 
 // Forms in React: https://reactjs.org/docs/forms.html
 
+import {Auth} from 'aws-amplify';
 import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
@@ -32,6 +33,7 @@ export default class LocationInfoDiv extends React.Component {
       selectedOption: '',
       // TODO: think of more elegant solution.
       reported: 0,
+      authenticated: false,
     };
 
     // To upload images in React, we use the file API.
@@ -43,6 +45,10 @@ export default class LocationInfoDiv extends React.Component {
     this.reportTextChange = this.reportTextChange.bind(this);
     this.submitLocationReport = this.submitLocationReport.bind(this);
     this.uploadNewImage = this.uploadNewImage.bind(this);
+
+    Auth.currentAuthenticatedUser()
+        .then(() => this.setState({authenticated: true}))
+        .catch(() => this.setState({authenticated: false}));
   }
 
   uploadNewImage(event) {
@@ -104,6 +110,49 @@ export default class LocationInfoDiv extends React.Component {
     }
   }
 
+  renderUploadImageForm() {
+    if (this.state.authenticated) {
+      return (
+        <form
+          className = "new-image-form"
+          onSubmit={this.uploadNewImage}
+        >
+          <h4>Upload new image</h4>
+          <input
+            type="file"
+            accept="image/png"
+            ref={this.imageInput}
+          />
+          <button type="submit" className="btn">Upload</button>
+        </form>
+      );
+    } else return null;
+  }
+
+  renderReportLocationForm() {
+    if (this.state.authenticated) {
+      return (
+        <form style={this.state.displayStyle}
+          className="report-location-popup"
+          onSubmit={this.submitLocationReport}>
+          <h4>Report Location</h4>
+          <Select
+            options={options}
+            onChange={this.reportOptionChange}
+          />
+          <label>Feel free to expand your reason:</label>
+          <input type="text"
+            placeholder="Reason Continued"
+            name="reason-continued"
+            value={this.state.reasonContinued}
+            onChange={this.reportTextChange}
+          />
+          <button type="submit" className="btn">Report Location</button>
+        </form>
+      );
+    } else return null;
+  }
+
   renderDates() {
     if (!this.props.permanent) {
       const s = new Date(this.props.dates.start).toDateString();
@@ -135,38 +184,11 @@ export default class LocationInfoDiv extends React.Component {
           {this.renderImg()}
           {this.renderDates()}
         </div>
-        <form
-          className = "new-image-form"
-          onSubmit={this.uploadNewImage}
-        >
-          <h4>Upload new image</h4>
-          <input
-            type="file"
-            accept="image/png"
-            ref={this.imageInput}
-          />
-          <button type="submit" className="btn">Upload</button>
-        </form>
-        <form style={this.state.displayStyle}
-          className="report-location-popup"
-          onSubmit={this.submitLocationReport}>
-          <h4>Report Location</h4>
-          <Select
-            options={options}
-            onChange={this.reportOptionChange}
-          />
-          <label>Feel free to expand your reason:</label>
-          <input type="text"
-            placeholder="Reason Continued"
-            name="reason-continued"
-            value={this.state.reasonContinued}
-            onChange={this.reportTextChange}
-          />
-          <button type="submit" className="btn">Report Location</button>
-          <button type="button" onClick={this.handleClose}
-            className="close">Close</button>
-        </form>
+        {this.renderUploadImageForm()}
+        {this.renderReportLocationForm()}
         {this.renderResponseOfReporting()}
+        <button type="button" onClick={this.handleClose}
+          className="close">Close</button>
       </div>
     );
   }

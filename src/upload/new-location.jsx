@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* global google */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,6 +8,8 @@ import Select from 'react-select';
 import DatePicker from 'react-date-picker';
 import gql from 'graphql-tag';
 import {v4 as uuid} from 'uuid';
+import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
+  from 'aws-amplify-react';
 
 import {uploadImage} from './upload-image';
 import {createPublicArt} from '../graphql/mutations';
@@ -246,11 +249,37 @@ export function newPublicArtUpload(lat, lng) {
     const sidebar = document.getElementById('sidebar');
     ReactDOM.unmountComponentAtNode(sidebar);
 
-    ReactDOM.render(
+    const handleClose = (event) => {
+      setMapAndSidebarStyle(false);
+    };
+
+    const uploadForm = () => {
+      return (
         <PublicArtUploadForm
           lat={lat}
           lng={lng}
-        />,
+        />
+      );
+    };
+
+    const UploadFormWithAuthenticator = withAuthenticator(uploadForm, {
+      includeGreetings: true,
+      authenticatorComponents: [
+        <Greetings outGreeting="To upload a new location, you must log in."/>,
+        <SignIn/>,
+        <SignUp/>,
+        <ConfirmSignUp/>,
+      ],
+      // TODO: get rid of phone number somehow?
+      usernameAttributes: 'email',
+    });
+
+    ReactDOM.render(
+        (<React.Fragment>
+          <UploadFormWithAuthenticator/>
+          <button type="button" onClick={handleClose}
+            className="close">Close</button>
+        </React.Fragment>),
         sidebar
     );
   }
