@@ -1,9 +1,5 @@
 {
     "auth": {
-        "freedomjsapp28b57bb9": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation"
-        },
         "freedomauth102019": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
