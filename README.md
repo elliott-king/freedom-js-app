@@ -10,7 +10,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | ----------------------------- | ------------ | :------: | ----------: | ------------------: |
 | React Components              | qol, js      |   low    |             |                     |
 | Filter public art by class    | js           |   med    |         yes | unnecessary for MVP |
-| Flag public art               | graphql, js  |   high   |         yes |                 MVP |
+| Flag public art               | graphql, js  |   high   |        done |                 MVP |
 | Get photos & show info window | graphql, js  |   high   |         yes |                 MVP |
 | Upload new location           | graphql, js  |   high   |         yes |                     |
 | UI & QOL improvements         | qol, css, js |   low    |             |                     |
@@ -86,15 +86,16 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Consider making sidebar collapsible                                    | done                         |
 | Collapsing sidebar should not move center of map                       |                              |
 | Host on a readable url                                                 | done                         |
-| Bottom button should not truncate text                                 |                              |
-| Make sure all requests/queries have error catching                     |                              |
+| Bottom button should not truncate text                                 | done                         |
+| Make sure all requests/queries have error catching                     | done                         |
+| Fix 'cannot get /with-sidebar' bug                                     |                              |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
 | User should only have to login to upload new image           | done          |
 | Sign up should not care about phone number                   |               |
 | Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
-| Log in should be self contained (not in art upload div)      |               |
+| Log in should be self contained (not in art upload div)      | done          |
 
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |
