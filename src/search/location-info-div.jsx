@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import {createReported} from '../graphql/mutations';
 import {uploadImage} from '../upload/upload-image';
-import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
+import {closeSidebar} from '../utils/set-map-and-sidebar-style';
 
 // Options for reporting public art.
 const options = [
@@ -65,7 +65,7 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   handleClose(event) {
-    setMapAndSidebarStyle(false);
+    closeSidebar();
   }
 
   submitLocationReport(event) {

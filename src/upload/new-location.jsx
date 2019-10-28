@@ -8,12 +8,10 @@ import Select from 'react-select';
 import DatePicker from 'react-date-picker';
 import gql from 'graphql-tag';
 import {v4 as uuid} from 'uuid';
-import {withAuthenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
-  from 'aws-amplify-react';
 
 import {uploadImage} from './upload-image';
 import {createPublicArt} from '../graphql/mutations';
-import setMapAndSidebarStyle from '../utils/set-map-and-sidebar-style';
+import {openSidebar, closeSidebar} from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
 import {centerMap} from '../utils/map-utils';
 import {SIMPLE_OPTIONS} from '../utils/constants';
@@ -90,7 +88,7 @@ class PublicArtUploadForm extends React.Component {
         console.log('Successfully uploaded image for new location', this.state.name);
 
         // Finally, remove both the sidebar and the marker.
-        setMapAndSidebarStyle(false);
+        closeSidebar();
         updateMarkers([]);
       }).catch((err) => {
         console.error('Error uploading new location:', err);
@@ -250,33 +248,15 @@ export function newPublicArtUpload(lat, lng) {
     ReactDOM.unmountComponentAtNode(sidebar);
 
     const handleClose = (event) => {
-      setMapAndSidebarStyle(false);
+      closeSidebar();
     };
-
-    const uploadForm = () => {
-      return (
-        <PublicArtUploadForm
-          lat={lat}
-          lng={lng}
-        />
-      );
-    };
-
-    const UploadFormWithAuthenticator = withAuthenticator(uploadForm, {
-      includeGreetings: true,
-      authenticatorComponents: [
-        <Greetings outGreeting="To upload a new location, you must log in."/>,
-        <SignIn/>,
-        <SignUp/>,
-        <ConfirmSignUp/>,
-      ],
-      // TODO: get rid of phone number somehow?
-      usernameAttributes: 'email',
-    });
 
     ReactDOM.render(
         (<React.Fragment>
-          <UploadFormWithAuthenticator/>
+          <PublicArtUploadForm
+            lat={lat}
+            lng={lng}
+          />
           <button type="button" onClick={handleClose}
             className="close">Close</button>
         </React.Fragment>),
@@ -284,5 +264,5 @@ export function newPublicArtUpload(lat, lng) {
     );
   }
 
-  setMapAndSidebarStyle(true);
+  openSidebar();
 }

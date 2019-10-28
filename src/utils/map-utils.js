@@ -3,13 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Auth} from 'aws-amplify';
-import {Authenticator, ConfirmSignUp, Greetings, SignIn, SignUp}
-  from 'aws-amplify-react';
 
 import LocationSearchButton from '../search/location-search-button.jsx';
 import {newPublicArtUpload} from '../upload/new-location.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
-import setMapAndSidebarStyle from './set-map-and-sidebar-style';
+import {openLogin} from './set-map-and-sidebar-style';
 
 /** Show error if issue getting geolocation
  *
@@ -42,34 +40,6 @@ export function centerMap() {
   }
 }
 
-/** Opens login form in sidebar */
-function showLoginForm() {
-  const sidebar = document.getElementById('sidebar');
-  ReactDOM.unmountComponentAtNode(sidebar);
-
-  ReactDOM.render(
-      (<React.Fragment>
-        <Authenticator
-          includeGreetings={true}
-          usernameAttributes='email'
-          authenticatorComponents={[
-            <SignIn/>,
-            <SignUp/>,
-            <ConfirmSignUp/>,
-            <Greetings
-              inGreeting="Welcome"
-            />,
-          ]}
-        />
-        <button type="button" onClick={() => setMapAndSidebarStyle(false)}
-          className="close">Close</button>
-      </React.Fragment>),
-      sidebar
-  );
-
-  setMapAndSidebarStyle(true);
-}
-
 /** @returns {Element} A button that will show the login form
  */
 function createLoginControl() {
@@ -89,7 +59,7 @@ function createLoginControl() {
   controlUI.appendChild(controlText);
 
   // Setup click event listener to show login form
-  controlUI.addEventListener('click', showLoginForm);
+  controlUI.addEventListener('click', openLogin);
 
   // Button text should be different if a user is already authenticated
   Auth.currentAuthenticatedUser()
@@ -187,22 +157,23 @@ export function initMap() {
   );
 
   map.addListener('click', function(event) {
-    const latLng = event.latLng;
-    const lat = latLng.lat();
-    const lng = latLng.lng();
+    Auth.currentAuthenticatedUser()
+        .then(() => {
+          const latLng = event.latLng;
+          const lat = latLng.lat();
+          const lng = latLng.lng();
 
-    // TODO: should disappear when the 'close' button clicked in new-location div.
-    const newLocationMarker = new google.maps.Marker({
-      position: {lng: lng, lat: lat},
-      map: map,
-      title: 'New location',
-      label: 'N',
-    });
-    updateMarkers([newLocationMarker]);
+          // TODO: should disappear when the 'close' button clicked in new-location div.
+          const newLocationMarker = new google.maps.Marker({
+            position: {lng: lng, lat: lat},
+            map: map,
+            title: 'New location',
+            label: 'N',
+          });
+          updateMarkers([newLocationMarker]);
 
-    newPublicArtUpload(lat, lng);
+          newPublicArtUpload(lat, lng);
+        }).catch(() => console.log('Cannot add new marker. No user authenticated.'));
   });
-
-  setMapAndSidebarStyle(false);
   return map;
 }
