@@ -17,14 +17,12 @@ This request is written using the amplify cli.e
             "size":$util.defaultIfNull($ctx.args.limit, 10),
             "query" : {
                 "bool" : {
-                    "must" : {
-                        "match" : {
-                            "permanent" : "$ctx.args.permanent",
+                    "must" : [
+                    	{ "match" : { "permanent" : "$ctx.args.permanent" } },
                         #if(!$utils.isNullOrEmpty($ctx.args.type))
-                            "type": "$ctx.args.type"
+                    {"match": { "type": "$ctx.args.type" }},
                         #end
-                        },
-                    },
+                    ],
                     "filter" : [
                         {"geo_bounding_box" : {
                             "location" : {
