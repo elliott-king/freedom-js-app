@@ -42,9 +42,9 @@ function revealLocationInfo(id) {
  * @param  {google.maps.Map} map a google map
  * @param  {string} filter an optional filter term
  * @param  {boolean} isPermanent search for permanent installations or not
- * @param  {Function} callback for new markers
+ * @returns {Promise<Array>} Promise containing the markers for each location
  */
-export function getPublicArtWithinMap(map, filter, isPermanent, callback) {
+export function getPublicArtWithinMap(map, filter, isPermanent) {
   const bounds = map.getBounds();
   const newMarkers = [];
   console.log('Bounds: ', bounds.toString());
@@ -64,7 +64,7 @@ export function getPublicArtWithinMap(map, filter, isPermanent, callback) {
   if (filter != 'all') variables.type = filter;
   console.log('GetWithinBounds variables', variables);
 
-  window.keyClient.query({
+  return window.keyClient.query({
     query: query,
     variables: variables,
     fetchPolicy: 'network-only',
@@ -92,8 +92,9 @@ export function getPublicArtWithinMap(map, filter, isPermanent, callback) {
       });
       newMarkers.push(marker);
     }
-    callback(newMarkers);
+    return newMarkers;
   }).catch((e) => {
     console.error('Error searching: ' + e.toString());
+    return newMarkers;
   });
 }

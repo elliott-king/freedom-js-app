@@ -56,9 +56,8 @@ export default class LocationSearchButton extends React.Component {
           onClick={() => getPublicArtWithinMap(
               window.map,
               this.state.filter,
-              this.state.permanent,
-              this.props.markersCallback
-          )}>
+              this.state.permanent
+          ).then(this.props.markersCallback)}>
           Public Art Search
         </div>
       </div>
