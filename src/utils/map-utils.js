@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Auth} from 'aws-amplify';
 
-import LocationSearchButton from '../search/location-search-button.jsx';
+import {EventSearchButton, PublicArtSearchButton}
+  from '../search/location-search-button.jsx';
 import {newPublicArtUpload} from '../upload/new-location.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 import {openLogin} from './set-map-and-sidebar-style';
@@ -147,13 +148,23 @@ export function initMap() {
   // Create div that holds search button
   // Adding custom controls:
   // https://github.com/tomchentw/react-google-maps/issues/818
-  const locationSearchDiv = document.createElement('div');
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(locationSearchDiv);
+  const publicArtSearchDiv = document.createElement('div');
+  publicArtSearchDiv.index = 1;
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(publicArtSearchDiv);
   ReactDOM.render(
-      <LocationSearchButton
+      <PublicArtSearchButton
         markersCallback={updateMarkers}
       />,
-      locationSearchDiv
+      publicArtSearchDiv
+  );
+
+  const eventSearchDiv = document.createElement('div');
+  eventSearchDiv.index = 2;
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(eventSearchDiv);
+  ReactDOM.render(
+      <EventSearchButton
+        markersCallback={updateMarkers}
+      />, eventSearchDiv
   );
 
   map.addListener('click', function(event) {

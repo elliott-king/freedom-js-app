@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
 import Select from 'react-select';
 
-import {getPublicArtWithinMap} from './location-search.jsx';
+import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 // eslint-disable-next-line no-unused-vars
 import {ALL_OPTIONS} from '../utils/constants';
 
@@ -16,7 +16,7 @@ const permanencyOptions = [
   {value: false, label: 'Temporary installation'},
 ];
 
-export default class LocationSearchButton extends React.Component {
+export class PublicArtSearchButton extends React.Component {
   constructor(props) {
     super(props);
     this.typeChange = this.typeChange.bind(this);
@@ -64,6 +64,34 @@ export default class LocationSearchButton extends React.Component {
     );
   }
 }
-LocationSearchButton.propTypes = {
+PublicArtSearchButton.propTypes = {
+  markersCallback: PropTypes.func.isRequired,
+};
+
+
+export class EventSearchButton extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div
+        className="map-button-ui"
+        title="Find nearby events">
+        <div className="map-button-text"
+          onClick={() => {
+            getEventWithinMap(window.map).then((newMarkers) => {
+              this.props.markersCallback(newMarkers);
+            });
+          }
+          }>
+          Event Search
+        </div>
+      </div>
+    );
+  }
+}
+EventSearchButton.propTypes = {
   markersCallback: PropTypes.func.isRequired,
 };
