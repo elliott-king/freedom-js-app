@@ -32,6 +32,18 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Make types an enum in Appsync GraphQL API                         | done   |          |
 | Check 'type' is chosen by user when uploading new location        | done   | low      |
 
+| Free events                                                  | Status | Priority |
+| ------------------------------------------------------------ | ------ | -------- |
+| Initial creation                                             |        |          |
+| Searchable in app                                            |        |          |
+| Accept new picture upload                                    |        |          |
+| Accept report/flagging                                       |        |          |
+| Search button should switch between options for each         |        |          |
+| Filter search by date/time                                   |        |          |
+| Do you need to sign up ahead of time? For Carnegie Hall, yes |        |          |
+| Type checker on upload (python)                              |        |          |
+
+
 | Flag public art/event                                                   | Status |
 | ----------------------------------------------------------------------- | ------ |
 | Seperate DynamoDB table                                                 | done   |
