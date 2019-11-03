@@ -1,44 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const flagLocation = `mutation FlagLocation($input: FlagLocationInput!) {
-  flagLocation(input: $input) {
-    id
-    location {
-      lat
-      lon
-    }
-    name
-    description
-    type
-    photos
-    permanent
-    date_range {
-      start
-      end
-    }
-  }
-}
-`;
-export const changePublicArtType = `mutation ChangePublicArtType($input: ChangePublicArtTypeInput!) {
-  changePublicArtType(input: $input) {
-    id
-    location {
-      lat
-      lon
-    }
-    name
-    description
-    type
-    photos
-    permanent
-    date_range {
-      start
-      end
-    }
-  }
-}
-`;
 export const addPhoto = `mutation AddPhoto($location_id: String!, $url: AWSURL!) {
   addPhoto(location_id: $location_id, url: $url) {
     id
@@ -112,6 +74,60 @@ export const deletePublicArt = `mutation DeletePublicArt($input: DeletePublicArt
       start
       end
     }
+  }
+}
+`;
+export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
+  createEvent(input: $input) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
+export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
+  updateEvent(input: $input) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
+export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
+  deleteEvent(input: $input) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
   }
 }
 `;

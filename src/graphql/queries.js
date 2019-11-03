@@ -32,6 +32,32 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
   }
 }
 `;
+export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox(
+  $top_right_gps: LocationInput!
+  $bottom_left_gps: LocationInput!
+  $limit: Int
+) {
+  getEventWithinBoundingBox(
+    top_right_gps: $top_right_gps
+    bottom_left_gps: $bottom_left_gps
+    limit: $limit
+  ) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
 export const whoAmI = `query WhoAmI {
   whoAmI
 }
@@ -76,6 +102,49 @@ export const listPublicArts = `query ListPublicArts(
         start
         end
       }
+    }
+    nextToken
+  }
+}
+`;
+export const getEvent = `query GetEvent($id: ID!) {
+  getEvent(id: $id) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
+export const listEvents = `query ListEvents(
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      location {
+        lat
+        lon
+      }
+      name
+      description
+      type
+      host
+      website
+      photos
+      datetime
+      location_description
     }
     nextToken
   }
@@ -133,6 +202,37 @@ export const searchPublicArts = `query SearchPublicArts(
         start
         end
       }
+    }
+    nextToken
+  }
+}
+`;
+export const searchEvents = `query SearchEvents(
+  $filter: SearchableEventFilterInput
+  $sort: SearchableEventSortInput
+  $limit: Int
+  $nextToken: String
+) {
+  searchEvents(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      location {
+        lat
+        lon
+      }
+      name
+      description
+      type
+      host
+      website
+      photos
+      datetime
+      location_description
     }
     nextToken
   }

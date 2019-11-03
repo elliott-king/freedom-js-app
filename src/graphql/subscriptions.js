@@ -58,6 +58,60 @@ export const onDeletePublicArt = `subscription OnDeletePublicArt {
   }
 }
 `;
+export const onCreateEvent = `subscription OnCreateEvent {
+  onCreateEvent {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
+export const onUpdateEvent = `subscription OnUpdateEvent {
+  onUpdateEvent {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
+export const onDeleteEvent = `subscription OnDeleteEvent {
+  onDeleteEvent {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    type
+    host
+    website
+    photos
+    datetime
+    location_description
+  }
+}
+`;
 export const onCreateReported = `subscription OnCreateReported {
   onCreateReported {
     id

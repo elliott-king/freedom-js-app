@@ -11,13 +11,23 @@ type DateRange {
     end: AWSDate
 }
 
+enum LocationType {
+    event
+    publicArt
+}
 enum PublicArtType {
     mural
     sculpture
 }
 
-# TODO: consider making @searchable
-# https://aws-amplify.github.io/docs/js/api#using-graphql-transformers
+enum EventType {
+    music
+    advocacy
+    sports
+    education
+    family
+}
+
 type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
     id: ID!
     location: Location!
@@ -33,29 +43,28 @@ type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
     date_range: DateRange
 }
 
+type Event @model @searchable @aws_api_key @aws_cognito_user_pools {
+    id: ID!
+    location: Location!
+    name: String!
+    description: String!
+    type: [EventType]
+    host: String
+    website: AWSURL
+    photos: [AWSURL]
+    datetime: AWSDateTime!
+    location_description: String
+}
+
 type Reported @model {
     id: ID
-    art_id: ID!
+    art_id: ID! # TODO: should be 'location_id'
+    # type: LocationType! TODO: add this
     reason: String!
     reason_continued: String
 }
 
-# TODO: should not be in final Beta
-input ChangePublicArtTypeInput {
-	name: String!
-	type: String!
-}
-
-# TODO: make 'reason' an enum
-input FlagLocationInput {
-	name: String!
-	reason: String!
-	reason_continued: String
-}
-
 type Mutation {
-	flagLocation(input: FlagLocationInput!): PublicArt
-	changePublicArtType(input: ChangePublicArtTypeInput!): PublicArt
     addPhoto(location_id: String!, url:AWSURL!): PublicArt
 }
 
@@ -67,6 +76,18 @@ type Query @aws_api_key{
         permanent: Boolean!,
 		type: PublicArtType
 	): [PublicArt]
+
+    getEventWithinBoundingBox(
+        top_right_gps: LocationInput!,
+        bottom_left_gps: LocationInput!,
+
+        # start_date: AWSDate!,
+        # start_time: AWSTime!,
+        # end_date: AWSDate!,
+        # end_time: AWSTime!,
+
+        limit: Int,
+    ): [Event]
 
     whoAmI: String
 }
