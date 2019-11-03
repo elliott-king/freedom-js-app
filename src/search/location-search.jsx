@@ -26,11 +26,7 @@ function revealLocationInfo(id) {
     ReactDOM.unmountComponentAtNode(sidebar);
     ReactDOM.render(
         <LocationInfoDiv
-          name={getPublicArt.name}
-          id={getPublicArt.id}
-          photos={getPublicArt.photos}
-          permanent={getPublicArt.permanent}
-          dates={getPublicArt.date_range}
+          location={location}
         />,
         sidebar
     );

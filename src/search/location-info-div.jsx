@@ -57,7 +57,7 @@ export default class LocationInfoDiv extends React.Component {
     if (this.imageInput.current.files.length > 0) {
       const imgFile = this.imageInput.current.files[0];
       // TODO: update description field.
-      uploadImage(imgFile, this.props.id, 'Testing: this is a photo file.');
+      uploadImage(imgFile, this.props.location.id, 'Testing: this is a photo file.');
     } else {
       window.alert('Please choose an image to upload.');
       console.warn('Please choose an image to upload.');
@@ -79,7 +79,7 @@ export default class LocationInfoDiv extends React.Component {
         mutation: gql(createReported),
         variables: {
           input: {
-            art_id: this.props.id,
+            art_id: this.props.location.id,
             reason: this.state.selectedOption.value,
             reason_continued: (this.state.reasonContinued ?
             this.state.reasonContinued : undefined),
@@ -102,8 +102,8 @@ export default class LocationInfoDiv extends React.Component {
   // Render optional things in React:
   // https://stackoverflow.com/questions/44015876
   renderImg() {
-    if (this.props.photos && this.props.photos.length > 0) {
-      const photo = this.props.photos[0];
+    if (this.props.location.photos && this.props.location.photos.length > 0) {
+      const photo = this.props.location.photos[0];
       return (
         <div className="location-image-div">
           <img className="location-image" src={photo}/>
@@ -157,9 +157,9 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDates() {
-    if (!this.props.permanent) {
-      const s = new Date(this.props.dates.start).toDateString();
-      const e = new Date(this.props.dates.start).toDateString();
+      if (!this.props.location.permanent) {
+        const s = new Date(this.props.location.dates.start).toDateString();
+        const e = new Date(this.props.location.dates.end).toDateString(); // TODO: testme
       return (
         <p>{s} - {e}</p>
       );
@@ -183,7 +183,7 @@ export default class LocationInfoDiv extends React.Component {
     return (
       <div id="location-content">
         <div className="location-head-info">
-          <h3>{this.props.name}</h3>
+          <h3>{this.props.location.name}</h3>
           {this.renderImg()}
           {this.renderDates()}
         </div>
@@ -197,9 +197,5 @@ export default class LocationInfoDiv extends React.Component {
   }
 }
 LocationInfoDiv.propTypes = {
-  name: PropTypes.string.isRequired,
-  photos: PropTypes.array,
-  id: PropTypes.string.isRequired,
-  permanent: PropTypes.bool,
-  dates: PropTypes.object,
+  location: PropTypes.object.isRequired,
 };
