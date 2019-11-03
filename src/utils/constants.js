@@ -1,3 +1,8 @@
+export const locationType = Object.freeze({
+  PUBLIC_ART: 1,
+  EVENT: 2,
+});
+
 export const SIMPLE_OPTIONS = [
   {value: 'sculpture', label: 'Sculpture'},
   {value: 'mural', label: 'Mural'},

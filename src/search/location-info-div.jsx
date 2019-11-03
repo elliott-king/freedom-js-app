@@ -13,6 +13,7 @@ import gql from 'graphql-tag';
 import {createReported} from '../graphql/mutations';
 import {uploadImage} from '../upload/upload-image';
 import {closeSidebar} from '../utils/set-map-and-sidebar-style';
+import {locationType} from '../utils/constants';
 
 // Options for reporting public art.
 const options = [
@@ -114,6 +115,10 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderUploadImageForm() {
+    if (this.props.type == locationType.EVENT) {
+      console.debug('TODO: handle image uploading for events.');
+      return null;
+    }
     if (this.state.authenticated) {
       return (
         <form
@@ -129,7 +134,8 @@ export default class LocationInfoDiv extends React.Component {
           <button type="submit" className="btn">Upload</button>
         </form>
       );
-    } else return null;
+    }
+    return null;
   }
 
   renderReportLocationForm() {
@@ -157,22 +163,24 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDates() {
+    if (this.props.type == locationType.PUBLIC_ART) {
       if (!this.props.location.permanent) {
         const s = new Date(this.props.location.dates.start).toDateString();
         const e = new Date(this.props.location.dates.end).toDateString(); // TODO: testme
-      return (
-        <p>{s} - {e}</p>
-      );
-    } else {
-      return null;
+        return (
+          <p>{s} - {e}</p>
+        );
+      }
     }
+    if (this.props.type == locationType.EVENT) console.debug('TODO: show event date.');
+    return null;
   }
 
   renderResponseOfReporting() {
     if (this.state.reported > 0) {
       return (<p id="location-reported">
         Issue &quot;{this.state.selectedOption.label}&quot;
-        for location &quot;{this.props.name}&quot; reported.
+        for location &quot;{this.props.location.name}&quot; reported.
       </p>);
     } else {
       return null;
@@ -198,4 +206,5 @@ export default class LocationInfoDiv extends React.Component {
 }
 LocationInfoDiv.propTypes = {
   location: PropTypes.object.isRequired,
+  type: PropTypes.number.isRequired,
 };
