@@ -115,8 +115,20 @@ html, body {
 
 /* Note that percentages are relative to its container div.*/
 .location-image {
-    max-width: 90%;
+    max-width: 100%;
     max-height: 40%;
     width: auto;
     height: auto;
+}
+.location-image-div {
+    text-align: center;
+}
+
+/* https://www.w3schools.com/howto/howto_css_sidebar_responsive.asp for @media info
+https://stackoverflow.com/questions/15147378/ for map size insiration*/
+@media screen and (max-width: 700px) {
+    .location-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
 }

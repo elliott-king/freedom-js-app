@@ -89,6 +89,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Bottom button should not truncate text                                 | done                         |
 | Make sure all requests/queries have error catching                     | done                         |
 | Fix 'cannot get /with-sidebar' bug                                     |                              |
+| Speed up/streamline map load                                           | HIGH PRIORITY                |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
