@@ -34,14 +34,15 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 
 | Free events                                                  | Status | Priority |
 | ------------------------------------------------------------ | ------ | -------- |
-| Initial creation                                             |        |          |
+| Initial creation                                             | done   |          |
 | Searchable in app                                            |        |          |
 | Accept new picture upload                                    |        |          |
 | Accept report/flagging                                       |        |          |
-| Search button should switch between options for each         |        |          |
-| Filter search by date/time                                   |        |          |
+| Search button should switch between public art and events    |        | HIGH     |
+| Filter search by date/time                                   |        | HIGH     |
 | Do you need to sign up ahead of time? For Carnegie Hall, yes |        |          |
 | Type checker on upload (python)                              |        |          |
+| Dates should be a discrete list (instead of start/end)       |        | HIGH     |
 
 
 | Flag public art/event                                                   | Status |
@@ -109,6 +110,16 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Sign up should not care about phone number                   |               |
 | Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
 | Log in should be self contained (not in art upload div)      | done          |
+
+| Scraping/parsing                                                                            | Status | Priority |
+| ------------------------------------------------------------------------------------------- | ------ | -------- |
+| All titles should be capitalized                                                            |        |          |
+| Typecheck entries                                                                           |        |          |
+| Check existence of all necessary fields                                                     |        |          |
+| Maybe just regex all paren & take last one? (instead of looking for paren in last sentence) |        |          |
+| Event type should be a list & take multiple options                                         |        |          |
+| Should be able to split single event into multiple different                                |        |          |
+| Should be able to reject creation of event                                                  |        |          |
 
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |
