@@ -7,5 +7,6 @@
             "Outputs.UserPoolId"
         ]
     },
-    "CreateAPIKey": 0
+    "CreateAPIKey": 0,
+    "APIKeyExpirationEpoch": 0
 }
