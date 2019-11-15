@@ -15,6 +15,10 @@ export function createClient() {
       jwtToken: async () => (
         await Auth.currentSession()).getIdToken().getJwtToken(),
     },
+    // TODO: needed to avoid bug with expired credentials (I think?)
+    // See: https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/453#issuecomment-520246437
+    // May have something to do with our parameters.json change in commit 88fc4
+    disableOffline: true,
     offlineConfig: {
       keyPrefix: 'mutations',
     },
@@ -28,6 +32,7 @@ export function createClient() {
       type: AUTH_TYPE.API_KEY,
       apiKey: aws_config.aws_appsync_apiKey,
     },
+    disableOffline: true,
     offlineConfig: {
       keyPrefix: 'queries',
     },
