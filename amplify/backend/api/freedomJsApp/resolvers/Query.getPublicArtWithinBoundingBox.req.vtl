@@ -20,7 +20,7 @@ This request is written using the amplify cli.e
                     "must" : [
                     	{ "match" : { "permanent" : "$ctx.args.permanent" } },
                         #if(!$utils.isNullOrEmpty($ctx.args.type))
-                    {"match": { "type": "$ctx.args.type" }},
+                            {"match": { "type": "$ctx.args.type" }},
                         #end
                     ],
                     "filter" : [
