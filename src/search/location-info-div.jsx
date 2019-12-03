@@ -171,8 +171,13 @@ export default class LocationInfoDiv extends React.Component {
           <p>{s} - {e}</p>
         );
       }
+    } else if (this.props.type == locationType.EVENT) {
+      const dateItems = this.props.location.dates.map(
+          (d) => <li key={d}>{new Date(d).toDateString()}</li>);
+      return (
+        <ul>{dateItems}</ul>
+      );
     }
-    if (this.props.type == locationType.EVENT) console.debug('TODO: show event date.');
     return null;
   }
 
