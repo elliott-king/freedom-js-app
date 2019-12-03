@@ -94,6 +94,7 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -114,6 +115,7 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -134,6 +136,7 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;

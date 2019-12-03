@@ -75,6 +75,7 @@ export const onCreateEvent = `subscription OnCreateEvent {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -95,6 +96,7 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -115,6 +117,7 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;

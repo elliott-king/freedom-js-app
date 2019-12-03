@@ -45,6 +45,7 @@ export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox($searc
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -110,6 +111,7 @@ export const getEvent = `query GetEvent($id: ID!) {
     dates
     times
     location_description
+    rsvp
   }
 }
 `;
@@ -135,6 +137,7 @@ export const listEvents = `query ListEvents(
       dates
       times
       location_description
+      rsvp
     }
     nextToken
   }
@@ -225,6 +228,7 @@ export const searchEvents = `query SearchEvents(
       dates
       times
       location_description
+      rsvp
     }
     nextToken
   }
