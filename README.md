@@ -113,13 +113,15 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 
 | Scraping/parsing                                                                            | Status | Priority |
 | ------------------------------------------------------------------------------------------- | ------ | -------- |
-| All titles should be capitalized                                                            |        |          |
-| Typecheck entries                                                                           |        |          |
-| Check existence of all necessary fields                                                     |        |          |
-| Maybe just regex all paren & take last one? (instead of looking for paren in last sentence) |        |          |
-| Event type should be a list & take multiple options                                         |        |          |
-| Should be able to split single event into multiple different                                |        |          |
-| Should be able to reject creation of event                                                  |        |          |
+| All titles should be capitalized                                                            | done   |          |
+| Typecheck entries                                                                           |        | med      |
+| Check existence of all necessary fields                                                     | done   |          |
+| Maybe just regex all paren & take last one? (instead of looking for paren in last sentence) | done   |          |
+| Event type should be a list & take multiple options                                         | done   |          |
+| Should be able to split single event into multiple different                                |        | low      |
+| Should be able to reject creation of event                                                  | done   |          |
+| Add date range type as seperate type (2-d list? or list of 2-d lists?)                      |        | med-high |
+| Consider splitting 'source' into title & url object?                                        |        | low      |
 
 | Long-term Support                                  | Status | Priority              |
 | -------------------------------------------------- | ------ | --------------------- |
