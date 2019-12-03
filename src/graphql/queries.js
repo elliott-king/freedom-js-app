@@ -49,11 +49,13 @@ export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox(
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -116,11 +118,13 @@ export const getEvent = `query GetEvent($id: ID!) {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -139,11 +143,13 @@ export const listEvents = `query ListEvents(
       }
       name
       description
-      type
+      types
       host
+      source
       website
       photos
-      datetime
+      dates
+      times
       location_description
     }
     nextToken
@@ -227,11 +233,13 @@ export const searchEvents = `query SearchEvents(
       }
       name
       description
-      type
+      types
       host
+      source
       website
       photos
-      datetime
+      dates
+      times
       location_description
     }
     nextToken

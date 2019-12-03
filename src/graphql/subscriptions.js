@@ -67,11 +67,13 @@ export const onCreateEvent = `subscription OnCreateEvent {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -85,11 +87,13 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -103,11 +107,13 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }

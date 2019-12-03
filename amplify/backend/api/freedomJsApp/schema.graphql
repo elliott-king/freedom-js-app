@@ -21,11 +21,23 @@ enum PublicArtType {
 }
 
 enum EventType {
-    music
     advocacy
-    sports
-    education
+    art
+    athletics
+    comedy
+    dance
+    education # TODO: sunset this
     family
+    film
+    food # only if food is free or its an educational thing, or there is something else included
+    history
+    literature
+    lgbtq
+    music
+    philosophy
+    science
+    shopping
+    theater
 }
 
 type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
@@ -48,12 +60,15 @@ type Event @model @searchable @aws_api_key @aws_cognito_user_pools {
     location: Location!
     name: String!
     description: String!
-    type: [EventType]
+    types: [EventType]
     host: String
+    source: String
     website: AWSURL
     photos: [AWSURL]
-    datetime: AWSDateTime!
+    dates: [AWSDate]! # TODO: should be array of date ranges (str?)
+    times: [AWSTime] # If just one, true for all dates. Otherwise, should be 1-1
     location_description: String
+    rsvp: Boolean # TODO: hard to parse for
 }
 
 type Reported @model {

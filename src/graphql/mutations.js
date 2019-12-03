@@ -86,11 +86,13 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -104,11 +106,13 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
@@ -122,11 +126,13 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     }
     name
     description
-    type
+    types
     host
+    source
     website
     photos
-    datetime
+    dates
+    times
     location_description
   }
 }
