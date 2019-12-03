@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
 import Select from 'react-select';
+import DatePicker from 'react-date-picker';
 
 import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 // eslint-disable-next-line no-unused-vars
@@ -72,6 +73,9 @@ PublicArtSearchButton.propTypes = {
 export class EventSearchButton extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      chosenDate: new Date(),
+    };
   }
 
   render() {
@@ -79,15 +83,21 @@ export class EventSearchButton extends React.Component {
       <div
         className="map-button-ui"
         title="Find nearby events">
-        <div className="map-button-text"
-          onClick={() => {
-            getEventWithinMap(window.map).then((newMarkers) => {
-              this.props.markersCallback(newMarkers);
-            });
-          }
-          }>
-          Event Search
-        </div>
+        <React.Fragment>
+          <DatePicker
+            onChange={(date) => this.setState({chosenDate: date})}
+            value={this.state.chosenDate}
+          />
+          <div className="map-button-text"
+            onClick={() => {
+              getEventWithinMap(window.map, this.state.chosenDate).then((newMarkers) => {
+                this.props.markersCallback(newMarkers);
+              });
+            }
+            }>
+            Event Search
+          </div>
+        </React.Fragment>
       </div>
     );
   }

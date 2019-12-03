@@ -53,9 +53,10 @@ function revealLocationInfo(id, type) {
 
 /**
  * @param  {google.maps.Map} map a google map
+ * @param {Date} chosenDate to look up events for
  * @returns {Promise<Array<google.maps.Marker>>} a promise containing the events in map markers
  */
-export function getEventWithinMap(map) {
+export function getEventWithinMap(map, chosenDate) {
   const bounds = map.getBounds();
   const newMarkers = [];
   console.log('Bounds:', bounds.toString());
@@ -64,6 +65,8 @@ export function getEventWithinMap(map) {
   const variables = {
     search: {
       // TODO: date variables.
+      start_date: chosenDate.toISOString().substr(0, 10),
+      end_date: chosenDate.toISOString().substr(0, 10),
       top_right_gps: {
         lat: bounds.getNorthEast().lat(),
         lon: bounds.getNorthEast().lng(),
