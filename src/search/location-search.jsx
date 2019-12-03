@@ -62,13 +62,16 @@ export function getEventWithinMap(map) {
 
   const query = gql(getEventWithinBoundingBox);
   const variables = {
-    top_right_gps: {
-      lat: bounds.getNorthEast().lat(),
-      lon: bounds.getNorthEast().lng(),
-    },
-    bottom_left_gps: {
-      lat: bounds.getSouthWest().lat(),
-      lon: bounds.getSouthWest().lng(),
+    search: {
+      // TODO: date variables.
+      top_right_gps: {
+        lat: bounds.getNorthEast().lat(),
+        lon: bounds.getNorthEast().lng(),
+      },
+      bottom_left_gps: {
+        lat: bounds.getSouthWest().lat(),
+        lon: bounds.getSouthWest().lng(),
+      },
     },
   };
 
@@ -121,13 +124,15 @@ export function getPublicArtWithinMap(map, filter, isPermanent) {
 
   const query = gql(getPublicArtWithinBoundingBox);
   const variables = {
-    top_right_gps: {
-      lat: bounds.getNorthEast().lat(),
-      lon: bounds.getNorthEast().lng(),
-    },
-    bottom_left_gps: {
-      lat: bounds.getSouthWest().lat(),
-      lon: bounds.getSouthWest().lng(),
+    search: {
+      top_right_gps: {
+        lat: bounds.getNorthEast().lat(),
+        lon: bounds.getNorthEast().lng(),
+      },
+      bottom_left_gps: {
+        lat: bounds.getSouthWest().lat(),
+        lon: bounds.getSouthWest().lng(),
+      },
     },
     permanent: isPermanent,
   };

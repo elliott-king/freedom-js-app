@@ -6,6 +6,13 @@ input LocationInput {
     lat: Float
     lon: Float
 }
+input BoundingBoxInput {
+    top_right_gps: LocationInput!,
+    bottom_left_gps: LocationInput!,
+    start_date: AWSDate,
+    end_date: AWSDate,
+    limit: Int
+}
 type DateRange {
     start: AWSDate
     end: AWSDate
@@ -85,24 +92,16 @@ type Mutation {
 
 type Query @aws_api_key{
 	getPublicArtWithinBoundingBox(
-		top_right_gps: LocationInput!,
-		bottom_left_gps: LocationInput!,
-		limit: Int,
+        # TODO: This includes option for date (not yet implemented)
+        search: BoundingBoxInput!,
         permanent: Boolean!,
 		type: PublicArtType
 	): [PublicArt]
 
     getEventWithinBoundingBox(
-        top_right_gps: LocationInput!,
-        bottom_left_gps: LocationInput!,
-
-        # start_date: AWSDate!,
+        search: BoundingBoxInput!
         # start_time: AWSTime!,
-        # end_date: AWSDate!,
         # end_time: AWSTime!,
 
-        limit: Int,
     ): [Event]
-
-    whoAmI: String
 }

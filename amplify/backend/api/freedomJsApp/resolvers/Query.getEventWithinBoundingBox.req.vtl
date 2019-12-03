@@ -18,20 +18,28 @@ This request is written using the amplify cli.e
             "query" : {
                 "bool" : {
                     "must": { "match_all": {}},
-                    "filter" : {
-                        "geo_bounding_box" : {
+                    "filter" : [
+                        #if(!$utils.isNullOrEmpty($ctx.args.search.start_date) && !$utils.isNullOrEmpty($ctx.args.search.end_date))
+                            {"range" : {
+                                "dates": {
+                                    "gte": "$context.args.search.start_date",
+                                    "lte": "$context.args.search.end_date"
+                                }
+                            }},
+                        #end
+                        {"geo_bounding_box" : {
                             "location" : {
                                 "top_right" : {
-                                    "lat" : "$context.arguments.top_right_gps.lat",
-                                    "lon" : "$context.arguments.top_right_gps.lon"
+                                    "lat" : "$context.arguments.search.top_right_gps.lat",
+                                    "lon" : "$context.arguments.search.top_right_gps.lon"
                                 },
                                 "bottom_left" : {
-                                    "lat" : "$context.arguments.bottom_left_gps.lat",
-                                    "lon" : "$context.arguments.bottom_left_gps.lon"
+                                    "lat" : "$context.arguments.search.bottom_left_gps.lat",
+                                    "lon" : "$context.arguments.search.bottom_left_gps.lon"
                                 }
                             }
-                        }
-                    }
+                        }}
+                    ]
                 }
             }
         }

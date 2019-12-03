@@ -2,16 +2,12 @@
 // this is an auto generated file. This will be overwritten
 
 export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBox(
-  $top_right_gps: LocationInput!
-  $bottom_left_gps: LocationInput!
-  $limit: Int
+  $search: BoundingBoxInput!
   $permanent: Boolean!
   $type: PublicArtType
 ) {
   getPublicArtWithinBoundingBox(
-    top_right_gps: $top_right_gps
-    bottom_left_gps: $bottom_left_gps
-    limit: $limit
+    search: $search
     permanent: $permanent
     type: $type
   ) {
@@ -32,16 +28,8 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
   }
 }
 `;
-export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox(
-  $top_right_gps: LocationInput!
-  $bottom_left_gps: LocationInput!
-  $limit: Int
-) {
-  getEventWithinBoundingBox(
-    top_right_gps: $top_right_gps
-    bottom_left_gps: $bottom_left_gps
-    limit: $limit
-  ) {
+export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox($search: BoundingBoxInput!) {
+  getEventWithinBoundingBox(search: $search) {
     id
     location {
       lat
@@ -58,10 +46,6 @@ export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox(
     times
     location_description
   }
-}
-`;
-export const whoAmI = `query WhoAmI {
-  whoAmI
 }
 `;
 export const getPublicArt = `query GetPublicArt($id: ID!) {

@@ -27,12 +27,12 @@ This request is written using the amplify cli.e
                         {"geo_bounding_box" : {
                             "location" : {
                                 "top_right" : {
-                                    "lat" : "$context.arguments.top_right_gps.lat",
-                                    "lon" : "$context.arguments.top_right_gps.lon"
+                                    "lat" : "$context.arguments.search.top_right_gps.lat",
+                                    "lon" : "$context.arguments.search.top_right_gps.lon"
                                 },
                                 "bottom_left" : {
-                                    "lat" : "$context.arguments.bottom_left_gps.lat",
-                                    "lon" : "$context.arguments.bottom_left_gps.lon"
+                                    "lat" : "$context.arguments.search.bottom_left_gps.lat",
+                                    "lon" : "$context.arguments.search.bottom_left_gps.lon"
                                 }
                             }
                         }},
