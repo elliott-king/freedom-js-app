@@ -41,6 +41,7 @@ enum EventType {
     literature
     lgbtq
     music
+    new_york
     philosophy
     science
     shopping
@@ -64,7 +65,7 @@ type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
 
 type Event @model @searchable @aws_api_key @aws_cognito_user_pools {
     id: ID!
-    location: Location!
+    location: Location! # Consider multiple locations?
     name: String!
     description: String!
     types: [EventType]
