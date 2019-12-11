@@ -3560,18 +3560,18 @@
         "possibleTypes" : null
       }, {
         "kind" : "ENUM",
-        "name" : "ModelSortDirection",
+        "name" : "LocationType",
         "description" : null,
         "fields" : null,
         "inputFields" : null,
         "interfaces" : null,
         "enumValues" : [ {
-          "name" : "ASC",
+          "name" : "event",
           "description" : null,
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "DESC",
+          "name" : "publicArt",
           "description" : null,
           "isDeprecated" : false,
           "deprecationReason" : null
@@ -3673,7 +3673,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "SearchableIntFilterInput",
+        "name" : "SearchableFloatFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -3681,7 +3681,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3690,7 +3690,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3699,7 +3699,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3708,7 +3708,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3717,7 +3717,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3726,7 +3726,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3738,7 +3738,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "Int",
+              "name" : "Float",
               "ofType" : null
             }
           },
@@ -3746,25 +3746,6 @@
         } ],
         "interfaces" : null,
         "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "ENUM",
-        "name" : "LocationType",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
-        "enumValues" : [ {
-          "name" : "event",
-          "description" : null,
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "publicArt",
-          "description" : null,
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        } ],
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
@@ -3862,7 +3843,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "SearchableFloatFilterInput",
+        "name" : "SearchableIntFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -3870,7 +3851,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3879,7 +3860,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3888,7 +3869,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3897,7 +3878,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3906,7 +3887,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3915,7 +3896,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Float",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3927,7 +3908,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "Float",
+              "name" : "Int",
               "ofType" : null
             }
           },
@@ -3935,6 +3916,25 @@
         } ],
         "interfaces" : null,
         "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "ENUM",
+        "name" : "ModelSortDirection",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : [ {
+          "name" : "ASC",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "DESC",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        } ],
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
