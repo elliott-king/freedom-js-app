@@ -35,6 +35,8 @@ export default class LocationInfoDiv extends React.Component {
       // TODO: think of more elegant solution.
       reported: 0,
       authenticated: false,
+      calendar: this.setupCalendar(),
+      dates: new Set(props.location.dates),
     };
 
     // To upload images in React, we use the file API.
@@ -50,6 +52,12 @@ export default class LocationInfoDiv extends React.Component {
     Auth.currentAuthenticatedUser()
         .then(() => this.setState({authenticated: true}))
         .catch(() => this.setState({authenticated: false}));
+  }
+
+  componentDidMount() {
+    if (this.props.type == locationType.EVENT) {
+      this.state.calendar.init();
+    }
   }
 
   uploadNewImage(event) {
@@ -162,6 +170,117 @@ export default class LocationInfoDiv extends React.Component {
     } else return null;
   }
 
+  /** Set up calendar fns.
+   * Adapted from https://code.tutsplus.com/tutorials/how-to-build-a-beautiful-calendar-widget--net-12538
+   *
+   * @returns object containing calendar fns
+   */
+  setupCalendar() {
+    let label;
+    const months = ['January', 'February', 'March', 'April', 'May',
+      'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const init = () => {
+      label = document.getElementById('label');
+      document.getElementById('prev').onclick = () => switchMonth(false);
+      document.getElementById('next').onclick = () => switchMonth(true);
+      label.onclick = () => switchMonth(
+          null, new Date().getMonth(), new Date().getFullYear());
+      label.click();
+    };
+
+    const switchMonth = (next, month, year) => {
+      const curr = label.textContent.trim().split(' ');
+      const tempYear = parseInt(curr[1], 10);
+      month = month || (
+        (next) ?
+        ((curr[0] === 'December') ? 0 : months.indexOf(curr[0]) + 1) :
+        ((curr[0] === 'January') ? 11 : months.indexOf(curr[0]) - 1)
+      );
+      year = year || (
+        (next && month === 0) ?
+        tempYear + 1 :
+        (!next && month === 11) ? tempYear - 1 : tempYear
+      );
+
+      const calendar = createCal(year, month);
+      document.querySelector('.cal-curr').remove();
+      document.getElementById('cal-frame').appendChild(calendar.calendar());
+      document.getElementById('label').textContent = calendar.label;
+    };
+
+    const createCal = (year, month) => {
+      let day = 1;
+      let haveDays = true;
+      let startDay = new Date(year, month, day).getDay();
+
+      let i;
+      let j;
+
+      const feb = ((year%4==0)&&(year%100!=0))||(year%400==0) ? 29 : 28;
+      const daysInMonths = [31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      const cal = [];
+
+      if (createCal.cache[year]) {
+        if (createCal.cache[year][month]) {
+          return createCal.cache[year][month];
+        }
+      } else {
+        createCal.cache[year] = {};
+      }
+      i = 0;
+      while (haveDays) {
+        cal[i] = [];
+        for (j = 0; j < 7; j++) {
+          if (i === 0) {
+            if (j === startDay) {
+              cal[i][j] = day++;
+              startDay++;
+            }
+          } else if (day <= daysInMonths[month]) {
+            cal[i][j] = day++;
+          } else {
+            cal[i][j] = '';
+            haveDays = false;
+          }
+          if (day > daysInMonths[month]) {
+            haveDays = false;
+          }
+        }
+        i++;
+      }
+      for (i = 0; i < cal.length; i++) {
+        cal[i] = '<tr><td>' + cal[i].join('</td><td>') + '</td></tr>';
+      }
+
+      const element = document.createElement('table');
+      element.innerHTML = cal.join('');
+      element.classList.add('cal-curr');
+      element.querySelectorAll('td:empty').forEach((e) => e.classList.add('cal-nil'));
+      element.querySelectorAll('td').forEach((td) => {
+        const date = (year.toString() + '-' +
+          (month + 1).toString().padStart(2, '0') + '-' +
+          td.textContent.padStart(2, '0')
+        );
+        if (this.state.dates.has(date)) td.classList.add('cal-today');
+      });
+      createCal.cache[year][month] = {
+        calendar: () => {
+          return element;
+        },
+        label: months[month] + ' ' + year,
+      };
+
+      return createCal.cache[year][month];
+    };
+    createCal.cache = {};
+    return {
+      init: init,
+      switchMonth: switchMonth,
+      createCal: createCal,
+    };
+  }
+
   renderDates() {
     if (this.props.type == locationType.PUBLIC_ART) {
       if (!this.props.location.permanent) {
@@ -172,10 +291,32 @@ export default class LocationInfoDiv extends React.Component {
         );
       }
     } else if (this.props.type == locationType.EVENT) {
-      const dateItems = this.props.location.dates.map(
-          (d) => <li key={d}>{new Date(d).toDateString()}</li>);
+      // TODO: print times
+      console.debug('Show times as well as dates for events.');
       return (
-        <ul>{dateItems}</ul>
+        <div id='cal'>
+          <div className='cal-header'>
+            <span className="left button" id="prev"> &lang; </span>
+            <span className="left hook"></span>
+            <span className="month-year" id="label"> June 20&0 </span>
+            <span className="right hook"></span>
+            <span className="right button" id="next"> &rang; </span>
+          </div>
+          <table id="cal-days">
+            <td>sun</td>
+            <td>mon</td>
+            <td>tue</td>
+            <td>wed</td>
+            <td>thu</td>
+            <td>fri</td>
+            <td>sat</td>
+          </table>
+          <div id="cal-frame">
+            <table className="cal-curr">
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       );
     }
     return null;
