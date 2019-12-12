@@ -282,9 +282,9 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDescription() {
-    if (this.props.type == locationType.EVENT) {
-      return <p>{this.props.location.description}</p>
-    }
+    if (this.props.type == locationType.EVENT && !this.props.location.photos) {
+      return <p>{this.props.location.description}</p>;
+    } else return null;
   }
 
   renderDates() {
