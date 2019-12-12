@@ -281,6 +281,12 @@ export default class LocationInfoDiv extends React.Component {
     };
   }
 
+  renderDescription() {
+    if (this.props.type == locationType.EVENT) {
+      return <p>{this.props.location.description}</p>
+    }
+  }
+
   renderDates() {
     if (this.props.type == locationType.PUBLIC_ART) {
       if (!this.props.location.permanent) {
@@ -339,6 +345,7 @@ export default class LocationInfoDiv extends React.Component {
         <div className="location-head-info">
           <h3>{this.props.location.name}</h3>
           {this.renderImg()}
+          {this.renderDescription()}
           {this.renderDates()}
         </div>
         {this.renderUploadImageForm()}
