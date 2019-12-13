@@ -155,7 +155,7 @@ export function initMap() {
       <PublicArtSearchButton
         markersCallback={updateMarkers}
       />,
-      publicArtSearchDiv
+      publicArtSearchDiv,
   );
 
   const eventSearchDiv = document.createElement('div');
@@ -164,7 +164,7 @@ export function initMap() {
   ReactDOM.render(
       <EventSearchButton
         markersCallback={updateMarkers}
-      />, eventSearchDiv
+      />, eventSearchDiv,
   );
 
   map.addListener('click', function(event) {

@@ -56,7 +56,7 @@ export function openLogin() {
         <button type="button" onClick={() => closeLogin()}
           className="close">Cancel</button>
       </React.Fragment>),
-      loginDiv
+      loginDiv,
   );
 }
 

@@ -260,7 +260,7 @@ export function newPublicArtUpload(lat, lng) {
           <button type="button" onClick={handleClose}
             className="close">Close</button>
         </React.Fragment>),
-        sidebar
+        sidebar,
     );
   }
 

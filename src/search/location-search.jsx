@@ -45,7 +45,7 @@ function revealLocationInfo(id, type) {
           location={location}
           type={type}
         />,
-        sidebar
+        sidebar,
     );
     openSidebar();
   }).catch((err) => console.error('Problem generating info window:', err));
