@@ -122,6 +122,16 @@ export default class LocationInfoDiv extends React.Component {
     }
   }
 
+  renderWebsite() {
+    if (this.props.location.website) {
+      return <a
+        href={this.props.location.website}
+        target='_blank'
+        rel='noopener noreferrer'>
+        {this.props.location.host}</a>;
+    } else return null;
+  }
+
   renderUploadImageForm() {
     if (this.props.type == locationType.EVENT) {
       console.debug('TODO: handle image uploading for events.');
@@ -173,7 +183,7 @@ export default class LocationInfoDiv extends React.Component {
   /** Set up calendar fns.
    * Adapted from https://code.tutsplus.com/tutorials/how-to-build-a-beautiful-calendar-widget--net-12538
    *
-   * @returns object containing calendar fns
+   * @returns {object} containing calendar fns
    */
   setupCalendar() {
     let label;
@@ -254,7 +264,7 @@ export default class LocationInfoDiv extends React.Component {
       }
 
       const element = document.createElement('table');
-      element.innerHTML = cal.join('');
+      element.innerHTML = '<tbody>' + cal.join('') + '</tbody>';
       element.classList.add('cal-curr');
       element.querySelectorAll('td:empty').forEach((e) => e.classList.add('cal-nil'));
       element.querySelectorAll('td').forEach((td) => {
@@ -347,6 +357,7 @@ export default class LocationInfoDiv extends React.Component {
           {this.renderImg()}
           {this.renderDescription()}
           {this.renderDates()}
+          {this.renderWebsite()}
         </div>
         {this.renderUploadImageForm()}
         {this.renderReportLocationForm()}
