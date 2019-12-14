@@ -87,6 +87,7 @@ export class EventSearchButton extends React.Component {
           <DatePicker
             onChange={(date) => this.setState({chosenDate: date})}
             value={this.state.chosenDate}
+            showFixedNumberOfWeeks
           />
           <div className="map-button-text"
             onClick={() => {
