@@ -28,6 +28,21 @@ const options = [
 export default class LocationInfoDiv extends React.Component {
   constructor(props) {
     super(props);
+
+    let dates = false;
+    if (this.props.type == locationType.PUBLIC_ART) {
+      if (!this.props.location.permanent) {
+        const s = new Date(this.props.location.dates.start);
+        const e = new Date(this.props.location.dates.end);
+
+        dates = new Set();
+        while (s <= e) {
+          dates.add(new Date(s));
+          s.setDate(s.getDate() + 1);
+        }
+      } 
+    } else dates = new Set(this.props.location.dates);
+
     this.state = {
       displayStyle: {display: 'block'},
       reasonContinued: '',
@@ -36,7 +51,7 @@ export default class LocationInfoDiv extends React.Component {
       reported: 0,
       authenticated: false,
       calendar: this.setupCalendar(),
-      dates: new Set(props.location.dates),
+      dates: dates,
     };
 
     // To upload images in React, we use the file API.
@@ -55,7 +70,7 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.type == locationType.EVENT) {
+    if (this.state.dates) {
       this.state.calendar.init();
     }
   }
@@ -298,15 +313,8 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDates() {
-    if (this.props.type == locationType.PUBLIC_ART) {
-      if (!this.props.location.permanent) {
-        const s = new Date(this.props.location.dates.start).toDateString();
-        const e = new Date(this.props.location.dates.end).toDateString(); // TODO: testme
-        return (
-          <p>{s} - {e}</p>
-        );
-      }
-    } else if (this.props.type == locationType.EVENT) {
+    if (this.state.dates) {
+      console.log('dates:', this.state.dates);
       // TODO: print times
       console.debug('Show times as well as dates for events.');
       return (

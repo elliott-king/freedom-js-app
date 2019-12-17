@@ -42,7 +42,9 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Filter search by date/time                                   |        | HIGH     |
 | Do you need to sign up ahead of time? For Carnegie Hall, yes |        |          |
 | Type checker on upload (python)                              |        |          |
-| Dates should be a discrete list (instead of start/end)       |        | HIGH     |
+| Dates should be a discrete list (instead of start/end)       | done   | HIGH     |
+| If searching for current day, ignore events with time < now  |        | mid-high |
+| Display event description                                    | done   | high     |
 
 
 | Flag public art/event                                                   | Status |
@@ -81,28 +83,30 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Remove pin after upload                                                       | done               |
 | Make most graphql fields mandatory                                            | done               |
 | Unauthenticated, rejected uploads should notify the user why they have failed | URGENT             |
+| Image upload should include which user uploaded it                            | REQ for MVP        |
 
 
-| UI & QOL improvements                                                  | Status                       |
-| ---------------------------------------------------------------------- | ---------------------------- |
-| Resize image window to a standard size                                 | done                         |
-| Place 'Report location' in own div                                     |                              |
-| Main dropdown menu size more consistent                                |                              |
-| All code to call AWS client should be in one file (-_-)                | done                         |
-| Change name "flag form" -> "report form"                               | MVP - not changed in graphql |
-| Fix problem with 'amplify publish'                                     | done - using Amplify console |
-| Google uses 'lng', ES uses 'lon' -> inconsistent                       |                              |
-| Revert aws-appsync package to official npm                             | done                         |
-| Revert to default network fetch policy (currently always fetches)      |                              |
-| Make PublicArt schema @searchable (will then automatically push to ES) | in progress                  |
-| Put Data Sources into api/CustomResources.json for eternal use         | done - mostly pre-generated  |
-| Consider making sidebar collapsible                                    | done                         |
-| Collapsing sidebar should not move center of map                       |                              |
-| Host on a readable url                                                 | done                         |
-| Bottom button should not truncate text                                 | done                         |
-| Make sure all requests/queries have error catching                     | done                         |
-| Fix 'cannot get /with-sidebar' bug                                     |                              |
-| Speed up/streamline map load                                           | HIGH PRIORITY                |
+| UI & QOL improvements                                                  | Status                     |
+| ---------------------------------------------------------------------- | -------------------------- |
+| Resize image window to a standard size                                 | done                       |
+| Place 'Report location' in own div                                     |                            |
+| Main dropdown menu size more consistent                                |                            |
+| All code to call AWS client should be in one file (-_-)                | done                       |
+| Change name "flag form" -> "report form"                               | MVP - unchanged in graphql |
+| Fix problem with 'amplify publish'                                     | using Amplify console      |
+| Google uses 'lng', ES uses 'lon' -> inconsistent                       |                            |
+| Revert aws-appsync package to official npm                             | done                       |
+| Revert to default network fetch policy (currently always fetches)      |                            |
+| Make PublicArt schema @searchable (will then automatically push to ES) | in progress                |
+| Put Data Sources into api/CustomResources.json for eternal use         | mostly pre-generated       |
+| Consider making sidebar collapsible                                    | done                       |
+| Collapsing sidebar should not move center of map                       |                            |
+| Host on a readable url                                                 | done                       |
+| Bottom button should not truncate text                                 | done                       |
+| Make sure all requests/queries have error catching                     | done                       |
+| Fix 'cannot get /with-sidebar' bug                                     |                            |
+| Speed up/streamline map load                                           | HIGH PRIORITY              |
+| Improve date/calendar css                                              | med/high                   |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
