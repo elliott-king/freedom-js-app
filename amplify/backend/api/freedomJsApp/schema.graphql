@@ -1,4 +1,4 @@
-type Location @aws_api_key {
+type Location @aws_api_key @aws_cognito_user_pools {
     lat: Float
     lon: Float
 }
@@ -13,7 +13,7 @@ input BoundingBoxInput {
     end_date: AWSDate,
     limit: Int
 }
-type DateRange @aws_api_key {
+type DateRange @aws_api_key @aws_cognito_user_pools {
     start: AWSDate
     end: AWSDate
 }
