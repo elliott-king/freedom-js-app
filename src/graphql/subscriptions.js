@@ -1,8 +1,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreatePublicArt = `subscription OnCreatePublicArt {
-  onCreatePublicArt {
+export const onCreatePublicArt = `subscription OnCreatePublicArt($owner: String!) {
+  onCreatePublicArt(owner: $owner) {
     id
     location {
       lat
@@ -17,11 +17,12 @@ export const onCreatePublicArt = `subscription OnCreatePublicArt {
       start
       end
     }
+    owner
   }
 }
 `;
-export const onUpdatePublicArt = `subscription OnUpdatePublicArt {
-  onUpdatePublicArt {
+export const onUpdatePublicArt = `subscription OnUpdatePublicArt($owner: String!) {
+  onUpdatePublicArt(owner: $owner) {
     id
     location {
       lat
@@ -36,11 +37,12 @@ export const onUpdatePublicArt = `subscription OnUpdatePublicArt {
       start
       end
     }
+    owner
   }
 }
 `;
-export const onDeletePublicArt = `subscription OnDeletePublicArt {
-  onDeletePublicArt {
+export const onDeletePublicArt = `subscription OnDeletePublicArt($owner: String!) {
+  onDeletePublicArt(owner: $owner) {
     id
     location {
       lat
@@ -55,11 +57,12 @@ export const onDeletePublicArt = `subscription OnDeletePublicArt {
       start
       end
     }
+    owner
   }
 }
 `;
-export const onCreateEvent = `subscription OnCreateEvent {
-  onCreateEvent {
+export const onCreateEvent = `subscription OnCreateEvent($owner: String!) {
+  onCreateEvent(owner: $owner) {
     id
     location {
       lat
@@ -76,11 +79,12 @@ export const onCreateEvent = `subscription OnCreateEvent {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;
-export const onUpdateEvent = `subscription OnUpdateEvent {
-  onUpdateEvent {
+export const onUpdateEvent = `subscription OnUpdateEvent($owner: String!) {
+  onUpdateEvent(owner: $owner) {
     id
     location {
       lat
@@ -97,11 +101,12 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;
-export const onDeleteEvent = `subscription OnDeleteEvent {
-  onDeleteEvent {
+export const onDeleteEvent = `subscription OnDeleteEvent($owner: String!) {
+  onDeleteEvent(owner: $owner) {
     id
     location {
       lat
@@ -118,6 +123,7 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;

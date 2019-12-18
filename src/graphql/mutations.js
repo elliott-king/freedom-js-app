@@ -17,6 +17,7 @@ export const addPhoto = `mutation AddPhoto($location_id: String!, $url: AWSURL!)
       start
       end
     }
+    owner
   }
 }
 `;
@@ -36,6 +37,7 @@ export const createPublicArt = `mutation CreatePublicArt($input: CreatePublicArt
       start
       end
     }
+    owner
   }
 }
 `;
@@ -55,6 +57,7 @@ export const updatePublicArt = `mutation UpdatePublicArt($input: UpdatePublicArt
       start
       end
     }
+    owner
   }
 }
 `;
@@ -74,6 +77,7 @@ export const deletePublicArt = `mutation DeletePublicArt($input: DeletePublicArt
       start
       end
     }
+    owner
   }
 }
 `;
@@ -95,6 +99,7 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;
@@ -116,6 +121,7 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;
@@ -137,6 +143,7 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     times
     location_description
     rsvp
+    owner
   }
 }
 `;

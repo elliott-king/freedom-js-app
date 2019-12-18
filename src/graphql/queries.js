@@ -25,6 +25,7 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
       start
       end
     }
+    owner
   }
 }
 `;
@@ -46,6 +47,32 @@ export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox($searc
     times
     location_description
     rsvp
+    owner
+  }
+}
+`;
+export const getReported = `query GetReported($id: ID!) {
+  getReported(id: $id) {
+    id
+    art_id
+    reason
+    reason_continued
+  }
+}
+`;
+export const listReporteds = `query ListReporteds(
+  $filter: ModelReportedFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listReporteds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      art_id
+      reason
+      reason_continued
+    }
+    nextToken
   }
 }
 `;
@@ -65,6 +92,7 @@ export const getPublicArt = `query GetPublicArt($id: ID!) {
       start
       end
     }
+    owner
   }
 }
 `;
@@ -89,80 +117,7 @@ export const listPublicArts = `query ListPublicArts(
         start
         end
       }
-    }
-    nextToken
-  }
-}
-`;
-export const getEvent = `query GetEvent($id: ID!) {
-  getEvent(id: $id) {
-    id
-    location {
-      lat
-      lon
-    }
-    name
-    description
-    types
-    host
-    source
-    website
-    photos
-    dates
-    times
-    location_description
-    rsvp
-  }
-}
-`;
-export const listEvents = `query ListEvents(
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      location {
-        lat
-        lon
-      }
-      name
-      description
-      types
-      host
-      source
-      website
-      photos
-      dates
-      times
-      location_description
-      rsvp
-    }
-    nextToken
-  }
-}
-`;
-export const getReported = `query GetReported($id: ID!) {
-  getReported(id: $id) {
-    id
-    art_id
-    reason
-    reason_continued
-  }
-}
-`;
-export const listReporteds = `query ListReporteds(
-  $filter: ModelReportedFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listReporteds(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      art_id
-      reason
-      reason_continued
+      owner
     }
     nextToken
   }
@@ -195,6 +150,59 @@ export const searchPublicArts = `query SearchPublicArts(
         start
         end
       }
+      owner
+    }
+    nextToken
+    total
+  }
+}
+`;
+export const getEvent = `query GetEvent($id: ID!) {
+  getEvent(id: $id) {
+    id
+    location {
+      lat
+      lon
+    }
+    name
+    description
+    types
+    host
+    source
+    website
+    photos
+    dates
+    times
+    location_description
+    rsvp
+    owner
+  }
+}
+`;
+export const listEvents = `query ListEvents(
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      location {
+        lat
+        lon
+      }
+      name
+      description
+      types
+      host
+      source
+      website
+      photos
+      dates
+      times
+      location_description
+      rsvp
+      owner
     }
     nextToken
   }
@@ -229,8 +237,10 @@ export const searchEvents = `query SearchEvents(
       times
       location_description
       rsvp
+      owner
     }
     nextToken
+    total
   }
 }
 `;
