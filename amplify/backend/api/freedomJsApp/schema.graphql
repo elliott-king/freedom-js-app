@@ -1,4 +1,4 @@
-type Location @aws_api_key @aws_cognito_user_pools{
+type Location @aws_api_key {
     lat: Float
     lon: Float
 }
@@ -13,7 +13,7 @@ input BoundingBoxInput {
     end_date: AWSDate,
     limit: Int
 }
-type DateRange {
+type DateRange @aws_api_key {
     start: AWSDate
     end: AWSDate
 }
@@ -48,7 +48,11 @@ enum EventType {
     theater
 }
 
-type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
+type PublicArt @model @searchable 
+    @auth(rules:[
+        {allow: owner},
+        {allow: public, operations: [read]}
+    ]) {
     id: ID!
     location: Location!
     name: String!
@@ -63,7 +67,11 @@ type PublicArt @model @searchable @aws_api_key @aws_cognito_user_pools{
     date_range: DateRange
 }
 
-type Event @model @searchable @aws_api_key @aws_cognito_user_pools {
+type Event @model @searchable 
+    @auth(rules:[
+        {allow: owner},
+        {allow: public, operations: [read]}
+    ]) {
     id: ID!
     location: Location! # Consider multiple locations?
     name: String!
@@ -79,6 +87,7 @@ type Event @model @searchable @aws_api_key @aws_cognito_user_pools {
     rsvp: Boolean # TODO: hard to parse for
 }
 
+# TODO: AUTH rule
 type Reported @model {
     id: ID
     art_id: ID! # TODO: should be 'location_id'
