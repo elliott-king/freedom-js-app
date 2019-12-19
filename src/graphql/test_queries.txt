@@ -1,0 +1,47 @@
+# The appsync queries console sucks, so we will save all potentially useful queries here so they don't get lost.
+
+query getPhoto{
+  getPhoto(id: "40fcddc2-3a06-4870-82ed-bd38898e8a4b") {
+    id
+    location_id
+    url
+  }
+}
+
+query getEvent {
+  getEvent(id: "575746c4-466b-420c-b84f-9a09c660e79c") {
+    name
+    id
+    photos {
+      items {
+        id
+        url
+        location_id
+      }
+    }
+  }
+}
+
+query getPA {
+  getPublicArt(id: "hello") {
+    name
+    photos {
+      items {
+        id 
+        url
+        location_id
+      }
+    }
+  }
+}
+
+mutation addPhoto {
+  createPhoto(input: {
+    url: "https://carnegiehall.imgix.net/-/media/CarnegieHall/Images/Events/2019-2020-CH-Presents/2020-03-01-Citywide-David-Krakauer-Kathleen-Taggjpg.png?fit=crop&crop=faces",
+    location_id: "575746c4-466b-420c-b84f-9a09c660e79c"
+  }) {
+    url
+    location_id
+    id
+  }
+}
