@@ -1,43 +1,43 @@
 {
-    "auth": {
-        "freedomauth102019": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": []
-        }
-    },
-    "storage": {
-        "s38b61f2ec": {
-            "service": "S3",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": []
-        }
-    },
-    "api": {
-        "freedomJsApp": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [
-                        {
-                            "authenticationType": "API_KEY",
-                            "apiKeyConfig": {
-                                "description": "public-queries",
-                                "apiKeyExpirationDays": 7
-                            }
-                        }
-                    ],
-                    "defaultAuthentication": {
-                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-                        "userPoolConfig": {
-                            "userPoolId": "authfreedomauth102019"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "hosting": {},
-    "function": {}
+	"auth": {
+		"freedomauth102019": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"storage": {
+		"s38b61f2ec": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"freedomJsApp": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "API_KEY",
+							"apiKeyConfig": {
+								"description": "public-queries",
+								"apiKeyExpirationDays": 7
+							}
+						}
+					],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authfreedomauth102019"
+						}
+					}
+				}
+			}
+		}
+	},
+	"hosting": {},
+	"function": {}
 }

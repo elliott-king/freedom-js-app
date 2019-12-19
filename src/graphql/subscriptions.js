@@ -11,13 +11,22 @@ export const onCreatePublicArt = `subscription OnCreatePublicArt($owner: String!
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -31,13 +40,22 @@ export const onUpdatePublicArt = `subscription OnUpdatePublicArt($owner: String!
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -51,13 +69,22 @@ export const onDeletePublicArt = `subscription OnDeletePublicArt($owner: String!
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -74,12 +101,21 @@ export const onCreateEvent = `subscription OnCreateEvent($owner: String!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -96,12 +132,21 @@ export const onUpdateEvent = `subscription OnUpdateEvent($owner: String!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -118,12 +163,21 @@ export const onDeleteEvent = `subscription OnDeleteEvent($owner: String!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -151,6 +205,36 @@ export const onDeleteReported = `subscription OnDeleteReported {
     art_id
     reason
     reason_continued
+  }
+}
+`;
+export const onCreatePhoto = `subscription OnCreatePhoto($owner: String!) {
+  onCreatePhoto(owner: $owner) {
+    id
+    location_id
+    url
+    user_id
+    owner
+  }
+}
+`;
+export const onUpdatePhoto = `subscription OnUpdatePhoto($owner: String!) {
+  onUpdatePhoto(owner: $owner) {
+    id
+    location_id
+    url
+    user_id
+    owner
+  }
+}
+`;
+export const onDeletePhoto = `subscription OnDeletePhoto($owner: String!) {
+  onDeletePhoto(owner: $owner) {
+    id
+    location_id
+    url
+    user_id
+    owner
   }
 }
 `;

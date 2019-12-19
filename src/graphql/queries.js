@@ -19,13 +19,22 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -42,12 +51,21 @@ export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox($searc
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -86,13 +104,22 @@ export const getPublicArt = `query GetPublicArt($id: ID!) {
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -111,13 +138,15 @@ export const listPublicArts = `query ListPublicArts(
       name
       description
       type
-      photos
       permanent
       date_range {
         start
         end
       }
       owner
+      photos {
+        nextToken
+      }
     }
     nextToken
   }
@@ -144,13 +173,15 @@ export const searchPublicArts = `query SearchPublicArts(
       name
       description
       type
-      photos
       permanent
       date_range {
         start
         end
       }
       owner
+      photos {
+        nextToken
+      }
     }
     nextToken
     total
@@ -170,12 +201,21 @@ export const getEvent = `query GetEvent($id: ID!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -197,12 +237,14 @@ export const listEvents = `query ListEvents(
       host
       source
       website
-      photos
       dates
       times
       location_description
       rsvp
       owner
+      photos {
+        nextToken
+      }
     }
     nextToken
   }
@@ -232,15 +274,44 @@ export const searchEvents = `query SearchEvents(
       host
       source
       website
-      photos
       dates
       times
       location_description
       rsvp
       owner
+      photos {
+        nextToken
+      }
     }
     nextToken
     total
+  }
+}
+`;
+export const getPhoto = `query GetPhoto($id: ID!) {
+  getPhoto(id: $id) {
+    id
+    location_id
+    url
+    user_id
+    owner
+  }
+}
+`;
+export const listPhotos = `query ListPhotos(
+  $filter: ModelPhotoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPhotos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      location_id
+      url
+      user_id
+      owner
+    }
+    nextToken
   }
 }
 `;

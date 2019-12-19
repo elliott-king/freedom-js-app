@@ -1,26 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const addPhoto = `mutation AddPhoto($location_id: String!, $url: AWSURL!) {
-  addPhoto(location_id: $location_id, url: $url) {
-    id
-    location {
-      lat
-      lon
-    }
-    name
-    description
-    type
-    photos
-    permanent
-    date_range {
-      start
-      end
-    }
-    owner
-  }
-}
-`;
 export const createPublicArt = `mutation CreatePublicArt($input: CreatePublicArtInput!) {
   createPublicArt(input: $input) {
     id
@@ -31,13 +11,22 @@ export const createPublicArt = `mutation CreatePublicArt($input: CreatePublicArt
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -51,13 +40,22 @@ export const updatePublicArt = `mutation UpdatePublicArt($input: UpdatePublicArt
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -71,13 +69,22 @@ export const deletePublicArt = `mutation DeletePublicArt($input: DeletePublicArt
     name
     description
     type
-    photos
     permanent
     date_range {
       start
       end
     }
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -94,12 +101,21 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -116,12 +132,21 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -138,12 +163,21 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     host
     source
     website
-    photos
     dates
     times
     location_description
     rsvp
     owner
+    photos {
+      items {
+        id
+        location_id
+        url
+        user_id
+        owner
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -171,6 +205,36 @@ export const deleteReported = `mutation DeleteReported($input: DeleteReportedInp
     art_id
     reason
     reason_continued
+  }
+}
+`;
+export const createPhoto = `mutation CreatePhoto($input: CreatePhotoInput!) {
+  createPhoto(input: $input) {
+    id
+    location_id
+    url
+    user_id
+    owner
+  }
+}
+`;
+export const updatePhoto = `mutation UpdatePhoto($input: UpdatePhotoInput!) {
+  updatePhoto(input: $input) {
+    id
+    location_id
+    url
+    user_id
+    owner
+  }
+}
+`;
+export const deletePhoto = `mutation DeletePhoto($input: DeletePhotoInput!) {
+  deletePhoto(input: $input) {
+    id
+    location_id
+    url
+    user_id
+    owner
   }
 }
 `;
