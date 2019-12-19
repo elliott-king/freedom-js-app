@@ -71,6 +71,7 @@ class PublicArtUploadForm extends React.Component {
         // TODO: we should add a default type.
         type: this.state.selectedOption.value,
       };
+
       if (!this.state.permanent) {
         input.date_range = {
           start: this.state.start.toISOString().substr(0, 10),
@@ -80,20 +81,14 @@ class PublicArtUploadForm extends React.Component {
 
       window.cognitoClient.mutate({
         mutation: gql(createPublicArt),
-        variables: {input: input},
-      }).then((response) => {
-        console.log('Uploaded new location', this.state.name, 'to dynamodb.');
-        return uploadImage(imgFile, locationId, '');
-      }).then((response) => {
-        console.log('Successfully uploaded image for new location', this.state.name);
-
-        // Finally, remove both the sidebar and the marker.
-        closeSidebar();
-        updateMarkers([]);
-      }).catch((err) => {
-        console.error('Error uploading new location:', err);
-        throw err;
-      });
+        variables: {input: input}})
+          .then((createPublicArtResponse) => uploadImage(imgFile, locationId))
+          .then((uploadPhotoResponse) => {
+            console.log('Uploaded new location', this.state.name, 'to dynamodb.');
+            // Finally, remove both the sidebar and the marker.
+            closeSidebar();
+            updateMarkers([]);
+          }).catch((err) => console.log('Cannot create new location:', err));
     } else if (!this.state.selectedOption) {
       window.alert('Please choose the type of public art');
       console.warn('Please choose the type of public art');

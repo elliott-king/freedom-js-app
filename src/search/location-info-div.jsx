@@ -40,7 +40,7 @@ export default class LocationInfoDiv extends React.Component {
           dates.add(new Date(s));
           s.setDate(s.getDate() + 1);
         }
-      } 
+      }
     } else dates = new Set(this.props.location.dates);
 
     this.state = {
@@ -79,9 +79,7 @@ export default class LocationInfoDiv extends React.Component {
     event.preventDefault();
 
     if (this.imageInput.current.files.length > 0) {
-      const imgFile = this.imageInput.current.files[0];
-      // TODO: update description field.
-      uploadImage(imgFile, this.props.location.id, 'Testing: this is a photo file.');
+      uploadImage(this.imageInput.current.files[0], this.props.location.id);
     } else {
       window.alert('Please choose an image to upload.');
       console.warn('Please choose an image to upload.');
@@ -126,11 +124,11 @@ export default class LocationInfoDiv extends React.Component {
   // Render optional things in React:
   // https://stackoverflow.com/questions/44015876
   renderImg() {
-    if (this.props.location.photos && this.props.location.photos.length > 0) {
-      const photo = this.props.location.photos[0];
+    if (this.props.location.photos && this.props.location.photos.items.length > 0) {
+      const photo = this.props.location.photos.items[0];
       return (
         <div className="location-image-div">
-          <img className="location-image" src={photo}/>
+          <img className="location-image" src={photo.url}/>
         </div>);
     } else {
       return null;
@@ -314,7 +312,6 @@ export default class LocationInfoDiv extends React.Component {
 
   renderDates() {
     if (this.state.dates) {
-      console.log('dates:', this.state.dates);
       // TODO: print times
       console.debug('Show times as well as dates for events.');
       return (
