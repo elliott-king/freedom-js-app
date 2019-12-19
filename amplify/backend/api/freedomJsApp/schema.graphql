@@ -60,7 +60,7 @@ type PublicArt @model @searchable
     type: PublicArtType!
 
     # TODO: need ids...?
-    photos: [AWSURL] 
+    photos: [Photo] @connection(keyName: "byLocation", fields: ["id"])
 
     # Some public art is up for a limited time.
     permanent: Boolean!
@@ -80,7 +80,7 @@ type Event @model @searchable
     host: String
     source: String
     website: AWSURL
-    photos: [AWSURL]
+    photos: [Photo] @connection(keyName: "byLocation", fields: ["id"])
     dates: [AWSDate]! # TODO: should be array of date ranges (str?)
     times: [AWSTime] # If just one, true for all dates. Otherwise, should be 1-1
     location_description: String
@@ -89,15 +89,23 @@ type Event @model @searchable
 
 # TODO: AUTH rule
 type Reported @model {
+    # TODO: add @connection like Photo
     id: ID
     art_id: ID! # TODO: should be 'location_id'
-    # type: LocationType! TODO: add this
     reason: String!
     reason_continued: String
 }
 
-type Mutation {
-    addPhoto(location_id: String!, url:AWSURL!): PublicArt
+type Photo @model 
+    @key(name: "byLocation", fields: ["location_id"])
+    @auth(rules:[
+        {allow: owner},
+        {allow: public, operations: [read]}
+    ]) {
+    id: ID
+    location_id: ID!
+    url: AWSURL!
+    user_id: ID
 }
 
 type Query @aws_api_key{
