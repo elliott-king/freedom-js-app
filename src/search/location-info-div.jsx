@@ -204,11 +204,12 @@ export default class LocationInfoDiv extends React.Component {
       'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const init = () => {
+      let date = new Date();
+      if (this.props.date) date = this.props.date;
       label = document.getElementById('label');
       document.getElementById('prev').onclick = () => switchMonth(false);
       document.getElementById('next').onclick = () => switchMonth(true);
-      label.onclick = () => switchMonth(
-          null, new Date().getMonth(), new Date().getFullYear());
+      label.onclick = () => switchMonth(null, date.getMonth(), date.getFullYear());
       label.click();
     };
 
@@ -379,4 +380,5 @@ export default class LocationInfoDiv extends React.Component {
 LocationInfoDiv.propTypes = {
   location: PropTypes.object.isRequired,
   type: PropTypes.number.isRequired,
+  date: PropTypes.object,
 };
