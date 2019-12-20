@@ -285,7 +285,10 @@ export default class LocationInfoDiv extends React.Component {
           (month + 1).toString().padStart(2, '0') + '-' +
           td.textContent.padStart(2, '0')
         );
-        if (this.state.dates.has(date)) td.classList.add('cal-today');
+        if (this.state.dates.has(date)) td.classList.add('cal-event-day');
+        if (new Date().toISOString().substring(0, 10) === date) {
+          td.classList.add('cal-today');
+        }
       });
       createCal.cache[year][month] = {
         calendar: () => {
