@@ -14,7 +14,7 @@ import {createPublicArt} from '../graphql/mutations';
 import {openSidebar, closeSidebar} from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
 import {centerMap} from '../utils/map-utils';
-import {SIMPLE_OPTIONS} from '../utils/constants';
+import {SIMPLE_ART_OPTIONS} from '../utils/constants';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -196,7 +196,7 @@ class PublicArtUploadForm extends React.Component {
             />
           </div>
           <Select
-            options={SIMPLE_OPTIONS}
+            options={SIMPLE_ART_OPTIONS}
             onChange={this.optionChange}
           />
           <input
