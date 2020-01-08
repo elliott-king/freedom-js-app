@@ -33,14 +33,17 @@ enum EventType {
     athletics
     comedy
     dance
+    diy
     education # TODO: sunset this
     family
     film
     food # only if food is free or its an educational thing, or there is something else included
     history
+    holiday
     literature
     lgbtq
     music
+    nature
     new_york
     philosophy
     science
