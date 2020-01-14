@@ -170,23 +170,7 @@ export function initMap() {
 
   window.locationType = locationType.NONE;
   map.addListener('click', function(event) {
-    Auth.currentAuthenticatedUser()
-        .then(() => {
-          const latLng = event.latLng;
-          const lat = latLng.lat();
-          const lng = latLng.lng();
-
-          // TODO: should disappear when the 'close' button clicked in new-location div.
-          const newLocationMarker = new google.maps.Marker({
-            position: {lng: lng, lat: lat},
-            map: map,
-            title: 'New location',
-            label: 'N',
-          });
-          updateMarkers([newLocationMarker]);
-
-          newPublicArtUpload(lat, lng);
-        }).catch(() => console.log('Cannot add new marker. No user authenticated.'));
+    newPublicArtUpload(event.latLng.lat(), event.latLng.lng());
   });
   return map;
 }

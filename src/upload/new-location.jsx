@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import {Auth} from 'aws-amplify';
 
 import Select from 'react-select';
 import DatePicker from 'react-date-picker';
@@ -316,34 +317,51 @@ PublicArtUploadForm.propTypes = {
 /**
  * @param  {number} lat latitude for new public art
  * @param  {number} lng longitude
+ * @param  {locationType} newLocationType optional type of the new location
  */
-export function newPublicArtUpload(lat, lng) {
-  console.debug('New click event at:', lat, lng);
+export function newPublicArtUpload(lat, lng, newLocationType) {
+  if (window.newLocationType != locationType.NONE) {
+    Auth.currentAuthenticatedUser()
+        .then(() => {
+          // TODO: should disappear when the 'close' button clicked in new-location div.
 
-  const currentLocationUpload = document.getElementById('new-public-art-upload');
+          const newLocationMarker = new google.maps.Marker({
+            position: {lng: lng, lat: lat},
+            map: window.map,
+            title: 'New location',
+            label: 'N',
+          });
+          updateMarkers([newLocationMarker]);
 
-  if (currentLocationUpload) {
-    window.updateNewLocationFields(lat, lng);
-  } else {
-    const sidebar = document.getElementById('sidebar');
-    ReactDOM.unmountComponentAtNode(sidebar);
+          const newLocationTypeHasChanged = (
+            newLocationType && newLocationType != window.newLocationType);
+          const currentLocationUpload = document.getElementById('new-location-upload');
 
-    const handleClose = (event) => {
-      closeSidebar();
-    };
+          if (currentLocationUpload && !newLocationTypeHasChanged) {
+            window.updateNewLocationFields(lat, lng);
+          } else {
+            window.newLocationType = newLocationType;
+            const sidebar = document.getElementById('sidebar');
+            ReactDOM.unmountComponentAtNode(sidebar);
 
-    ReactDOM.render(
-        (<React.Fragment>
-          <PublicArtUploadForm
-            lat={lat}
-            lng={lng}
-          />
-          <button type="button" onClick={handleClose}
-            className="close">Close</button>
-        </React.Fragment>),
-        sidebar,
-    );
+            const handleClose = (event) => {
+              closeSidebar();
+            };
+
+            ReactDOM.render(
+                (<React.Fragment>
+                  <PublicArtUploadForm
+                    lat={lat}
+                    lng={lng}
+                    type={window.newLocationType}
+                  />
+                  <button type="button" onClick={handleClose}
+                    className="close">Close</button>
+                </React.Fragment>),
+                sidebar,
+            );
+          }
+          openSidebar();
+        }).catch(() => console.log('Cannot add new marker. No user authenticated.'));
   }
-
-  openSidebar();
 }
