@@ -8,7 +8,7 @@ export const SIMPLE_ART_OPTIONS = [
   {value: 'mural', label: 'Mural'},
 ];
 
-const additionalOptions = [
+const additionalArtOptions = [
   {value: 'all', label: 'Any type'},
 ];
 
@@ -35,3 +35,5 @@ export const EVENT_TYPES = [
   {value: 'shopping', label: 'Shopping'},
   {value: 'theater', label: 'Theater'},
 ];
+
+export const ALL_OPTIONS = additionalArtOptions.concat(SIMPLE_ART_OPTIONS);
