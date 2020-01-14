@@ -6,11 +6,12 @@ import DatePicker from 'react-date-picker';
 
 import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 // eslint-disable-next-line no-unused-vars
-import {ALL_OPTIONS} from '../utils/constants';
+import {ALL_OPTIONS, locationType} from '../utils/constants';
 
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
 import 'babel-polyfill';
+import {newPublicArtUpload} from '../upload/new-location.jsx';
 
 const permanencyOptions = [
   {value: true, label: 'Permanent installation'},
@@ -61,6 +62,13 @@ export class PublicArtSearchButton extends React.Component {
           ).then(this.props.markersCallback)}>
           Public Art Search
         </div>
+        <div className="map-button-text"
+          onClick={() => {
+            const center = window.map.getCenter();
+            newPublicArtUpload(center.lat(), center.lng(), locationType.PUBLIC_ART);
+          }}>
+          New Public Art
+        </div>
       </div>
     );
   }
@@ -94,9 +102,15 @@ export class EventSearchButton extends React.Component {
               getEventWithinMap(window.map, this.state.chosenDate).then((newMarkers) => {
                 this.props.markersCallback(newMarkers);
               });
-            }
-            }>
+            }}>
             Event Search
+          </div>
+          <div className="map-button-text"
+            onClick={() => {
+              const center = window.map.getCenter();
+              newPublicArtUpload(center.lat(), center.lng(), locationType.EVENT);
+            }}>
+            New Event
           </div>
         </React.Fragment>
       </div>
