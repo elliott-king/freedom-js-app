@@ -41,38 +41,38 @@ html, body {
     height: 100%;
 }
 
-.public-art-upload-form-container {
+.location-upload-form-container {
     width: 100%;
     margin: auto;
     display: flex;
 }
 
-.public-art-upload-form-container form {
+.location-upload-form-container form {
     width: 100%;
 }
 
-.public-art-upload-form h1 {
+.location-upload-form h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     /* width: 100%; */
     /* margin: 0 auto; */
     text-align: center;
 }
-.public-art-upload-form h4 {
+.location-upload-form h4 {
     text-align: center;
 }
-.public-art-upload-form .new-public-art-name {
+.location-upload-form .new-location-name {
     display: flex;
     flex-flow: row wrap;
     margin: 0 1rem;
 }
-.public-art-upload-form .new-public-art-description {
+.location-upload-form .new-location-description {
     display: flex;
     flex-flow: row wrap;
     margin: 0 1rem;
 }
 /* Inline form. */
 /* https://www.w3schools.com/howto/howto_css_inline_form.asp */
-.public-art-upload-form input[type=text] {
+.location-upload-form input[type=text] {
     vertical-align: middle;
     margin: 10px 0 10px auto;
     background-color: #fff;
@@ -82,15 +82,15 @@ html, body {
     float: right;
 }
 
-.new-public-art-image {
+.new-location-image {
     margin: 10px auto;
 }
 
-.new-public-art-image input[type=file] {
+.new-location-image input[type=file] {
     text-align: right;
 }
 
-.public-art-upload-form button {
+.location-upload-form button {
     margin: 20px auto;
     display: block;
     padding: 10px;
@@ -105,11 +105,11 @@ html, body {
     background-color: #fff;
 }
 
-.public-art-upload-form button:hover {
+.location-upload-form button:hover {
     background-color: #fff;
 }
 
-.public-art-dropdowns {
+.location-dropdowns {
     width: 175px;
 }
 
