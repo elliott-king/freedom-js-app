@@ -9,6 +9,7 @@ import {EventSearchButton, PublicArtSearchButton}
 import {newPublicArtUpload} from '../upload/new-location.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 import {openLogin} from './set-map-and-sidebar-style';
+import {locationType} from './constants.js';
 
 /** Show error if issue getting geolocation
  *
@@ -167,6 +168,7 @@ export function initMap() {
       />, eventSearchDiv,
   );
 
+  window.locationType = locationType.NONE;
   map.addListener('click', function(event) {
     Auth.currentAuthenticatedUser()
         .then(() => {

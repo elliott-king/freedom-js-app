@@ -1,4 +1,5 @@
 export const locationType = Object.freeze({
+  NONE: 0,
   PUBLIC_ART: 1,
   EVENT: 2,
 });
