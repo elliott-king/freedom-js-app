@@ -38,7 +38,7 @@ class PublicArtUploadForm extends React.Component {
       host: '',
       website: '',
       dates: [new Date()],
-      times: ['12:00'],
+      times: [],
       locationDescription: '',
       rsvp: false,
       // TODO: none of the arrays are implemented as multiple select (currently only provide one)
@@ -207,6 +207,7 @@ class PublicArtUploadForm extends React.Component {
             value={this.state.dates[0]}
           />
           <TimePicker
+            disableClock={true}
             onChange={(val) => this.setState({times: [val]})}
             value={this.state.times[0]}
           />
@@ -221,9 +222,9 @@ class PublicArtUploadForm extends React.Component {
     if (this.props.type == locationType.EVENT) {
       return (
         <React.Fragment>
-          <div className="new-event-website">
+          <div className="new-location-input">
             <p>Website</p>
-            <input className="new-location-input"
+            <input
               type="text"
               placeholder="URL"
               name="website"
@@ -231,9 +232,9 @@ class PublicArtUploadForm extends React.Component {
               onChange={(event) => this.setState({website: event.target.value})}
             />
           </div>
-          <div className="new-event-host">
+          <div className="new-location-input">
             <p>Host</p>
-            <input className="new-location-input"
+            <input
               type="text"
               placeholder="Host/Venue"
               name="host"
@@ -241,9 +242,9 @@ class PublicArtUploadForm extends React.Component {
               onChange={(event) => this.setState({host: event.target.value})}
             />
           </div>
-          <div className="new-event-location-description">
+          <div className="new-location-input">
             <p>Address</p>
-            <input className="new-location-input"
+            <input
               type="text"
               placeholder="Address (optional)"
               name="location-description"
@@ -268,9 +269,9 @@ class PublicArtUploadForm extends React.Component {
             Location: {this.props.lat.toFixed(3)}, {this.props.lng.toFixed(3)}
           </h4>
           <p>Click the map to change location.</p>
-          <div className="new-location-name">
+          <div className="new-location-input">
             <p>Name</p>
-            <input className = "new-location-input"
+            <input
               type="text"
               placeholder="Name"
               name="name"
@@ -279,9 +280,9 @@ class PublicArtUploadForm extends React.Component {
               // onChange={this.nameChange}
             />
           </div>
-          <div className="new-location-description">
+          <div className="new-location-input">
             <p>Description</p>
-            <input className="new-location-input"
+            <input
               type="text"
               placeholder="Optional"
               name="description"

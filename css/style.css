@@ -60,12 +60,7 @@ html, body {
 .location-upload-form h4 {
     text-align: center;
 }
-.location-upload-form .new-location-name {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 0 1rem;
-}
-.location-upload-form .new-location-description {
+.location-upload-form .new-location-input {
     display: flex;
     flex-flow: row wrap;
     margin: 0 1rem;
