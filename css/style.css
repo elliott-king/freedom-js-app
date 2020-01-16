@@ -238,7 +238,20 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
     box-shadow:1px 1px 0px #fff inset; 
     -moz-box-shadow:1px 1px 0px #fff inset; 
     -webkit-box-shadow:1px 1px 0px #fff inset; 
-} 
+}
+#cal #cal-frame td.cal-event-day {
+    background: lightblue;
+    box-shadow:1px 1px 0px #fff inset; 
+    -moz-box-shadow:1px 1px 0px #fff inset; 
+    -webkit-box-shadow:1px 1px 0px #fff inset; 
+}
+#cal #cal-frame td.cal-event-day.cal-today {
+    background: darkblue;
+    color: white;
+    box-shadow:1px 1px 0px #fff inset; 
+    -moz-box-shadow:1px 1px 0px #fff inset; 
+    -webkit-box-shadow:1px 1px 0px #fff inset; 
+}
 /* Not allowing hover */
 /* #cal #cal-frame td:not(.nil):hover { 
     color:#fff; 

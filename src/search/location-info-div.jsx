@@ -204,11 +204,12 @@ export default class LocationInfoDiv extends React.Component {
       'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const init = () => {
+      let date = new Date();
+      if (this.props.date) date = this.props.date;
       label = document.getElementById('label');
       document.getElementById('prev').onclick = () => switchMonth(false);
       document.getElementById('next').onclick = () => switchMonth(true);
-      label.onclick = () => switchMonth(
-          null, new Date().getMonth(), new Date().getFullYear());
+      label.onclick = () => switchMonth(null, date.getMonth(), date.getFullYear());
       label.click();
     };
 
@@ -285,7 +286,10 @@ export default class LocationInfoDiv extends React.Component {
           (month + 1).toString().padStart(2, '0') + '-' +
           td.textContent.padStart(2, '0')
         );
-        if (this.state.dates.has(date)) td.classList.add('cal-today');
+        if (this.state.dates.has(date)) td.classList.add('cal-event-day');
+        if (new Date().toISOString().substring(0, 10) === date) {
+          td.classList.add('cal-today');
+        }
       });
       createCal.cache[year][month] = {
         calendar: () => {
@@ -376,4 +380,5 @@ export default class LocationInfoDiv extends React.Component {
 LocationInfoDiv.propTypes = {
   location: PropTypes.object.isRequired,
   type: PropTypes.number.isRequired,
+  date: PropTypes.object,
 };

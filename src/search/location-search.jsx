@@ -16,8 +16,9 @@ let prevMarker = null;
  *
  * @param  {string} id ID of location desired
  * @param {locationType} type type of location to look up
+ * @param {Date} date chosen for search
  */
-function revealLocationInfo(id, type) {
+function revealLocationInfo(id, type, date=new Date()) {
   let query;
   let s;
   if (type == locationType.PUBLIC_ART) {
@@ -44,6 +45,7 @@ function revealLocationInfo(id, type) {
         <LocationInfoDiv
           location={location}
           type={type}
+          date={date}
         />,
         sidebar,
     );
@@ -57,6 +59,7 @@ function revealLocationInfo(id, type) {
  * @returns {Promise<Array<google.maps.Marker>>} a promise containing the events in map markers
  */
 export function getEventWithinMap(map, chosenDate) {
+  const dateString = chosenDate.toISOString().substring(0, 10);
   const bounds = map.getBounds();
   const newMarkers = [];
   console.log('Bounds:', bounds.toString());
@@ -65,8 +68,8 @@ export function getEventWithinMap(map, chosenDate) {
   const variables = {
     search: {
       // TODO: date variables.
-      start_date: chosenDate.toISOString().substr(0, 10),
-      end_date: chosenDate.toISOString().substr(0, 10),
+      start_date: dateString,
+      end_date: dateString,
       top_right_gps: {
         lat: bounds.getNorthEast().lat(),
         lon: bounds.getNorthEast().lng(),
@@ -101,7 +104,7 @@ export function getEventWithinMap(map, chosenDate) {
         if (prevMarker) prevMarker.setLabel(null);
 
         console.log('querying event:', event.name, event.id);
-        revealLocationInfo(event.id, locationType.EVENT); // TODO: fixme
+        revealLocationInfo(event.id, locationType.EVENT, chosenDate);
         marker.setLabel('A');
         prevMarker = marker;
       });
