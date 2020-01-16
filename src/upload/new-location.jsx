@@ -321,7 +321,12 @@ PublicArtUploadForm.propTypes = {
  * @param  {locationType} newLocationType optional type of the new location
  */
 export function newPublicArtUpload(lat, lng, newLocationType) {
-  if (window.newLocationType != locationType.NONE) {
+  const newLocationTypeHasChanged = (
+    newLocationType && newLocationType != window.newLocationType);
+  if (newLocationTypeHasChanged) window.newLocationType = newLocationType;
+
+  if (window.newLocationType == locationType.EVENT ||
+    window.newLocationType == locationType.PUBLIC_ART) {
     Auth.currentAuthenticatedUser()
         .then(() => {
           // TODO: should disappear when the 'close' button clicked in new-location div.
@@ -333,15 +338,11 @@ export function newPublicArtUpload(lat, lng, newLocationType) {
             label: 'N',
           });
           updateMarkers([newLocationMarker]);
-
-          const newLocationTypeHasChanged = (
-            newLocationType && newLocationType != window.newLocationType);
           const currentLocationUpload = document.getElementById('new-location-upload');
 
           if (currentLocationUpload && !newLocationTypeHasChanged) {
             window.updateNewLocationFields(lat, lng);
           } else {
-            window.newLocationType = newLocationType;
             const sidebar = document.getElementById('sidebar');
             ReactDOM.unmountComponentAtNode(sidebar);
 

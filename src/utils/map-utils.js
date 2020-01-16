@@ -168,7 +168,7 @@ export function initMap() {
       />, eventSearchDiv,
   );
 
-  window.locationType = locationType.NONE;
+  window.newLocationType = locationType.NONE;
   map.addListener('click', function(event) {
     newPublicArtUpload(event.latLng.lat(), event.latLng.lng());
   });
