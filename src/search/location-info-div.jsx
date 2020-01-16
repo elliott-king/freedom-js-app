@@ -216,7 +216,7 @@ export default class LocationInfoDiv extends React.Component {
     const switchMonth = (next, month, year) => {
       const curr = label.textContent.trim().split(' ');
       const tempYear = parseInt(curr[1], 10);
-      month = month || (
+      month = (month !== null && month !== undefined) ? month : (
         (next) ?
         ((curr[0] === 'December') ? 0 : months.indexOf(curr[0]) + 1) :
         ((curr[0] === 'January') ? 11 : months.indexOf(curr[0]) - 1)
