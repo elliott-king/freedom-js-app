@@ -15,7 +15,7 @@ import {uploadImage} from './upload-image';
 import {createPublicArt, createEvent} from '../graphql/mutations';
 import {openSidebar, closeSidebar} from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
-import {SIMPLE_ART_OPTIONS, locationType, EVENT_TYPES} from '../utils/constants';
+import {SIMPLE_ART_OPTIONS, LOCATION_TYPE, EVENT_TYPES} from '../utils/constants';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -63,8 +63,8 @@ class PublicArtUploadForm extends React.Component {
     if (this.imageInput.current.files.length > 0 && this.state.name) {
       const hasFieldsPublicArt = Boolean(this.state.artType);
       const hasFieldsEvent = this.state.eventTypes.length > 0 && this.state.website;
-      if ((this.props.type == locationType.PUBLIC_ART && hasFieldsPublicArt) ||
-        (this.props.type == locationType.EVENT && hasFieldsEvent)) {
+      if ((this.props.type == LOCATION_TYPE.PUBLIC_ART && hasFieldsPublicArt) ||
+        (this.props.type == LOCATION_TYPE.EVENT && hasFieldsEvent)) {
         let gqlMutation = undefined;
         const locationId = uuid();
         const imgFile = this.imageInput.current.files[0];
@@ -80,7 +80,7 @@ class PublicArtUploadForm extends React.Component {
             this.state.description : undefined),
         };
 
-        if (this.props.type == locationType.PUBLIC_ART) {
+        if (this.props.type == LOCATION_TYPE.PUBLIC_ART) {
           gqlMutation = createPublicArt;
           input.permanent = this.state.permanent;
           // TODO: we should add a default type.
@@ -92,7 +92,7 @@ class PublicArtUploadForm extends React.Component {
               end: this.state.end.toISOString().substr(0, 10),
             };
           }
-        } else if (this.props.type == locationType.EVENT) {
+        } else if (this.props.type == LOCATION_TYPE.EVENT) {
           gqlMutation = createEvent;
           input.rsvp = this.state.rsvp;
           input.times = this.state.times;
@@ -121,7 +121,7 @@ class PublicArtUploadForm extends React.Component {
       } else if (!this.state.artType && !(this.state.eventTypes.length > 0)) {
         window.alert('Please choose one or more tags for the location.');
         console.warn('Please choose one or more tags for the location.');
-      } else if (this.props.type == locationType.EVENT) {
+      } else if (this.props.type == LOCATION_TYPE.EVENT) {
         window.alert('Please include a website for this event.');
         console.warn('Please include a website for this event.');
       }
@@ -135,19 +135,19 @@ class PublicArtUploadForm extends React.Component {
   }
 
   renderTitle() {
-    if (this.props.type == locationType.PUBLIC_ART) return (<h1>New Public Art</h1>);
+    if (this.props.type == LOCATION_TYPE.PUBLIC_ART) return (<h1>New Public Art</h1>);
     else return (<h1>New Event</h1>);
   }
 
   renderTypeSelector() {
-    if (this.props.type == locationType.PUBLIC_ART) {
+    if (this.props.type == LOCATION_TYPE.PUBLIC_ART) {
       return (
         <Select
           options={SIMPLE_ART_OPTIONS}
           onChange={(selectedOption) => this.setState({artType: selectedOption.value})}
         />
       );
-    } else if (this.props.type == locationType.EVENT) {
+    } else if (this.props.type == LOCATION_TYPE.EVENT) {
       return (
         <Select
           options={EVENT_TYPES}
@@ -159,12 +159,12 @@ class PublicArtUploadForm extends React.Component {
   }
 
   renderCheckbox() {
-    const text = (this.props.type == locationType.PUBLIC_ART ?
+    const text = (this.props.type == LOCATION_TYPE.PUBLIC_ART ?
       'Permanent piece' : 'RSVP Necessary');
-    const isChecked = (this.props.type == locationType.PUBLIC_ART ?
+    const isChecked = (this.props.type == LOCATION_TYPE.PUBLIC_ART ?
       this.state.permanent : this.state.rsvp);
     const checkboxChange = (event) => {
-      if (this.props.type == locationType.PUBLIC_ART) {
+      if (this.props.type == LOCATION_TYPE.PUBLIC_ART) {
         this.setState({permanent: event.target.checked});
       } else {
         this.setState({rsvp: event.target.checked});
@@ -185,7 +185,7 @@ class PublicArtUploadForm extends React.Component {
   }
 
   renderDateSelectors() {
-    if (this.props.type == locationType.PUBLIC_ART && !this.state.permanent) {
+    if (this.props.type == LOCATION_TYPE.PUBLIC_ART && !this.state.permanent) {
       return (
         <React.Fragment>
           <DatePicker
@@ -198,7 +198,7 @@ class PublicArtUploadForm extends React.Component {
           />
         </React.Fragment>
       );
-    } else if (this.props.type == locationType.EVENT) {
+    } else if (this.props.type == LOCATION_TYPE.EVENT) {
       // TODO: time picker looks awful. User should only be able to type
       return (
         <React.Fragment>
@@ -219,7 +219,7 @@ class PublicArtUploadForm extends React.Component {
   }
 
   renderSimpleEventFields() {
-    if (this.props.type == locationType.EVENT) {
+    if (this.props.type == LOCATION_TYPE.EVENT) {
       return (
         <React.Fragment>
           <div className="new-location-input">
@@ -318,15 +318,15 @@ PublicArtUploadForm.propTypes = {
 /**
  * @param  {number} lat latitude for new public art
  * @param  {number} lng longitude
- * @param  {locationType} newLocationType optional type of the new location
+ * @param  {LOCATION_TYPE} newLocationType optional type of the new location
  */
 export function newLocationUpload(lat, lng, newLocationType) {
   const newLocationTypeHasChanged = (
     newLocationType && newLocationType != window.newLocationType);
   if (newLocationTypeHasChanged) window.newLocationType = newLocationType;
 
-  if (window.newLocationType == locationType.EVENT ||
-    window.newLocationType == locationType.PUBLIC_ART) {
+  if (window.newLocationType == LOCATION_TYPE.EVENT ||
+    window.newLocationType == LOCATION_TYPE.PUBLIC_ART) {
     Auth.currentAuthenticatedUser()
         .then(() => {
           // TODO: should disappear when the 'close' button clicked in new-location div.

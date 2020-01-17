@@ -1,4 +1,4 @@
-export const locationType = Object.freeze({
+export const LOCATION_TYPE = Object.freeze({
   NONE: 0,
   PUBLIC_ART: 1,
   EVENT: 2,
@@ -50,4 +50,4 @@ export const EVENT_TYPES = [
   {value: 'theater', label: 'Theater'},
 ];
 
-export const ALL_OPTIONS = additionalArtOptions.concat(SIMPLE_ART_OPTIONS);
+export const ALL_OPTIONS = [{value: 'all', label: 'Any type'}].concat(SIMPLE_ART_OPTIONS);

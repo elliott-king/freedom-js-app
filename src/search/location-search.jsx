@@ -8,28 +8,28 @@ import ReactDOM from 'react-dom';
 
 import LocationInfoDiv from './location-info-div.jsx';
 import {openSidebar} from '../utils/set-map-and-sidebar-style';
-import {locationType} from '../utils/constants';
+import {LOCATION_TYPE} from '../utils/constants';
 
 let prevMarker = null;
 
 /** Queries api for a given location and renders it in the sidebar.
  *
  * @param  {string} id ID of location desired
- * @param {locationType} type type of location to look up
+ * @param {LOCATION_TYPE} type type of location to look up
  * @param {Date} date chosen for search
  */
 function revealLocationInfo(id, type, date=new Date()) {
   let query;
   let s;
-  if (type == locationType.PUBLIC_ART) {
+  if (type == LOCATION_TYPE.PUBLIC_ART) {
     query = getPublicArt;
     s = 'getPublicArt';
-  } else if (type == locationType.EVENT) {
+  } else if (type == LOCATION_TYPE.EVENT) {
     query = getEvent;
     s = 'getEvent';
   } else {
     throw new TypeError('To get info for a location, it must have a type of: ' +
-                        Object.keys(locationType).toString());
+                        Object.keys(LOCATION_TYPE).toString());
   }
 
   window.keyClient.query({
@@ -104,7 +104,7 @@ export function getEventWithinMap(map, chosenDate) {
         if (prevMarker) prevMarker.setLabel(null);
 
         console.log('querying event:', event.name, event.id);
-        revealLocationInfo(event.id, locationType.EVENT, chosenDate);
+        revealLocationInfo(event.id, LOCATION_TYPE.EVENT, chosenDate);
         marker.setLabel('A');
         prevMarker = marker;
       });
@@ -167,7 +167,7 @@ export function getPublicArtWithinMap(map, filter, isPermanent) {
         }
 
         console.log('querying public art:', publicArt.name, publicArt.id);
-        revealLocationInfo(publicArt.id, locationType.PUBLIC_ART);
+        revealLocationInfo(publicArt.id, LOCATION_TYPE.PUBLIC_ART);
         marker.setLabel('A');
         prevMarker = marker;
       });

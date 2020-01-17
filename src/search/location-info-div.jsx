@@ -13,14 +13,14 @@ import gql from 'graphql-tag';
 import {createReported} from '../graphql/mutations';
 import {uploadImage} from '../upload/upload-image';
 import {closeSidebar} from '../utils/set-map-and-sidebar-style';
-import {locationType, PUBLIC_ART_REPORTS, EVENT_REPORTS} from '../utils/constants';
+import {LOCATION_TYPE, PUBLIC_ART_REPORTS, EVENT_REPORTS} from '../utils/constants';
 
 export default class LocationInfoDiv extends React.Component {
   constructor(props) {
     super(props);
 
     let dates = false;
-    if (this.props.type == locationType.PUBLIC_ART) {
+    if (this.props.type == LOCATION_TYPE.PUBLIC_ART) {
       if (!this.props.location.permanent) {
         const s = new Date(this.props.location.dates.start);
         const e = new Date(this.props.location.dates.end);
@@ -166,7 +166,7 @@ export default class LocationInfoDiv extends React.Component {
           onSubmit={this.submitLocationReport}>
           <h4>Report Location</h4>
           <Select
-            options={this.props.type == locationType.PUBLIC_ART ?
+            options={this.props.type == LOCATION_TYPE.PUBLIC_ART ?
               PUBLIC_ART_REPORTS : EVENT_REPORTS}
             onChange={this.reportOptionChange}
           />
@@ -301,7 +301,7 @@ export default class LocationInfoDiv extends React.Component {
   renderDescription() {
     // I don't feel that a description is currently necessary if there is a photo
     // Photos are self explanatory, and this provides less clutter
-    if (this.props.type == locationType.EVENT && !this.props.location.photos) {
+    if (this.props.type == LOCATION_TYPE.EVENT && !this.props.location.photos) {
       return <p>{this.props.location.description}</p>;
     } else return null;
   }

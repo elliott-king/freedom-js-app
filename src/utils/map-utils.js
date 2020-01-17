@@ -9,7 +9,7 @@ import {EventSearchButton, PublicArtSearchButton}
 import {newLocationUpload} from '../upload/new-location.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 import {openLogin} from './set-map-and-sidebar-style';
-import {locationType} from './constants.js';
+import {LOCATION_TYPE} from './constants.js';
 
 /** Show error if issue getting geolocation
  *
@@ -168,7 +168,7 @@ export function initMap() {
       />, eventSearchDiv,
   );
 
-  window.newLocationType = locationType.NONE;
+  window.newLocationType = LOCATION_TYPE.NONE;
   map.addListener('click', function(event) {
     newLocationUpload(event.latLng.lat(), event.latLng.lng());
   });

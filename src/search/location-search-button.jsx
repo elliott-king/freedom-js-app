@@ -6,7 +6,7 @@ import DatePicker from 'react-date-picker';
 
 import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 // eslint-disable-next-line no-unused-vars
-import {ALL_OPTIONS, locationType} from '../utils/constants';
+import {ALL_OPTIONS, LOCATION_TYPE} from '../utils/constants';
 
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
@@ -65,7 +65,7 @@ export class PublicArtSearchButton extends React.Component {
         <div className="map-button-text"
           onClick={() => {
             const center = window.map.getCenter();
-            newLocationUpload(center.lat(), center.lng(), locationType.PUBLIC_ART);
+            newLocationUpload(center.lat(), center.lng(), LOCATION_TYPE.PUBLIC_ART);
           }}>
           New Public Art
         </div>
@@ -108,7 +108,7 @@ export class EventSearchButton extends React.Component {
           <div className="map-button-text"
             onClick={() => {
               const center = window.map.getCenter();
-              newLocationUpload(center.lat(), center.lng(), locationType.EVENT);
+              newLocationUpload(center.lat(), center.lng(), LOCATION_TYPE.EVENT);
             }}>
             New Event
           </div>
