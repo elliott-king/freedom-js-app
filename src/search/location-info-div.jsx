@@ -13,17 +13,7 @@ import gql from 'graphql-tag';
 import {createReported} from '../graphql/mutations';
 import {uploadImage} from '../upload/upload-image';
 import {closeSidebar} from '../utils/set-map-and-sidebar-style';
-import {locationType} from '../utils/constants';
-
-// Options for reporting public art.
-const options = [
-  {value: 'not-public-art', label: 'Location is not public art'},
-  {value: 'wrong-photo', label: 'Photo incorrect'},
-  {value: 'place-dne', label: 'Location does not exist'},
-  {value: 'wrong-location-type', label: 'Mislabeled location type'},
-  {value: 'nsfw', label: 'Location has inappropriate or offensive content'},
-  {value: 'bad-date-range', label: 'Date range is incorrect.'},
-];
+import {locationType, PUBLIC_ART_REPORTS, EVENT_REPORTS} from '../utils/constants';
 
 export default class LocationInfoDiv extends React.Component {
   constructor(props) {
