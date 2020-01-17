@@ -166,7 +166,8 @@ export default class LocationInfoDiv extends React.Component {
           onSubmit={this.submitLocationReport}>
           <h4>Report Location</h4>
           <Select
-            options={options}
+            options={this.props.type == locationType.PUBLIC_ART ?
+              PUBLIC_ART_REPORTS : EVENT_REPORTS}
             onChange={this.reportOptionChange}
           />
           <label>Feel free to expand your reason:</label>
