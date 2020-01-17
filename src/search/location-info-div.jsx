@@ -146,10 +146,6 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderUploadImageForm() {
-    if (this.props.type == locationType.EVENT) {
-      console.debug('TODO: handle image uploading for events.');
-      return null;
-    }
     if (this.state.authenticated) {
       return (
         <form
