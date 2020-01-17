@@ -320,7 +320,7 @@ PublicArtUploadForm.propTypes = {
  * @param  {number} lng longitude
  * @param  {locationType} newLocationType optional type of the new location
  */
-export function newPublicArtUpload(lat, lng, newLocationType) {
+export function newLocationUpload(lat, lng, newLocationType) {
   const newLocationTypeHasChanged = (
     newLocationType && newLocationType != window.newLocationType);
   if (newLocationTypeHasChanged) window.newLocationType = newLocationType;

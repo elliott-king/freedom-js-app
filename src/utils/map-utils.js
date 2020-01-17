@@ -6,7 +6,7 @@ import {Auth} from 'aws-amplify';
 
 import {EventSearchButton, PublicArtSearchButton}
   from '../search/location-search-button.jsx';
-import {newPublicArtUpload} from '../upload/new-location.jsx';
+import {newLocationUpload} from '../upload/new-location.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 import {openLogin} from './set-map-and-sidebar-style';
 import {locationType} from './constants.js';
@@ -170,7 +170,7 @@ export function initMap() {
 
   window.newLocationType = locationType.NONE;
   map.addListener('click', function(event) {
-    newPublicArtUpload(event.latLng.lat(), event.latLng.lng());
+    newLocationUpload(event.latLng.lat(), event.latLng.lng());
   });
   return map;
 }

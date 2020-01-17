@@ -11,7 +11,7 @@ import {ALL_OPTIONS, locationType} from '../utils/constants';
 // Needed to avoid error w/ async fns
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
 import 'babel-polyfill';
-import {newPublicArtUpload} from '../upload/new-location.jsx';
+import {newLocationUpload} from '../upload/new-location.jsx';
 
 const permanencyOptions = [
   {value: true, label: 'Permanent installation'},
@@ -65,7 +65,7 @@ export class PublicArtSearchButton extends React.Component {
         <div className="map-button-text"
           onClick={() => {
             const center = window.map.getCenter();
-            newPublicArtUpload(center.lat(), center.lng(), locationType.PUBLIC_ART);
+            newLocationUpload(center.lat(), center.lng(), locationType.PUBLIC_ART);
           }}>
           New Public Art
         </div>
@@ -108,7 +108,7 @@ export class EventSearchButton extends React.Component {
           <div className="map-button-text"
             onClick={() => {
               const center = window.map.getCenter();
-              newPublicArtUpload(center.lat(), center.lng(), locationType.EVENT);
+              newLocationUpload(center.lat(), center.lng(), locationType.EVENT);
             }}>
             New Event
           </div>
