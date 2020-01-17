@@ -52,6 +52,7 @@ export default class LocationInfoDiv extends React.Component {
       authenticated: false,
       calendar: this.setupCalendar(),
       dates: dates,
+      uploadedImage: false,
     };
 
     // To upload images in React, we use the file API.
@@ -79,7 +80,8 @@ export default class LocationInfoDiv extends React.Component {
     event.preventDefault();
 
     if (this.imageInput.current.files.length > 0) {
-      uploadImage(this.imageInput.current.files[0], this.props.location.id);
+      uploadImage(this.imageInput.current.files[0], this.props.location.id)
+          .then((mutation) => this.setState({uploadedImage: true}));
     } else {
       window.alert('Please choose an image to upload.');
       console.warn('Please choose an image to upload.');
@@ -159,6 +161,7 @@ export default class LocationInfoDiv extends React.Component {
             ref={this.imageInput}
           />
           <button type="submit" className="btn">Upload</button>
+          {this.state.uploadedImage ? (<p>Image uploaded!</p>) : null}
         </form>
       );
     }
@@ -305,6 +308,8 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDescription() {
+    // I don't feel that a description is currently necessary if there is a photo
+    // Photos are self explanatory, and this provides less clutter
     if (this.props.type == locationType.EVENT && !this.props.location.photos) {
       return <p>{this.props.location.description}</p>;
     } else return null;
