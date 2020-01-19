@@ -60,14 +60,14 @@ class PublicArtUploadForm extends React.Component {
   uploadHandler(event) {
     event.preventDefault(); // KTHXWHAT?
 
-    if (this.imageInput.current.files.length > 0 && this.state.name) {
-      const hasFieldsPublicArt = Boolean(this.state.artType);
+    if (this.state.name) {
+      const hasFieldsPublicArt = (
+        Boolean(this.state.artType) && this.imageInput.current.files.length > 0);
       const hasFieldsEvent = this.state.eventTypes.length > 0 && this.state.website;
       if ((this.props.type == LOCATION_TYPE.PUBLIC_ART && hasFieldsPublicArt) ||
         (this.props.type == LOCATION_TYPE.EVENT && hasFieldsEvent)) {
         let gqlMutation = undefined;
         const locationId = uuid();
-        const imgFile = this.imageInput.current.files[0];
 
         const input = {
           id: locationId,
@@ -102,6 +102,7 @@ class PublicArtUploadForm extends React.Component {
             input.website = 'http://' + this.state.website;
           } else input.website = this.state.website;
           if (this.state.host) input.host = this.state.host;
+          // TODO: base lat lng location on the description, if it exists.
           if (this.state.locationDescription) {
             input.location_description = this.state.locationDescription;
           }
@@ -112,7 +113,14 @@ class PublicArtUploadForm extends React.Component {
 
         window.cognitoClient.mutate({
           mutation: gql(gqlMutation), variables: {input: input}})
-            .then((createLocationResponse) => uploadImage(imgFile, locationId))
+            .then((createLocationResponse) => {
+              if (this.imageInput.current.files.length > 0) {
+                const imgFile = this.imageInput.current.files[0];
+                return uploadImage(imgFile, locationId);
+              } else {
+                return 'No image to upload.';
+              }
+            })
             .then((uploadPhotoResponse) => {
               // Finally, remove both the sidebar and the marker.
               closeSidebar();
@@ -124,13 +132,13 @@ class PublicArtUploadForm extends React.Component {
       } else if (this.props.type == LOCATION_TYPE.EVENT) {
         window.alert('Please include a website for this event.');
         console.warn('Please include a website for this event.');
+      } else if (!this.imageInput.current.files.length > 0) {
+        window.alert('Need image to create a new public art.');
+        console.warn('Need image to create a new public art.');
       }
-    } else if (!this.state.name) {
+    } else {
       window.alert('New location needs a name.');
       console.warn('New location needs a name.');
-    } else {
-      window.alert('Need image to create a new location');
-      console.warn('Need image to create a new location.');
     }
   }
 
