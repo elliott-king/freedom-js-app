@@ -32,12 +32,14 @@ enum EventType {
     art
     athletics
     comedy
+    crafts
     dance
     diy
     education # TODO: sunset this
     family
     film
     food # only if food is free or its an educational thing, or there is something else included
+    games
     history
     holiday
     literature
@@ -47,8 +49,9 @@ enum EventType {
     new_york
     philosophy
     science
-    shopping
+    shopping # TODO: sunset this?
     theater
+    technology
 }
 
 type PublicArt @model @searchable 
