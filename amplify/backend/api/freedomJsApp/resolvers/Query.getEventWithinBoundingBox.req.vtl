@@ -14,7 +14,7 @@ This request is written using the amplify cli.e
         "queryString":{},
         "body":{
             "from":0,
-            "size":$util.defaultIfNull($ctx.args.limit, 10),
+            "size":$util.defaultIfNull($ctx.args.search.limit, 10),
             "query" : {
                 "bool" : {
                     "must": { "match_all": {}},
