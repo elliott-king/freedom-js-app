@@ -32,19 +32,24 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Make types an enum in Appsync GraphQL API                         | done   |          |
 | Check 'type' is chosen by user when uploading new location        | done   | low      |
 
-| Free events                                                  | Status | Priority |
-| ------------------------------------------------------------ | ------ | -------- |
-| Initial creation                                             | done   |          |
-| Searchable in app                                            |        |          |
-| Accept new picture upload                                    |        |          |
-| Accept report/flagging                                       |        |          |
-| Search button should switch between public art and events    |        | HIGH     |
-| Filter search by date/time                                   |        | HIGH     |
-| Do you need to sign up ahead of time? For Carnegie Hall, yes |        |          |
-| Type checker on upload (python)                              |        |          |
-| Dates should be a discrete list (instead of start/end)       | done   | HIGH     |
-| If searching for current day, ignore events with time < now  |        | mid-high |
-| Display event description                                    | done   | high     |
+| Free events                                                   | Status            | Priority |
+| ------------------------------------------------------------- | ----------------- | -------- |
+| Initial creation                                              | done              |          |
+| Searchable in app                                             |                   |          |
+| Accept new picture upload                                     |                   |          |
+| Accept report/flagging                                        |                   |          |
+| Search button should switch between public art and events     | done              | HIGH     |
+| Filter search by date/time                                    | EVENT - time only | HIGH     |
+| Do you need to sign up ahead of time? For Carnegie Hall, yes  |                   |          |
+| Type checker on upload (python)                               |                   |          |
+| Dates should be a discrete list (instead of start/end)        | done              | HIGH     |
+| If searching for current day, ignore events with time < now   |                   | mid-high |
+| Display event description                                     | done              | high     |
+| Event calendar should open on date from search                | done              | medium   |
+| Consider splitting 'art' into 'fine art' and 'arts & crafts'  |                   | low      |
+| In schema: unify event and art with inherited 'location' type |                   | low      |
+| Flag events                                                   | done              | mid-high |
+| Option for all-day events & multiple days                     |                   | mid      |
 
 
 | Flag public art/event                                                   | Status |
@@ -84,6 +89,9 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Make most graphql fields mandatory                                            | done               |
 | Unauthenticated, rejected uploads should notify the user why they have failed | URGENT             |
 | Image upload should include which user uploaded it                            | REQ for MVP        |
+| Image upload should take url OR image from disk                               | URGENT             |
+| Upon successful upload, should clear sidebar                                  | done               |
+| Image upload should take jpg                                                  | done               |
 
 
 | UI & QOL improvements                                                  | Status                     |
