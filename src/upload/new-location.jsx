@@ -308,7 +308,7 @@ class PublicArtUploadForm extends React.Component {
             <h4>Choose image for location</h4>
             <input
               type="file"
-              accept="image/png"
+              accept="image/png,image/jpeg"
               ref={this.imageInput}
             />
           </div>

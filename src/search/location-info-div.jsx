@@ -147,7 +147,7 @@ export default class LocationInfoDiv extends React.Component {
           <h4>Upload new image</h4>
           <input
             type="file"
-            accept="image/png"
+            accept="image/png,image/jpeg"
             ref={this.imageInput}
           />
           <button type="submit" className="btn">Upload</button>
