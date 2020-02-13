@@ -71,3 +71,22 @@ query getUpcomingEvents {
     website
   }
 }
+
+query getPublicArt {
+  getPublicArtWithinBoundingBox(
+    search: {
+      top_right_gps: {
+        lat: 40.843890
+        lon: -73.747242
+      }
+      bottom_left_gps: {
+        lat: 40.493938
+        lon: -74.278223
+      }
+      permanent: true
+    }
+  ) {
+    name
+    location
+  }
+}
