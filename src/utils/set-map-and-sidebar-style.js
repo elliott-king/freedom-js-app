@@ -22,10 +22,14 @@ const divTypeEnum = Object.freeze({
 
 let historyPushed = false;
 
-/** Setup login div */
-export function openLogin() {
+/** Setup large over-screen div
+ *
+ * @returns {Element} the now open div
+ */
+export function openLargeScreen() {
   closeSidebar();
   prepHistory();
+  // TODO: change to 'large'
   addHistory(divTypeEnum.LOGIN);
   const loginDiv = document.getElementById('login');
   const mapDiv = document.getElementById('map');
@@ -38,6 +42,12 @@ export function openLogin() {
 
   mapDiv.style['margin-left'] = '0';
   mapDiv.style.height = smallWindowRatios.map;
+  return loginDiv;
+}
+
+/** Setup login div */
+export function openLogin() {
+  const loginDiv = openLargeScreen();
 
   ReactDOM.render(
       (<React.Fragment>
