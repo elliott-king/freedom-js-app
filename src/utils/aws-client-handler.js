@@ -5,7 +5,6 @@ import aws_config from '../aws-exports';
 /** Creates two AppSync clients: One with Cognito, one with an API key.
  */
 export function createClient() {
-
   // Users do not need to be logged in to query our data
   window.keyClient = new AWSAppSyncClient({
     url: aws_config.aws_appsync_graphqlEndpoint,

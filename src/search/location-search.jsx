@@ -119,9 +119,9 @@ export function getEventWithinMap(map, bounds, chosenDate) {
 
 /**
  * @param  {google.maps.Map} map a google map
+ * @param  {google.maps.LatLngBounds} bounds of map
  * @param  {string} filter an optional filter term
  * @param  {boolean} isPermanent search for permanent installations or not
- * @param  {google.maps.LatLngBounds} bounds of map
  * @returns {Promise<Array>} Promise containing the markers for each location
  */
 export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
