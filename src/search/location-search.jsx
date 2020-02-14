@@ -55,12 +55,12 @@ function revealLocationInfo(id, type, date=new Date()) {
 
 /**
  * @param  {google.maps.Map} map a google map
+ * @param  {google.maps.LatLngBounds} bounds of map
  * @param {Date} chosenDate to look up events for
  * @returns {Promise<Array<google.maps.Marker>>} a promise containing the events in map markers
  */
-export function getEventWithinMap(map, chosenDate) {
+export function getEventWithinMap(map, bounds, chosenDate) {
   const dateString = chosenDate.toISOString().substring(0, 10);
-  const bounds = map.getBounds();
   const newMarkers = [];
   console.log('Bounds:', bounds.toString());
 
@@ -121,10 +121,10 @@ export function getEventWithinMap(map, chosenDate) {
  * @param  {google.maps.Map} map a google map
  * @param  {string} filter an optional filter term
  * @param  {boolean} isPermanent search for permanent installations or not
+ * @param  {google.maps.LatLngBounds} bounds of map
  * @returns {Promise<Array>} Promise containing the markers for each location
  */
-export function getPublicArtWithinMap(map, filter, isPermanent) {
-  const bounds = map.getBounds();
+export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
   const newMarkers = [];
   console.log('Bounds: ', bounds.toString());
 

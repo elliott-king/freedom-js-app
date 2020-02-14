@@ -3,8 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {EventSearchButton, PublicArtSearchButton}
-  from '../search/location-search-button.jsx';
+// import {EventSearchButton, PublicArtSearchButton}
+//   from '../search/location-search-button.jsx';
+import {openSearchDialog} from '../search/search-div.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
 
 /** Show error if issue getting geolocation
@@ -106,23 +107,19 @@ export function initMap() {
   // Create div that holds search button
   // Adding custom controls:
   // https://github.com/tomchentw/react-google-maps/issues/818
-  const publicArtSearchDiv = document.createElement('div');
-  publicArtSearchDiv.index = 1;
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(publicArtSearchDiv);
+  const searchDiv = document.createElement('div');
+  searchDiv.index = 1;
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(searchDiv);
   ReactDOM.render(
-      <PublicArtSearchButton
-        markersCallback={updateMarkers}
-      />,
-      publicArtSearchDiv,
-  );
-
-  const eventSearchDiv = document.createElement('div');
-  eventSearchDiv.index = 2;
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(eventSearchDiv);
-  ReactDOM.render(
-      <EventSearchButton
-        markersCallback={updateMarkers}
-      />, eventSearchDiv,
+      <div
+        className="map-button-ui"
+        title="Find nearby events and public art">
+        <div className="map-button-text"
+          onClick={() => openSearchDialog(updateMarkers)}>
+          Search
+        </div>
+      </div>,
+      searchDiv,
   );
 
   return map;
