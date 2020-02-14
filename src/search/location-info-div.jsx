@@ -218,13 +218,17 @@ export default class LocationInfoDiv extends React.Component {
             <span className="right button" id="next"> &rang; </span>
           </div>
           <table id="cal-days">
-            <td>sun</td>
-            <td>mon</td>
-            <td>tue</td>
-            <td>wed</td>
-            <td>thu</td>
-            <td>fri</td>
-            <td>sat</td>
+            <tbody>
+              <tr>
+                <td>sun</td>
+                <td>mon</td>
+                <td>tue</td>
+                <td>wed</td>
+                <td>thu</td>
+                <td>fri</td>
+                <td>sat</td>
+              </tr>
+            </tbody>
           </table>
           <div id="cal-frame">
             <table className="cal-curr">
