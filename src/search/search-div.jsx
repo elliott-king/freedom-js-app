@@ -42,7 +42,7 @@ class SearchDiv extends React.Component {
 
   renderPublicArtSearch() {
     return (
-      <div className='container art-choices'>
+      <React.Fragment>
         <div className='row art-choice'>
           <label>
             Sculpture
@@ -65,7 +65,7 @@ class SearchDiv extends React.Component {
             />
           </label>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 
@@ -136,35 +136,29 @@ class SearchDiv extends React.Component {
   }
 
   render() {
+    // borrowed from https://codepen.io/itsthomas/pen/rLapRy
     return (
       <React.Fragment>
-        {/* // borrowed from https://codepen.io/itsthomas/pen/rLapRy
-        // TODO: switch from clearfix to flexbox/ display:inline-block
-        // https://stackoverflow.com/questions/8554043/ */}
-        <div className='container button-container'>
-          <div className='row justify-content-around'>
-            <button className={this.buttonClassnames(LOCATION_TYPE.PUBLIC_ART)}
-              onClick={() => this.setState({'type': LOCATION_TYPE.PUBLIC_ART})}>
-              Public Art
-            </button>
-            <button className={this.buttonClassnames(LOCATION_TYPE.EVENT)}
-              onClick={() => this.setState({'type': LOCATION_TYPE.EVENT})}>
-              Events
-            </button>
-          </div>
+        <div className='row justify-content-around'>
+          <button className={this.buttonClassnames(LOCATION_TYPE.PUBLIC_ART)}
+            onClick={() => this.setState({'type': LOCATION_TYPE.PUBLIC_ART})}>
+            Public Art
+          </button>
+          <button className={this.buttonClassnames(LOCATION_TYPE.EVENT)}
+            onClick={() => this.setState({'type': LOCATION_TYPE.EVENT})}>
+            Events
+          </button>
         </div>
         {this.renderSearchForm()}
-        <div className='container button-container'>
-          <div className='row justify-content-center'>
-            <button type='button' onClick={this.search} className='col-sm-2 btn btn-dark'>
-              Search
-            </button>
-          </div>
-          <div className='row justify-content-center'>
-            <button type='button' onClick={closeLogin} className='col-sm-2 btn btn-light'>
-              Cancel
-            </button>
-          </div>
+        <div className='row justify-content-center'>
+          <button type='button' onClick={this.search} className='col-sm-2 btn btn-dark'>
+            Search
+          </button>
+        </div>
+        <div className='row justify-content-center'>
+          <button type='button' onClick={closeLogin} className='col-sm-2 btn btn-light'>
+            Cancel
+          </button>
         </div>
       </React.Fragment>
     );
