@@ -280,3 +280,9 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
 #cal #cal-frame table.temp { 
     position:absolute; 
 }
+.button-container {
+    margin: 32px;
+}
+.art-choice {
+    font-size: x-large;
+}

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import {LOCATION_TYPE} from '../utils/constants';
-import DatePicker from 'react-date-picker';
+import Calendar from 'react-calendar';
 import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 import {closeLogin, openLargeScreen} from '../utils/set-map-and-sidebar-style';
 
@@ -31,58 +31,55 @@ class SearchDiv extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  buttonClassnames(type) {
+    let className = 'btn col-4 ';
+    if (type == LOCATION_TYPE.PUBLIC_ART) className += 'public-art-selector ';
+    else className += 'event-selector ';
+    if (type == this.state.type) className += 'btn-primary';
+    else className += 'btn-secondary';
+    return className;
+  }
+
   renderPublicArtSearch() {
     return (
-      <React.Fragment>
-        <label>
-          Sculpture
-          <input
-            name="Sculpture"
-            type="checkbox"
-            checked={this.state.artSculpture}
-            onChange={(event) => this.setState({artSculpture: event.target.checked})}
-          />
-        </label>
-        <label>
-          Mural
-          <input
-            name="Mural"
-            type="Checkbox"
-            checked={this.state.artMural}
-            onChange={(event) => this.setState({artMural: event.target.checked})}
-          />
-        </label>
-      </React.Fragment>
+      <div className='container art-choices'>
+        <div className='row art-choice'>
+          <label>
+            Sculpture
+            <input
+              name='Sculpture'
+              type='checkbox'
+              checked={this.state.artSculpture}
+              onChange={(event) => this.setState({artSculpture: event.target.checked})}
+            />
+          </label>
+        </div>
+        <div className='row art-choice'>
+          <label>
+            Mural
+            <input
+              name='Mural'
+              type='Checkbox'
+              checked={this.state.artMural}
+              onChange={(event) => this.setState({artMural: event.target.checked})}
+            />
+          </label>
+        </div>
+      </div>
     );
   }
 
   renderEventSearch() {
     return (
-      <React.Fragment>
-        <DatePicker
-          onChange={(date) => this.setState({eventChosenDate: date})}
-          value={this.state.eventChosenDate}
-          showFixedNumberOfWeeks
-        />
-        {/* <label>
-          Family event
-          <input
-            name="Family"
-            type="Checkbox"
-            checked={this.state.eventFamily}
-            onChange={(event) => this.setState({eventFamily: event.target.checked})}
+      <div className='container'>
+        <div className='row justify-content-center'>
+          <Calendar
+            onChange={(date) => this.setState({eventChosenDate: date})}
+            value={this.state.eventChosenDate}
+            showFixedNumberOfWeeks
           />
-        </label>
-        <label>
-          Teen event
-          <input
-            name="Teen"
-            type="Checkbox"
-            checked={this.state.eventTeen}
-            onChange={(event) => this.setState({eventTeen: event.target.checked})}
-          />
-        </label> */}
-      </React.Fragment>
+        </div>
+      </div>
     );
   }
 
@@ -136,27 +133,31 @@ class SearchDiv extends React.Component {
         {/* // borrowed from https://codepen.io/itsthomas/pen/rLapRy
         // TODO: switch from clearfix to flexbox/ display:inline-block
         // https://stackoverflow.com/questions/8554043/ */}
-        <div className='selector-button-container clearfix'>
-          <div className='col-xs-6 public-art-selector'>
-            <button className='btn public-art-selector'
+        <div className='container button-container'>
+          <div className='row justify-content-around'>
+            <button className={this.buttonClassnames(LOCATION_TYPE.PUBLIC_ART)}
               onClick={() => this.setState({'type': LOCATION_TYPE.PUBLIC_ART})}>
               Public Art
             </button>
-          </div>
-          <div className='col-xs-6 event-selector'>
-            <button className='btn event-selector'
+            <button className={this.buttonClassnames(LOCATION_TYPE.EVENT)}
               onClick={() => this.setState({'type': LOCATION_TYPE.EVENT})}>
               Events
             </button>
           </div>
         </div>
-        <div className="TODO: decide the class">{this.renderSearchForm()}</div>
-        <button type="button" onClick={this.search} className="search">
-          Search
-        </button>
-        <button type="button" className="close" onClick={closeLogin}>
-          Cancel
-        </button>
+        {this.renderSearchForm()}
+        <div className='container button-container'>
+          <div className='row justify-content-center'>
+            <button type='button' onClick={this.search} className='col-sm-2 btn btn-dark'>
+              Search
+            </button>
+          </div>
+          <div className='row justify-content-center'>
+            <button type='button' onClick={closeLogin} className='col-sm-2 btn btn-light'>
+              Cancel
+            </button>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
