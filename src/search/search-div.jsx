@@ -112,6 +112,10 @@ class SearchDiv extends React.Component {
       ).then((newMarkers) => {
         closeLogin();
         this.props.markersCallback(newMarkers);
+        if (newMarkers.length == 0) {
+          window.alert('No art found in the area you have selected.' +
+            '\nTry zooming out for more options.');
+        }
       });
     } else {
       // TODO: is public/private
@@ -123,6 +127,10 @@ class SearchDiv extends React.Component {
       ).then((newMarkers) => {
         closeLogin();
         this.props.markersCallback(newMarkers);
+        if (newMarkers.length == 0) {
+          window.alert('No events found in the area you selected.' +
+            '\nTry zooming out or a different date.');
+        }
       });
     }
   }
