@@ -197,9 +197,8 @@ export default class LocationInfoDiv extends React.Component {
   }
 
   renderDescription() {
-    // I don't feel that a description is currently necessary if there is a photo
-    // Photos are self explanatory, and this provides less clutter
-    if (this.props.type == LOCATION_TYPE.EVENT && !this.props.location.photos) {
+    if (this.props.type == LOCATION_TYPE.EVENT &&
+        Object.prototype.hasOwnProperty.call(this.props.location, 'description')) {
       return <p>{this.props.location.description}</p>;
     } else return null;
   }
@@ -246,13 +245,13 @@ export default class LocationInfoDiv extends React.Component {
       <div id="location-content">
         <div className="location-head-info">
           <h3>{this.props.location.name}</h3>
+          {this.renderWebsite()}
           {this.renderImg()}
           {this.renderDescription()}
           {this.renderDates()}
-          {this.renderWebsite()}
         </div>
         <button type="button" onClick={this.handleClose}
-          className="close">Close</button>
+          className="btn btn-light">Close</button>
       </div>
     );
   }
