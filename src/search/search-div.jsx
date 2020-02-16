@@ -94,14 +94,11 @@ class SearchDiv extends React.Component {
       let filter; // TODO: handle values as constant like location-search-button
       if (this.state.artMural && this.state.artSculpture) {
         filter = 'all';
-        console.log('setting art type as all');
       } else {
         if (this.state.artMural) {
           filter = 'mural';
-          console.log('setting art type as mural');
         } else {
           filter = 'sculpture';
-          console.log('setting art type as sculpture');
         }
       }
       getPublicArtWithinMap(

@@ -62,7 +62,6 @@ function revealLocationInfo(id, type, date=new Date()) {
 export function getEventWithinMap(map, bounds, chosenDate) {
   const dateString = chosenDate.toISOString().substring(0, 10);
   const newMarkers = [];
-  console.log('Bounds:', bounds.toString());
 
   const query = gql(getEventWithinBoundingBox);
   const variables = {
@@ -90,8 +89,6 @@ export function getEventWithinMap(map, bounds, chosenDate) {
     variables: variables,
     fetchPolicy: 'network-only',
   }).then(({data: {getEventWithinBoundingBox}}) => {
-    console.debug('Events from getWithinBoundingBox:');
-    console.debug(getEventWithinBoundingBox);
 
     for (const event of getEventWithinBoundingBox) {
       const location = event.location;
@@ -103,7 +100,7 @@ export function getEventWithinMap(map, bounds, chosenDate) {
       marker.addListener('click', () => {
         if (prevMarker) prevMarker.setLabel(null);
 
-        console.log('querying event:', event.name, event.id);
+        // console.log('querying event:', event.name, event.id);
         revealLocationInfo(event.id, LOCATION_TYPE.EVENT, chosenDate);
         marker.setLabel('A');
         prevMarker = marker;
@@ -126,7 +123,6 @@ export function getEventWithinMap(map, bounds, chosenDate) {
  */
 export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
   const newMarkers = [];
-  console.log('Bounds: ', bounds.toString());
 
   const query = gql(getPublicArtWithinBoundingBox);
   const variables = {
@@ -150,8 +146,6 @@ export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
     variables: variables,
     fetchPolicy: 'network-only',
   }).then(({data: {getPublicArtWithinBoundingBox}} ) => {
-    console.debug('Public art from getWithinBoundingBox: ');
-    console.debug(getPublicArtWithinBoundingBox);
 
     for (const publicArt of getPublicArtWithinBoundingBox) {
       const location = publicArt.location;
@@ -166,7 +160,7 @@ export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
           prevMarker.setLabel(null);
         }
 
-        console.log('querying public art:', publicArt.name, publicArt.id);
+        // console.log('querying public art:', publicArt.name, publicArt.id);
         revealLocationInfo(publicArt.id, LOCATION_TYPE.PUBLIC_ART);
         marker.setLabel('A');
         prevMarker = marker;

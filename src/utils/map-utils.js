@@ -29,7 +29,6 @@ export function centerMap() {
     navigator.geolocation.getCurrentPosition(function(position) {
       const pos = new google.maps.LatLng(
           position.coords.latitude, position.coords.longitude);
-      console.log('Your position: ', pos.toString());
       window.map.setCenter(pos);
     }, function() {
       handleLocationError(true, window.map.getCenter());

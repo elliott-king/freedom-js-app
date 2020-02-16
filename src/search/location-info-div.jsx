@@ -206,7 +206,6 @@ export default class LocationInfoDiv extends React.Component {
   renderDates() {
     if (this.state.dates) {
       // TODO: print times
-      console.debug('Show times as well as dates for events.');
       return (
         <div id='cal'>
           <div className='cal-header'>

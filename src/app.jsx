@@ -11,10 +11,10 @@ import aws_config from './aws-exports';
 Amplify.configure(aws_config);
 
 // We create global auth clients so anything can call gql queries
-console.debug('creating client...');
+console.log('creating client...');
 createClient();
 
 // Map global so that markers can be added from anywhere
-console.debug('initializing map...');
+console.log('initializing map...');
 window.map = initMap();
 
