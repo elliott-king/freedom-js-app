@@ -38,8 +38,16 @@ export const getPublicArtWithinBoundingBox = `query GetPublicArtWithinBoundingBo
   }
 }
 `;
-export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox($search: BoundingBoxInput!) {
-  getEventWithinBoundingBox(search: $search) {
+export const getEventWithinBoundingBox = `query GetEventWithinBoundingBox(
+  $search: BoundingBoxInput!
+  $is_public: Boolean!
+  $is_private: Boolean!
+) {
+  getEventWithinBoundingBox(
+    search: $search
+    is_public: $is_public
+    is_private: $is_private
+  ) {
     id
     location {
       lat
