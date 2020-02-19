@@ -17,7 +17,7 @@ This request is written using the amplify cli.e
             "size":$util.defaultIfNull($ctx.args.search.limit, 10),
             "query" : {
                 "bool" : {
-                    "must": { "match_all": {}},
+                	"must": { "match_all": {}},
                     "filter" : [
                         #if(!$utils.isNullOrEmpty($ctx.args.search.start_date) && !$utils.isNullOrEmpty($ctx.args.search.end_date))
                             {"range" : {
@@ -38,8 +38,24 @@ This request is written using the amplify cli.e
                                     "lon" : "$context.arguments.search.bottom_left_gps.lon"
                                 }
                             }
-                        }}
-                    ]
+                        }},
+                        #if($ctx.args.is_public && !$ctx.args.is_private)
+                          {"bool": { 
+                            "should": [
+                              { "term": {"source": "https://www.nycgovparks.org"}},
+                              { "term": {"source": "https://www.nypl.org"}}
+                            ]
+                          }},
+                        #end
+                        #if(!$ctx.args.is_public && $context.args.is_private)
+                          {"bool": {
+                            "must_not": [
+                              { "term": {"source": "https://www.nycgovparks.org"}},
+                              { "term": {"source": "https://www.nypl.org"}}
+                            ]
+                          }},
+                        #end
+                    ],
                 }
             }
         }
