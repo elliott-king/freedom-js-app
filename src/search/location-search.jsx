@@ -57,14 +57,19 @@ function revealLocationInfo(id, type, date=new Date()) {
  * @param  {google.maps.Map} map a google map
  * @param  {google.maps.LatLngBounds} bounds of map
  * @param {Date} chosenDate to look up events for
+ * @param {boolean} isPublic if the user wants events from a public entity
+ * @param {boolean} isPrivate if the user wants events from a private entity
  * @returns {Promise<Array<google.maps.Marker>>} a promise containing the events in map markers
  */
-export function getEventWithinMap(map, bounds, chosenDate) {
+export function getEventWithinMap(map, bounds, chosenDate, isPublic, isPrivate) {
+  // TODO: take in variables object instead of asking for ispublic, chosendate, etc..
   const dateString = chosenDate.toISOString().substring(0, 10);
   const newMarkers = [];
 
   const query = gql(getEventWithinBoundingBox);
   const variables = {
+    is_public: isPublic,
+    is_private: isPrivate,
     search: {
       // TODO: date variables.
       start_date: dateString,
@@ -89,7 +94,6 @@ export function getEventWithinMap(map, bounds, chosenDate) {
     variables: variables,
     fetchPolicy: 'network-only',
   }).then(({data: {getEventWithinBoundingBox}}) => {
-
     for (const event of getEventWithinBoundingBox) {
       const location = event.location;
       location.lng = location.lon;
@@ -146,7 +150,6 @@ export function getPublicArtWithinMap(map, bounds, filter, isPermanent) {
     variables: variables,
     fetchPolicy: 'network-only',
   }).then(({data: {getPublicArtWithinBoundingBox}} ) => {
-
     for (const publicArt of getPublicArtWithinBoundingBox) {
       const location = publicArt.location;
 

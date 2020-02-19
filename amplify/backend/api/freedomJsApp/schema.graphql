@@ -130,7 +130,9 @@ type Query @aws_api_key{
 	): [PublicArt]
 
     getEventWithinBoundingBox(
-        search: BoundingBoxInput!
+        search: BoundingBoxInput!,
+        is_public: Boolean!,
+        is_private: Boolean!,
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 

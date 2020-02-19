@@ -79,6 +79,28 @@ class SearchDiv extends React.Component {
             showFixedNumberOfWeeks
           />
         </div>
+        <div className='row art-choice'>
+          <label>
+            Run by a public entity
+            <input
+              name='Public'
+              type='checkbox'
+              checked={this.state.eventPublic}
+              onChange={(event) => this.setState({eventPublic: event.target.checked})}
+            />
+          </label>
+        </div>
+        <div className='row art-choice'>
+          <label>
+            Run by a private company
+            <input
+              name='Private'
+              type='Checkbox'
+              checked={this.state.eventPrivate}
+              onChange={(event) => this.setState({eventPrivate: event.target.checked})}
+            />
+          </label>
+        </div>
       </div>
     );
   }
@@ -121,6 +143,8 @@ class SearchDiv extends React.Component {
           window.map,
           this.props.bounds,
           this.state.eventChosenDate,
+          this.state.eventPublic,
+          this.state.eventPrivate,
       ).then((newMarkers) => {
         closeLogin();
         this.props.markersCallback(newMarkers);
