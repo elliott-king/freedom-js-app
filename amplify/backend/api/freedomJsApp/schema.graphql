@@ -133,6 +133,7 @@ type Query @aws_api_key{
         search: BoundingBoxInput!,
         is_public: Boolean!,
         is_private: Boolean!,
+        family: Boolean!,
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 

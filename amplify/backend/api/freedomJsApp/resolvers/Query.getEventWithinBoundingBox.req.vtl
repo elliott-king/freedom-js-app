@@ -55,6 +55,14 @@ This request is written using the amplify cli.e
                             ]
                           }},
                         #end
+                        {"bool": {
+                        	#if( $ctx.args.family )
+                          		"must":
+                            #else
+                            	"must_not":
+                            #end
+                            	{"term": {"types": "family"}}
+                        }},
                     ],
                 }
             }
