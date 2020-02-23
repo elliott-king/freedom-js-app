@@ -286,3 +286,6 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
 .art-choice {
     font-size: x-large;
 }
+.art-choice label {
+    margin: .5em 1em;
+}

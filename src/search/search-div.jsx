@@ -22,7 +22,7 @@ class SearchDiv extends React.Component {
       eventChosenDate: new Date(),
       eventPublic: true,
       eventPrivate: true,
-      // eventFamily: true,
+      eventFamily: false,
       // eventTeen: true,
       // eventAthletic: true,  // probably overkill to incl atm
       // eventEducation: true, // probably overkill to incl atm
@@ -89,8 +89,6 @@ class SearchDiv extends React.Component {
               onChange={(event) => this.setState({eventPublic: event.target.checked})}
             />
           </label>
-        </div>
-        <div className='row art-choice'>
           <label>
             Run by a private company
             <input
@@ -98,6 +96,17 @@ class SearchDiv extends React.Component {
               type='Checkbox'
               checked={this.state.eventPrivate}
               onChange={(event) => this.setState({eventPrivate: event.target.checked})}
+            />
+          </label>
+        </div>
+        <div className='row art-choice'>
+          <label>
+            Family-friendly events
+            <input
+              name='Family'
+              type='Checkbox'
+              checked={this.state.eventFamily}
+              onChange={(events) => this.setState({eventFamily: event.target.checked})}
             />
           </label>
         </div>
@@ -145,6 +154,7 @@ class SearchDiv extends React.Component {
           this.state.eventChosenDate,
           this.state.eventPublic,
           this.state.eventPrivate,
+          this.state.eventFamily,
       ).then((newMarkers) => {
         closeLogin();
         this.props.markersCallback(newMarkers);
