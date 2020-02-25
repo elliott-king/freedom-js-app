@@ -54,7 +54,7 @@ enum EventType {
     science
     senior
     shopping # TODO: sunset this?
-    spirituality
+    spirituality # TODO: sunset this?
     teen
     theater
     technology
@@ -134,6 +134,7 @@ type Query @aws_api_key{
         is_public: Boolean!,
         is_private: Boolean!,
         family: Boolean!,
+        types: [EventType]
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 

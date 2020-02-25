@@ -63,6 +63,14 @@ This request is written using the amplify cli.e
                             #end
                             	{"term": {"types": "family"}}
                         }},
+                        #if(!$utils.isNullOrEmpty($ctx.args.types))
+                        	{"bool": { 
+                            	"should": [
+                                  #foreach( $type in $ctx.args.types )
+                                            {"term": {"types": "$type"}},
+                                  #end
+                            ]}}
+                        #end
                     ],
                 }
             }
