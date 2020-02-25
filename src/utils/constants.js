@@ -27,18 +27,23 @@ export const EVENT_REPORTS = [
 ].concat(SHARED_REPORTS);
 
 export const EVENT_TYPES = [
-  {value: 'advocacy', label: 'Advocacy'},
+  {value: 'advocacy', label: 'Volunteering'},
   {value: 'art', label: 'Art'},
   {value: 'athletics', label: 'Athletics'},
   {value: 'comedy', label: 'Comedy'},
+  {value: 'crafts', label: 'Arts & Crafts'},
   {value: 'dance', label: 'Dance'},
   {value: 'diy', label: 'DIY'},
   {value: 'education', label: 'Education'},
+  {value: 'fashion', label: 'Fashion'},
   {value: 'family', label: 'Family'},
   {value: 'film', label: 'Film'},
   {value: 'food', label: 'Food'},
+  {value: 'games', label: 'Gaming'},
+  {value: 'health_medical', label: 'Health & Wellness'},
   {value: 'history', label: 'History'},
   {value: 'holiday', label: 'Holiday'},
+  {value: 'library', label: 'Library'},
   {value: 'literature', label: 'Literature'},
   {value: 'lgbtq', label: 'LGBTQ'},
   {value: 'music', label: 'Music'},
@@ -46,8 +51,13 @@ export const EVENT_TYPES = [
   {value: 'new_york', label: 'New York'},
   {value: 'philosophy', label: 'Philosophy'},
   {value: 'science', label: 'Science'},
+  {value: 'senior', label: 'Senior Citizen'},
   {value: 'shopping', label: 'Shopping'},
+  {value: 'spirituality', label: 'Spirituality'},
+  {value: 'teen', label: 'Teen'},
   {value: 'theater', label: 'Theater'},
+  {value: 'technology', label: 'Technology'},
+  {value: 'world_events', label: 'World News'},
 ];
 
 export const ALL_OPTIONS = [{value: 'all', label: 'Any type'}].concat(SIMPLE_ART_OPTIONS);
