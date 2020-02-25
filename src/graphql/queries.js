@@ -45,12 +45,14 @@ export const getEventWithinBoundingBox = /* GraphQL */ `
     $is_public: Boolean!
     $is_private: Boolean!
     $family: Boolean!
+    $types: [EventType]
   ) {
     getEventWithinBoundingBox(
       search: $search
       is_public: $is_public
       is_private: $is_private
       family: $family
+      types: $types
     ) {
       id
       location {
