@@ -48,6 +48,9 @@ mutation addPhoto {
 
 query getUpcomingEvents {
   getEventWithinBoundingBox(
+    is_public: true
+    is_private: true
+    family: false
     search: {
       top_right_gps: {
         lat: 40.843890
@@ -57,8 +60,8 @@ query getUpcomingEvents {
         lat: 40.493938
         lon: -74.278223
       }
-      start_date: "2020-02-02"
-      end_date: "2020-02-08"
+      start_date: "2020-02-23"
+      end_date: "2020-02-29"
       limit: 100
     }
   ) {
