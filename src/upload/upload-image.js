@@ -28,7 +28,7 @@ export function uploadImage(imgFile, locationId) {
           const input = {
             url: 'https://' + path.join(aws_config.aws_user_files_s3_bucket +
                 '.s3.amazonaws.com', 'public', s3Result.key),
-            id: uuid,
+            id: photoId,
             user_id: user.username,
             location_id: locationId,
           };
