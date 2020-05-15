@@ -14,7 +14,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-calendar": "^2.19.2",
-    "react-date-picker": "^8.0.1",
+    "react-day-picker": "^7.4.8",
     "react-dom": "^16.13.1",
     "react-time-picker": "^3.9.0",
     "uuid": "^3.4.0"
