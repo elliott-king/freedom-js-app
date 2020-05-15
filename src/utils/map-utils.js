@@ -2,11 +2,13 @@
 /* global google */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Auth} from 'aws-amplify';
 
-// import {EventSearchButton, PublicArtSearchButton}
-//   from '../search/location-search-button.jsx';
+import {newLocationUpload} from '../upload/new-location.jsx';
 import {openSearchDialog} from '../search/search-div.jsx';
 import {updateMarkers, updateUserLocationMarker} from './markers-utils';
+import {openLogin} from './set-map-and-sidebar-style';
+import {LOCATION_TYPE} from './constants.js';
 
 /** Show error if issue getting geolocation
  *
@@ -38,6 +40,40 @@ export function centerMap() {
   }
 }
 
+/** @returns {Element} A button that will show the login form
+ */
+function createLoginControl() {
+  const controlDiv = document.createElement('div');
+  const controlUI = document.createElement('div');
+  controlUI.setAttribute('class', 'map-button-ui');
+  controlUI.setAttribute('id', 'login-button-ui');
+  // TODO: Set control title depending on login status
+  controlUI.title = 'Log in';
+  controlDiv.append(controlUI);
+
+  // Set CSS from control interior
+  const controlText = document.createElement('div');
+  controlText.setAttribute('class', 'map-button-text');
+  controlText.setAttribute('id', 'login-button-text');
+  controlText.innerHTML = 'Log in';
+  controlUI.appendChild(controlText);
+
+  // Setup click event listener to show login form
+  controlUI.addEventListener('click', openLogin);
+
+  // Button text should be different if a user is already authenticated
+  Auth.currentAuthenticatedUser()
+      .then(() => {
+        controlUI.title = 'Log out';
+        controlText.innerHTML = 'Log out';
+      })
+      .catch(() => {
+        controlUI.title = 'Log in';
+        controlText.innerHTML = 'Log in';
+      });
+
+  return controlDiv;
+}
 
 /** @returns {Element} A button that will center the map
  */
@@ -102,6 +138,11 @@ export function initMap() {
     centerControlDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
   }
+
+  // Create the DIV to hold the login button.
+  const loginControlDiv = createLoginControl();
+  loginControlDiv.index = 2;
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(loginControlDiv);
 
   // Create div that holds search button
   // Adding custom controls:
