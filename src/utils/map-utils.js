@@ -162,5 +162,10 @@ export function initMap() {
       searchDiv,
   );
 
+  window.newLocationType = LOCATION_TYPE.EVENT;
+  map.addListener('click', function(event) {
+    newLocationUpload(event.latLng.lat(), event.latLng.lng());
+  });
+
   return map;
 }
