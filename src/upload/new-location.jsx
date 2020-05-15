@@ -12,7 +12,7 @@ import gql from 'graphql-tag';
 import {v4 as uuid} from 'uuid';
 
 import {uploadImage} from './upload-image';
-import {createPublicArt, createEvent} from '../graphql/mutations';
+import {createPublicArt, createEvent, createPhoto} from '../graphql/mutations';
 import {openSidebar, closeSidebar} from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
 import {SIMPLE_ART_OPTIONS, LOCATION_TYPE, EVENT_TYPES} from '../utils/constants';
@@ -26,6 +26,7 @@ class PublicArtUploadForm extends React.Component {
       name: '',
       description: '',
       artType: '', // TODO: rename 'artType'
+      photoUrl: '',
 
       // public art
       permanent: true,
@@ -114,7 +115,16 @@ class PublicArtUploadForm extends React.Component {
         window.cognitoClient.mutate({
           mutation: gql(gqlMutation), variables: {input: input}})
             .then((createLocationResponse) => {
-              if (this.imageInput.current.files.length > 0) {
+              if (this.state.photoUrl) {
+                const photoInput = {
+                  url: this.state.photoUrl,
+                  location_id: locationId,
+                };
+                return window.cognitoClient.mutate({
+                  mutation: gql(createPhoto),
+                  variables: {input: photoInput},
+                }).catch((err) => console.log('Error with gql in image upload:', err));
+              } else if (this.imageInput.current.files.length > 0) {
                 const imgFile = this.imageInput.current.files[0];
                 return uploadImage(imgFile, locationId);
               } else {
@@ -308,6 +318,14 @@ class PublicArtUploadForm extends React.Component {
               type="file"
               accept="image/png,image/jpeg"
               ref={this.imageInput}
+            />
+            <p>URL</p>
+            <input
+              type="text"
+              placeholder="Url"
+              name="url"
+              value={this.state.photoUrl}
+              onChange={(event) => this.setState({photoUrl: event.target.value})}
             />
           </div>
           <button type="submit" className="btn">Upload new location</button>
