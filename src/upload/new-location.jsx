@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import {Auth} from 'aws-amplify';
 
 import Select from 'react-select';
-import DatePicker from 'react-date-picker';
+import DayPicker, {DateUtils} from 'react-day-picker';
+import 'react-day-picker/lib/style.css'; // needed for day picker
 import TimePicker from 'react-time-picker';
 import gql from 'graphql-tag';
 import {v4 as uuid} from 'uuid';
@@ -38,7 +39,7 @@ class PublicArtUploadForm extends React.Component {
       eventTypes: [],
       host: '',
       website: '',
-      dates: [new Date()],
+      dates: [],
       times: [],
       locationDescription: '',
       rsvp: false,
@@ -48,6 +49,7 @@ class PublicArtUploadForm extends React.Component {
     // To upload images in React, we use the file API.
     // https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
     this.imageInput = React.createRef();
+    this.handleEventDayClick = this.handleEventDayClick.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
   }
 
@@ -56,6 +58,17 @@ class PublicArtUploadForm extends React.Component {
     window.updateNewLocationFields = (lat, lon) => {
       this.setState({lat: lat, lon: lon});
     };
+  }
+
+  handleEventDayClick(day, {selected}) {
+    const {dates} = this.state;
+    if (selected) {
+      const selectedIndex = dates.findIndex((selectedDay) => {
+        DateUtils.isSameDay(selectedDay, day);
+      });
+      dates.splice(selectedIndex, 1);
+    } else dates.push(day);
+    this.setState({dates});
   }
 
   uploadHandler(event) {
@@ -204,25 +217,17 @@ class PublicArtUploadForm extends React.Component {
 
   renderDateSelectors() {
     if (this.props.type == LOCATION_TYPE.PUBLIC_ART && !this.state.permanent) {
-      return (
-        <React.Fragment>
-          <DatePicker
-            onChange={(val) => this.setState({start: val})}
-            value={this.state.start}
-          />
-          <DatePicker
-            onChange={(val) => this.setState({end: val})}
-            value={this.state.end}
-          />
-        </React.Fragment>
-      );
+      // FIXME: update date picker
+      // See: https://react-day-picker.js.org/examples/selected-range
+      // Note that this is not currently visible, as clicking the map will only show an event form
+      return;
     } else if (this.props.type == LOCATION_TYPE.EVENT) {
-      // TODO: time picker looks awful. User should only be able to type
+      // TODO: time picker looks awful.
       return (
         <React.Fragment>
-          <DatePicker
-            onChange={(val) => this.setState({dates: [val]})}
-            value={this.state.dates[0]}
+          <DayPicker
+            selectedDays={this.state.dates}
+            onDayClick={this.handleEventDayClick}
           />
           <TimePicker
             disableClock={true}
@@ -295,7 +300,6 @@ class PublicArtUploadForm extends React.Component {
               name="name"
               value={this.state.name}
               onChange={(event) => this.setState({name: event.target.value})}
-              // onChange={this.nameChange}
             />
           </div>
           <div className="new-location-input">
@@ -371,7 +375,7 @@ export function newLocationUpload(lat, lng, newLocationType) {
           } else {
             const sidebar = document.getElementById('sidebar');
             if (!document.getElementsByClassName('new-location-input')) {
-            ReactDOM.unmountComponentAtNode(sidebar);
+              ReactDOM.unmountComponentAtNode(sidebar);
             }
             const handleClose = (event) => {
               closeSidebar();
