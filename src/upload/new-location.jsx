@@ -124,8 +124,6 @@ class PublicArtUploadForm extends React.Component {
             .then((uploadPhotoResponse) => {
               // Finally, remove both the sidebar and the marker.
               closeSidebar();
-              const sidebar = document.getElementById('sidebar');
-              ReactDOM.unmountComponentAtNode(sidebar);
               updateMarkers([]);
             }).catch((err) => console.log('Cannot create new location:', err));
       } else if (!this.state.artType && !(this.state.eventTypes.length > 0)) {
@@ -354,8 +352,9 @@ export function newLocationUpload(lat, lng, newLocationType) {
             window.updateNewLocationFields(lat, lng);
           } else {
             const sidebar = document.getElementById('sidebar');
+            if (!document.getElementsByClassName('new-location-input')) {
             ReactDOM.unmountComponentAtNode(sidebar);
-
+            }
             const handleClose = (event) => {
               closeSidebar();
             };
