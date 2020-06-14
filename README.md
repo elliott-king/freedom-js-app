@@ -1,7 +1,24 @@
+Local free events, as well as points of interest (murals, public art).
+
+Initially started because I was (am) a broke sucker in NYC. Currently, the events are collated by yours truly, source scrapers [here](https://github.com/elliott-king/freedom-scripts). This functionality can be found [here](https://freedom.cannibaltaylor.com/). The events will be off by location. The public art is still accurate.
+
+Since Coronavirus, I have pivoted to online free streaming events. All events are still currently NYC-focused. This functionality can be found [here](https://no-login-mvp.d32yf79oq8yspa.amplifyapp.com/).
+
 # Status
-MVP
-freedom.cannibaltaylor.com
+#### Events by location & date
+MVP - on hold
+
 https://master.d32yf79oq8yspa.amplifyapp.com/
+
+#### Streaming events by date
+MVP
+
+https://no-login-mvp.d32yf79oq8yspa.amplifyapp.com/
+
+# Running
+This is mostly a reminder for myself. Anyone else reading this may have difficulty setting up.
+
+First you need to get a Google Maps API key. (The ones in `package.json` will only work for my machine). Then `amplify init` and all that [jazz](https://docs.amplify.aws/cli/start/install). It can be run with `npm run-script start`.
 
 # Todos
 
