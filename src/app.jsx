@@ -1,11 +1,14 @@
 import '../css/style.css';
 
-import {initMap} from './utils/map-utils';
 import {createClient} from './utils/aws-client-handler';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Amplify from 'aws-amplify';
 // eslint-disable-next-line camelcase
 import aws_config from './aws-exports';
+
+import EventContainer from './nomap/event-container.jsx';
 
 // Required setup for AWS Amplify utilities (API, S3, Auth, etc..)
 Amplify.configure(aws_config);
@@ -14,7 +17,4 @@ Amplify.configure(aws_config);
 console.log('creating client...');
 createClient();
 
-// Map global so that markers can be added from anywhere
-console.log('initializing map...');
-window.map = initMap();
-
+ReactDOM.render(<EventContainer />, document.getElementById('root'));
