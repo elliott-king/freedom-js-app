@@ -1,5 +1,7 @@
 # Freedom
-Local free events in New York City.
+Local free events in New York City. 
+
+Built with AWS Amplify & AppSync. Uses ElasticSearch, DynamoDB, NodeJS, React, and the Google Maps API.
 
 <img src=".github/images/sample.png" alt="sample search" width="60%" />
 
