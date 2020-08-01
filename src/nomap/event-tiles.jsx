@@ -10,12 +10,12 @@ class EventTile extends React.Component {
     if (this.props.location.photos && this.props.location.photos.items.length > 0) {
       const photo = this.props.location.photos.items[0];
       return (
-        <div className="col-2 event-item img-holder border">
+        <div className="col-sm-2 event-item img-holder border">
           <img className="img-fluid event-img" src={photo.url}/>
         </div>
       );
     } else {
-      return <div className="col-2 event-item border"></div>;
+      return <div className="col-sm-2 event-item img-holder border"></div>;
     }
   }
 
@@ -24,7 +24,7 @@ class EventTile extends React.Component {
     return (
       <div className="event-row row bg-light">
         {this.renderImg()}
-        <div className="col event-item border">
+        <div className="col-sm-10 event-item border">
           <div className="event-header row">
             <h4 className="col-8">
               <a href={this.props.location.website}
@@ -33,8 +33,17 @@ class EventTile extends React.Component {
                 {this.props.location.name}
               </a>
             </h4>
-            <p className="col">{this.props.location.dates[0]}</p>
-            <p className="col">{this.props.location.times[0]}</p>
+            <div className="col">
+              <div className="row">
+                <div className="col">
+                  <p className="row">{this.props.location.host}</p>
+                  <div className="row">
+                    <p className="col-md">{this.props.location.dates[0].substring(5)}</p>
+                    <p className="col-md">{this.props.location.times[0].substring(0, 5)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="event-content row">
             <p className="col event-description">{description}</p>
