@@ -101,7 +101,6 @@ export const createEvent = /* GraphQL */ `
       }
       name
       description
-      types
       host
       source
       website
@@ -133,7 +132,6 @@ export const updateEvent = /* GraphQL */ `
       }
       name
       description
-      types
       host
       source
       website
@@ -165,7 +163,6 @@ export const deleteEvent = /* GraphQL */ `
       }
       name
       description
-      types
       host
       source
       website
