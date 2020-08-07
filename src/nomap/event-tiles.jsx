@@ -11,7 +11,7 @@ class EventTile extends React.Component {
       const photo = this.props.location.photos.items[0];
       return (
         <div className="col-sm-2 event-item img-holder border">
-          <img className="img-fluid event-img" src={photo.url}/>
+          <img className="img-fluid event-img align-self-center" src={photo.url}/>
         </div>
       );
     } else {
@@ -69,7 +69,7 @@ export default class EventTileContainer extends React.Component {
 
   render() {
     return (
-      <div className="event-tile-container container-fluid">
+      <div className="event-tile-container container">
         {this.renderEmptyNotification()}
         {this.props.locations.map((location, i) =>
           <EventTile key={i} location={location}/>)}

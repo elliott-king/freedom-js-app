@@ -297,6 +297,7 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
 @media (min-width: 576px) {
     .event-row {
         display: table;
+        width: 100%;
     }
 
     .event-description {
@@ -324,7 +325,7 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
 
 .event-img {
     max-height: 140px;
-    max-width: 140px;
+    /* max-width: 140px; */
 }
 
 .img-holder {
