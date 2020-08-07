@@ -55,22 +55,6 @@ This request is written using the amplify cli.e
                             ]
                           }},
                         #end
-                        {"bool": {
-                        	#if( $ctx.args.family )
-                          		"must":
-                            #else
-                            	"must_not":
-                            #end
-                            	{"term": {"types": "family"}}
-                        }},
-                        #if(!$utils.isNullOrEmpty($ctx.args.types))
-                        	{"bool": { 
-                            	"should": [
-                                  #foreach( $type in $ctx.args.types )
-                                            {"term": {"types": "$type"}},
-                                  #end
-                            ]}}
-                        #end
                     ],
                 }
             }

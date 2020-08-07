@@ -27,40 +27,6 @@ enum PublicArtType {
     sculpture
 }
 
-enum EventType {
-    advocacy
-    art
-    athletics
-    comedy
-    crafts
-    dance
-    diy
-    education
-    fashion
-    family
-    film
-    food # only if food is free or its an educational thing, or there is something else included
-    games
-    health_medical
-    history
-    holiday
-    library
-    literature
-    lgbtq
-    music
-    nature
-    new_york
-    philosophy
-    science
-    senior
-    shopping # TODO: sunset this?
-    spirituality # TODO: sunset this?
-    teen
-    theater
-    technology
-    world_events
-}
-
 type PublicArt @model @searchable 
     @auth(rules:[
         {allow: owner},
@@ -89,7 +55,6 @@ type Event @model @searchable
     location: Location! # Consider multiple locations?
     name: String!
     description: String!
-    types: [EventType]
     host: String
     source: String
     website: AWSURL
@@ -133,8 +98,6 @@ type Query @aws_api_key{
         search: BoundingBoxInput!,
         is_public: Boolean!,
         is_private: Boolean!,
-        family: Boolean!,
-        types: [EventType]
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 
