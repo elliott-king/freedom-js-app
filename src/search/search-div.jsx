@@ -3,9 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 
-import {LOCATION_TYPE, EVENT_TYPES} from '../utils/constants';
+import {LOCATION_TYPE} from '../utils/constants';
 import Calendar from 'react-calendar';
 import {getPublicArtWithinMap, getEventWithinMap} from './location-search.jsx';
 import {closeLogin, openLargeScreen} from '../utils/set-map-and-sidebar-style';
@@ -23,8 +22,6 @@ class SearchDiv extends React.Component {
       eventChosenDate: new Date(),
       eventPublic: true,
       eventPrivate: true,
-      eventFamily: false,
-      eventTypes: [],
       // eventTeen: true,
       // eventAthletic: true,  // probably overkill to incl atm
       // eventEducation: true, // probably overkill to incl atm
@@ -101,26 +98,6 @@ class SearchDiv extends React.Component {
             />
           </label>
         </div>
-        <div className='row art-choice'>
-          <label>
-            Family-friendly events
-            <input
-              name='Family'
-              type='Checkbox'
-              checked={this.state.eventFamily}
-              onChange={(event) => this.setState({eventFamily: event.target.checked})}
-            />
-          </label>
-        </div>
-        <div className='row'>
-          <Select
-            className='col-lg'
-            options={EVENT_TYPES}
-            isMulti
-            menuPlacement="top"
-            onChange={(value, action) => this.setState({eventTypes: value})}
-          />
-        </div>
       </div>
     );
   }
@@ -158,16 +135,12 @@ class SearchDiv extends React.Component {
       });
     } else {
       // TODO: is public/private
-      // TODO: is family/teen
-      const types = this.state.eventTypes.map((option) => option.value);
       getEventWithinMap(
           window.map,
           this.props.bounds,
           this.state.eventChosenDate,
           this.state.eventPublic,
           this.state.eventPrivate,
-          this.state.eventFamily,
-          types,
       ).then((newMarkers) => {
         closeLogin();
         this.props.markersCallback(newMarkers);

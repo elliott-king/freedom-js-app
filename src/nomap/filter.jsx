@@ -10,8 +10,6 @@ export default class Filter extends React.Component {
       // time: TODO: worry about this later
       public: true,
       private: true,
-      family: false,
-      types: [],
     };
     this.onSearchClick = this.onSearchClick.bind(this);
     this.renderCalendar = this.renderCalendar.bind(this);
@@ -32,7 +30,6 @@ export default class Filter extends React.Component {
     const variables = {
       is_public: this.state.public,
       is_private: this.state.private,
-      family: this.state.family,
       search: {
         start_date: this.state.date.toISOString().substring(0, 10),
         end_date: this.state.date.toISOString().substring(0, 10),

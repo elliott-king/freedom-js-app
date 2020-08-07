@@ -59,12 +59,10 @@ function revealLocationInfo(id, type, date=new Date()) {
  * @param {Date} chosenDate to look up events for
  * @param {boolean} isPublic if the user wants events from a public entity
  * @param {boolean} isPrivate if the user wants events from a private entity
- * @param {boolean} family to request family-oriented events
- * @param {Array} types to filter by
  * @returns {Promise<Array<google.maps.Marker>>} a promise containing the events in map markers
  */
 export function getEventWithinMap(
-    map, bounds, chosenDate, isPublic, isPrivate, family, types) {
+    map, bounds, chosenDate, isPublic, isPrivate) {
   // TODO: take in variables object instead of asking for ispublic, chosendate, etc..
   const dateString = chosenDate.toISOString().substring(0, 10);
   const newMarkers = [];
@@ -73,8 +71,6 @@ export function getEventWithinMap(
   const variables = {
     is_public: isPublic,
     is_private: isPrivate,
-    family: family,
-    types: types,
     search: {
       // TODO: date variables.
       start_date: dateString,

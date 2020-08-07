@@ -15,7 +15,7 @@ import {uploadImage} from './upload-image';
 import {createPublicArt, createEvent} from '../graphql/mutations';
 import {openSidebar, closeSidebar} from '../utils/set-map-and-sidebar-style';
 import {updateMarkers} from '../utils/markers-utils';
-import {SIMPLE_ART_OPTIONS, LOCATION_TYPE, EVENT_TYPES} from '../utils/constants';
+import {SIMPLE_ART_OPTIONS, LOCATION_TYPE} from '../utils/constants';
 
 class PublicArtUploadForm extends React.Component {
   constructor(props) {
@@ -34,7 +34,6 @@ class PublicArtUploadForm extends React.Component {
 
       // event
       // NOTE: we will ignore the 'source' field for user-supplied content
-      eventTypes: [],
       host: '',
       website: '',
       dates: [new Date()],
@@ -63,7 +62,7 @@ class PublicArtUploadForm extends React.Component {
     if (this.state.name) {
       const hasFieldsPublicArt = (
         Boolean(this.state.artType) && this.imageInput.current.files.length > 0);
-      const hasFieldsEvent = this.state.eventTypes.length > 0 && this.state.website;
+      const hasFieldsEvent = !!this.state.website;
       if ((this.props.type == LOCATION_TYPE.PUBLIC_ART && hasFieldsPublicArt) ||
         (this.props.type == LOCATION_TYPE.EVENT && hasFieldsEvent)) {
         let gqlMutation = undefined;
@@ -97,7 +96,6 @@ class PublicArtUploadForm extends React.Component {
           input.rsvp = this.state.rsvp;
           input.times = this.state.times;
           input.dates = this.state.dates.map((d) => d.toISOString().substr(0, 10));
-          input.types = this.state.eventTypes;
           if (!this.state.website.startsWith('http')) {
             input.website = 'http://' + this.state.website;
           } else input.website = this.state.website;
