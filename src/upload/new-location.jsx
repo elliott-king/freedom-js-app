@@ -155,14 +155,6 @@ class PublicArtUploadForm extends React.Component {
           onChange={(selectedOption) => this.setState({artType: selectedOption.value})}
         />
       );
-    } else if (this.props.type == LOCATION_TYPE.EVENT) {
-      return (
-        <Select
-          options={EVENT_TYPES}
-          onChange={
-            (selectedOption) => this.setState({eventTypes: [selectedOption.value]})}
-        />
-      );
     } else return null;
   }
 
