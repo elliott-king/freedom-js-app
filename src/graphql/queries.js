@@ -44,15 +44,11 @@ export const getEventWithinBoundingBox = /* GraphQL */ `
     $search: BoundingBoxInput!
     $is_public: Boolean!
     $is_private: Boolean!
-    $family: Boolean!
-    $types: [EventType]
   ) {
     getEventWithinBoundingBox(
       search: $search
       is_public: $is_public
       is_private: $is_private
-      family: $family
-      types: $types
     ) {
       id
       location {
@@ -61,7 +57,6 @@ export const getEventWithinBoundingBox = /* GraphQL */ `
       }
       name
       description
-      types
       host
       source
       website
@@ -217,7 +212,6 @@ export const getEvent = /* GraphQL */ `
       }
       name
       description
-      types
       host
       source
       website
@@ -254,7 +248,6 @@ export const listEvents = /* GraphQL */ `
         }
         name
         description
-        types
         host
         source
         website
@@ -292,7 +285,6 @@ export const searchEvents = /* GraphQL */ `
         }
         name
         description
-        types
         host
         source
         website

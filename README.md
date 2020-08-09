@@ -1,9 +1,27 @@
-# Status
-MVP
-freedom.cannibaltaylor.com
-https://master.d32yf79oq8yspa.amplifyapp.com/
+# Freedom
+Local free events in New York City. 
 
-# Todos
+Built with AWS Amplify & AppSync. Uses ElasticSearch, DynamoDB, NodeJS, React, and the Google Maps API.
+
+<img src=".github/images/sample.png" alt="sample search" width="60%" />
+
+Initially started because I was (am) a broke sucker in NYC. Currently, the events are collected by yours truly, from scrapers I wrote [here](https://github.com/elliott-king/freedom-scripts). This site can be found [here](https://freedom.cannibaltaylor.com/).
+
+Since Coronavirus, I have pivoted to online free streaming events. All events are still currently NYC-focused. Once we return to a semblance of normal, I will bring back the map search functionality.
+
+## Status
+#### Events by location & date
+MVP - done, now on hold
+
+#### Streaming events by date
+MVP - done, now main branch
+
+## To Run
+This is mostly a reminder for myself. Anyone else reading this may have difficulty setting up.
+
+First you need to get a Google Maps API key. (The ones in `package.json` will only work for my machine). Then `amplify init` and all that [jazz](https://docs.amplify.aws/cli/start/install). It can be run with `npm run-script start`. You will need to use the [scrapers](https://github.com/elliott-king/freedom-scripts) to populate the backend.
+
+## Todos
 
 ### Goals for alpha and beta testing:
 | Goal                          | Tag          | Priority | In Progress |                Done |
@@ -115,6 +133,7 @@ https://master.d32yf79oq8yspa.amplifyapp.com/
 | Fix 'cannot get /with-sidebar' bug                                     |                            |
 | Speed up/streamline map load                                           | HIGH PRIORITY              |
 | Improve date/calendar css                                              | med/high                   |
+| Make mobile-responsive                                                 | med/high                   |
 
 | Login Process (currently run by AWS)                         | Status        |
 | ------------------------------------------------------------ | ------------- |
