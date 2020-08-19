@@ -49,6 +49,7 @@ First you need to get a Google Maps API key. (The ones in `package.json` will on
 | Store types as list in dynamoDB (currently only one type allowed) |        | low      |
 | Make types an enum in Appsync GraphQL API                         | done   |          |
 | Check 'type' is chosen by user when uploading new location        | done   | low      |
+| add 'professional' type - for business/resume help                |        | medium   |
 
 | Free events                                                   | Status            | Priority |
 | ------------------------------------------------------------- | ----------------- | -------- |
@@ -68,6 +69,7 @@ First you need to get a Google Maps API key. (The ones in `package.json` will on
 | In schema: unify event and art with inherited 'location' type |                   | low      |
 | Flag events                                                   | done              | mid-high |
 | Option for all-day events & multiple days                     |                   | mid      |
+| Can click tile to open in own window (Routes)                 |                   | mid      |
 
 
 | Flag public art/event                                                   | Status |
@@ -135,12 +137,13 @@ First you need to get a Google Maps API key. (The ones in `package.json` will on
 | Improve date/calendar css                                              | med/high                   |
 | Make mobile-responsive                                                 | med/high                   |
 
-| Login Process (currently run by AWS)                         | Status        |
-| ------------------------------------------------------------ | ------------- |
-| User should only have to login to upload new image           | done          |
-| Sign up should not care about phone number                   |               |
-| Sign up should show error messages (not just console.log it) | HIGH PRIORITY |
-| Log in should be self contained (not in art upload div)      | done          |
+| Login Process (currently run by AWS)                                        | Status        |
+| --------------------------------------------------------------------------- | ------------- |
+| User should only have to login to upload new image                          | done          |
+| Sign up should not care about phone number                                  |               |
+| Sign up should show error messages (not just console.log it)                | HIGH PRIORITY |
+| Log in should be self contained (not in art upload div)                     | done          |
+| Should have user feedback -> automatically include the user's search params |               |
 
 | Scraping/parsing                                                                            | Status | Priority |
 | ------------------------------------------------------------------------------------------- | ------ | -------- |
@@ -154,12 +157,16 @@ First you need to get a Google Maps API key. (The ones in `package.json` will on
 | Add date range type as seperate type (2-d list? or list of 2-d lists?)                      |        | med-high |
 | Consider splitting 'source' into title & url object?                                        |        | low      |
 
-| Long-term Support                                  | Status | Priority              |
-| -------------------------------------------------- | ------ | --------------------- |
-| Backup data - 3 formats, 3 locations               |        | immediately after MVP |
-| Create amplify 'dev' env w/ seperate ES & DynamoDB |        | immediately after MVP |
-| Unit tests                                         |        | Immediately after MVP |
-| Make history API usage more elegant                |        | mid/low               |
+
+| Long-term Support                                                    | Status | Priority              |
+| -------------------------------------------------------------------- | ------ | --------------------- |
+| Backup data - 3 formats, 3 locations                                 |        | immediately after MVP |
+| Create amplify 'dev' env w/ seperate ES & DynamoDB                   |        | immediately after MVP |
+| Unit tests                                                           |        | Immediately after MVP |
+| Make history API usage more elegant                                  |        | mid/low               |
+| AWS Rekognition to reject images that do not meet decency guidelines |        | low                   |
+| Use Authentication to credit uploaded images (like Google?)          |        | mid                   |
+| Use AI & NLP to classify types from description                      |        | mid                   |
 
 | non-code                  | Status |
 | ------------------------- | ------ |
