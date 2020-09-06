@@ -38,23 +38,7 @@ This request is written using the amplify cli.e
                                     "lon" : "$context.arguments.search.bottom_left_gps.lon"
                                 }
                             }
-                        }},
-                        #if($ctx.args.is_public && !$ctx.args.is_private)
-                          {"bool": { 
-                            "should": [
-                              { "term": {"source": "https://www.nycgovparks.org"}},
-                              { "term": {"source": "https://www.nypl.org"}}
-                            ]
-                          }},
-                        #end
-                        #if(!$ctx.args.is_public && $context.args.is_private)
-                          {"bool": {
-                            "must_not": [
-                              { "term": {"source": "https://www.nycgovparks.org"}},
-                              { "term": {"source": "https://www.nypl.org"}}
-                            ]
-                          }},
-                        #end
+                        }}
                     ],
                 }
             }

@@ -35,6 +35,7 @@ type PublicArt @model @searchable
     id: ID!
     location: Location!
     name: String!
+    # TODO: consider adding a 'long description' for ones w/ multiple <p> descriptions
     description: String
     type: PublicArtType!
 
@@ -96,8 +97,8 @@ type Query @aws_api_key{
 
     getEventWithinBoundingBox(
         search: BoundingBoxInput!,
-        is_public: Boolean!,
-        is_private: Boolean!,
+        # is_public: Boolean!,
+        # is_private: Boolean!,
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 
