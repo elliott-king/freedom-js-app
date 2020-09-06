@@ -40,16 +40,8 @@ export const getPublicArtWithinBoundingBox = /* GraphQL */ `
   }
 `;
 export const getEventWithinBoundingBox = /* GraphQL */ `
-  query GetEventWithinBoundingBox(
-    $search: BoundingBoxInput!
-    $is_public: Boolean!
-    $is_private: Boolean!
-  ) {
-    getEventWithinBoundingBox(
-      search: $search
-      is_public: $is_public
-      is_private: $is_private
-    ) {
+  query GetEventWithinBoundingBox($search: BoundingBoxInput!) {
+    getEventWithinBoundingBox(search: $search) {
       id
       location {
         lat
