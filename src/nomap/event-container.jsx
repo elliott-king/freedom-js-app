@@ -38,8 +38,8 @@ export default class EventContainer extends React.Component {
 
   componentDidMount() {
     const variables = {
-      is_public: true,
-      is_private: true,
+      // is_public: true,
+      // is_private: true,
       search: {
         start_date: new Date().toISOString().substring(0, 10),
         end_date: new Date().toISOString().substring(0, 10),

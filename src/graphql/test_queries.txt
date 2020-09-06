@@ -48,8 +48,6 @@ mutation addPhoto {
 
 query getUpcomingEvents {
   getEventWithinBoundingBox(
-    is_public: true
-    is_private: true
     family: false
     search: {
       top_right_gps: {

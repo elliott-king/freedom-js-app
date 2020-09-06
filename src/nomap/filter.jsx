@@ -28,8 +28,8 @@ export default class Filter extends React.Component {
 
   onSearchClick() {
     const variables = {
-      is_public: this.state.public,
-      is_private: this.state.private,
+      // is_public: this.state.public,
+      // is_private: this.state.private,
       search: {
         start_date: this.state.date.toISOString().substring(0, 10),
         end_date: this.state.date.toISOString().substring(0, 10),
