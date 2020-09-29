@@ -97,8 +97,8 @@ type Query @aws_api_key{
 
     getEventWithinBoundingBox(
         search: BoundingBoxInput!,
-        # is_public: Boolean!,
-        # is_private: Boolean!,
+        is_public: Boolean!,
+        is_private: Boolean!,
         # start_time: AWSTime!,
         # end_time: AWSTime!,
 
