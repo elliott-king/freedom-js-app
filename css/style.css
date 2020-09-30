@@ -6,6 +6,11 @@ html, body {
     background: white;
 }
 
+label {
+    margin-right: .5rem;
+    margin-left: .25rem;
+}
+
 #root { 
     height: 100%;
 }
@@ -294,6 +299,10 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
     margin: auto;
 }
 
+.radio-container {
+    display: inline-block;
+}
+
 @media (min-width: 576px) {
     .event-row {
         display: table;
@@ -320,6 +329,10 @@ https://stackoverflow.com/questions/15147378/ for map size insiration*/
     .img-holder {
         display: none;
         visibility: hidden;
+    }
+
+    .radio-container {
+        display: block;
     }
 }
 
