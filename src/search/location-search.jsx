@@ -69,8 +69,8 @@ export function getEventWithinMap(
 
   const query = gql(getEventWithinBoundingBox);
   const variables = {
-    // is_public: isPublic,
-    // is_private: isPrivate,
+    is_public: true, // todo: should not be hardcoded
+    is_private: true, // todo: should not be hardcoded
     search: {
       // TODO: date variables.
       start_date: dateString,

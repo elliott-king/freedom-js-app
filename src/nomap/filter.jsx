@@ -8,7 +8,7 @@ export default class Filter extends React.Component {
     this.state = {
       date: new Date(), // TODO: take date range?
       // time: TODO: worry about this later
-      public: true,
+      public: true, // fixme: implement checkbox to change these
       private: true,
     };
     this.onSearchClick = this.onSearchClick.bind(this);
@@ -28,8 +28,8 @@ export default class Filter extends React.Component {
 
   onSearchClick() {
     const variables = {
-      // is_public: this.state.public,
-      // is_private: this.state.private,
+      is_public: this.state.public,
+      is_private: this.state.private,
       search: {
         start_date: this.state.date.toISOString().substring(0, 10),
         end_date: this.state.date.toISOString().substring(0, 10),
