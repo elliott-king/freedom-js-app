@@ -19,6 +19,19 @@ class EventTile extends React.Component {
     }
   }
 
+  convertTo12Hr(time) {
+    const timestring = time.substring(0, 5);
+    const d = new Date('1970-01-02T' + timestring + 'Z');
+    return d.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+  }
+
+  formatDate(datestr) {
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const d = new Date(datestr);
+    return months[d.getMonth()] + ' ' + (d.getDate() + 1).toString();
+  }
+
   render() {
     const description = this.props.location.description.substring(0, 270) + '...';
     return (
@@ -38,8 +51,8 @@ class EventTile extends React.Component {
                 <div className="col">
                   <p className="row">{this.props.location.host}</p>
                   <div className="row">
-                    <p className="col-md">{this.props.location.dates[0].substring(5)}</p>
-                    <p className="col-md">{this.props.location.times[0].substring(0, 5)}</p>
+                    <p className="col-md">{this.formatDate(this.props.location.dates[0])}</p>
+                    <p className="col-md">{this.convertTo12Hr(this.props.location.times[0])}</p>
                   </div>
                 </div>
               </div>
