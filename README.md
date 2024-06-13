@@ -177,3 +177,6 @@ First you need to get a Google Maps API key. (The ones in `package.json` will on
 ### Possible extensions
 - Use AWS Rekognition to reject images that do not meet decency guidelines
 - Use Auth to credit images (like Google does)
+
+todo:
+- get rid of babel-polyfill (it's 7 yrs old....)
