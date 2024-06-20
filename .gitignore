@@ -90,3 +90,6 @@ freedom-js-app.code-workspace
 
 # Webpack
 dist/
+
+# MacOS proprietary files
+.DS_Store
