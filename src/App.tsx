@@ -1,3 +1,4 @@
+import "@aws-amplify/ui-react/styles.css";
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
@@ -19,7 +20,10 @@ function App() {
 
   return (
     <main>
-      <h1>First draft of amplify frontend. Should work with TODOs since amplify/data/resources has TODO model</h1>
+      <h1>
+        First draft of amplify frontend. Should work with TODOs since
+        amplify/data/resources has TODO model
+      </h1>
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
