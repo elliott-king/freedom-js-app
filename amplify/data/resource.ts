@@ -1,4 +1,4 @@
-import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -10,8 +10,33 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+      isDone: a.boolean(),
     })
     .authorization((allow) => [allow.guest()]),
+  Event: a
+    .model({
+      name: a.string().required(),
+      host: a.string().required(),
+      description: a.string().required(),
+      location_description: a.string().required(),
+      rsvp: a.boolean().required(),
+
+      source: a.url().required(),
+      website: a.url().required(),
+
+      // todo: can this be enum array based on EVENT_TYPES?
+      types: a.string().array(),
+
+      location: a.customType({
+        lat: a.float().required(),
+        long: a.float().required(),
+      }),
+
+      dates: a.date().array().required(),
+      times: a.time().array(),
+    }) // TODO: only allow logged-in users access
+    .authorization((allow) => [allow.guest().to(["read"])]),
+  // .authorization((allow) => [allow.guest()]), // for testing
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,7 +44,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'iam',
+    defaultAuthorizationMode: "iam",
   },
 });
 
