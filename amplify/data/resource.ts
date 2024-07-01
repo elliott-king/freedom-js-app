@@ -37,6 +37,14 @@ const schema = a.schema({
     }) // TODO: only allow logged-in users access
     .authorization((allow) => [allow.guest().to(["read"])]),
   // .authorization((allow) => [allow.guest()]), // for testing
+
+  EventPhoto: a
+    .model({
+      eventId: a.id(),
+      event: a.belongsTo("Event", "eventId"),
+      url: a.url().required(),
+    })
+    .authorization((allow) => [allow.guest().to(["read"])]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
