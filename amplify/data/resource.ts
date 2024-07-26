@@ -47,6 +47,33 @@ const schema = a.schema({
       allow.publicApiKey(),
     ]),
 
+  getEvents: a
+    .query()
+    .returns(a.ref("Event").array())
+    .authorization((allow) => [allow.publicApiKey()])
+    .handler(
+      a.handler.custom({
+        entry: "./searchEventResolver.js",
+        dataSource: "osDataSource",
+      })
+    ),
+
+  searchEventWithinBoundingBox: a
+    .query()
+    .arguments({
+      top: a.float().required(),
+      left: a.float().required(),
+      bottom: a.float().required(),
+      right: a.float().required(),
+    })
+    .returns(a.ref("Event").array())
+    .authorization((allow) => [allow.publicApiKey()])
+    .handler(
+      a.handler.custom({
+        entry: "./searchEventWithinBoundingBoxResolver.js",
+        dataSource: "osDataSource",
+      })
+    ),
 
   EventPicture: a
     .model({
