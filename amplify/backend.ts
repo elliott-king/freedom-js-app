@@ -148,7 +148,7 @@ const indexMapping = {
       description: {
         type: "text",
       },
-      location_description: {
+      locationDescription: {
         type: "text",
       },
       rsvp: {
@@ -156,10 +156,10 @@ const indexMapping = {
       },
       source: { type: "text" },
       website: { type: "text" },
-      types: { type: "string" },
+      types: { type: "text" },
       location: { type: "geo_point" },
       dates: { type: "date", format: "year_month_day" },
-      times: { type: "date", format: "time " },
+      times: { type: "date", format: "time_no_millis" },
     },
   },
 };

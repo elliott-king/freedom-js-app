@@ -12,13 +12,16 @@ const schema = a.schema({
       content: a.string(),
       isDone: a.boolean(),
     })
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [
+      // allow.guest(), // needs iam auth
+      allow.publicApiKey(),
+    ]), // fixme: get rid of this model
   Event: a
     .model({
       name: a.string().required(),
       host: a.string().required(),
       description: a.string().required(),
-      location_description: a.string().required(),
+      locationDescription: a.string().required(),
       rsvp: a.boolean().required(),
 
       source: a.url().required(),
@@ -29,22 +32,32 @@ const schema = a.schema({
 
       location: a.customType({
         lat: a.float().required(),
-        long: a.float().required(),
+        lon: a.float().required(),
       }),
 
       dates: a.date().array().required(),
       times: a.time().array(),
-    }) // TODO: only allow logged-in users access
-    .authorization((allow) => [allow.guest().to(["read"])]),
-  // .authorization((allow) => [allow.guest()]), // for testing
 
-  EventPhoto: a
+      photos: a.hasMany("EventPicture", "eventId"),
+    })
+    .authorization((allow) => [
+      // TODO: only allow logged-in users access
+      // allow.guest(), // FIXME: for testing
+      // allow.guest().to(["read"])
+      allow.publicApiKey(),
+    ]),
+
+
+  EventPicture: a
     .model({
       eventId: a.id(),
       event: a.belongsTo("Event", "eventId"),
       url: a.url().required(),
     })
-    .authorization((allow) => [allow.guest().to(["read"])]),
+    .authorization((allow) => [
+      // allow.guest().to(["read"]),
+      allow.publicApiKey(),
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -52,7 +65,11 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "iam",
+    // defaultAuthorizationMode: "iam",
+    defaultAuthorizationMode: "apiKey",
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,
+    },
   },
 });
 
