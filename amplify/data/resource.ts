@@ -23,6 +23,7 @@ const schema = a.schema({
       description: a.string().required(),
       locationDescription: a.string().required(),
       rsvp: a.boolean().required(),
+      gov: a.boolean().required(),
 
       source: a.url().required(),
       website: a.url().required(),

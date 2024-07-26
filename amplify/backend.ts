@@ -159,6 +159,9 @@ const indexMapping = {
       rsvp: {
         type: "boolean",
       },
+      gov: {
+        type: "boolean",
+      },
       source: { type: "text" },
       website: { type: "text" },
       types: { type: "text" },
