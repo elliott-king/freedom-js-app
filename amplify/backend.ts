@@ -112,7 +112,12 @@ const openSearchIntegrationPipelineRole = new iam.Role(
               "dynamodb:GetRecords",
               "dynamodb:GetShardIterator",
             ],
-            resources: [tableArn, tableArn + "/*"],
+            resources: [
+              tableArn,
+              tableArn + "/*",
+              tableArn + "/export/*",
+              tableArn + "/stream/*",
+            ],
           }),
         ],
       }),
@@ -201,10 +206,11 @@ dynamodb-pipeline:
 `;
 
 // Create a CloudWatch log group
-// const logGroup = new logs.LogGroup(dataStack, "LogGroup", {
-//   logGroupName: "freedom-open-search-service/pipelines/dev",
-//   removalPolicy: RemovalPolicy.DESTROY,
-// });
+const logGroupName = "/aws/vendedlogs/OpenSearchService/pipelines/freedom-dev";
+const logGroup = new logs.LogGroup(dataStack, "LogGroup", {
+  logGroupName: logGroupName,
+  removalPolicy: RemovalPolicy.DESTROY,
+});
 
 // Create an OpenSearch Integration Service pipeline
 const cfnPipeline = new osis.CfnPipeline(
@@ -215,12 +221,18 @@ const cfnPipeline = new osis.CfnPipeline(
     minUnits: 1,
     pipelineConfigurationBody: openSearchTemplate,
     pipelineName: "freedom-ddb-integration",
-    // FIXME: Takes a huge amt of time to set up, and never seems to accept logGroupName
-    // logPublishingOptions: {
-    //   isLoggingEnabled: true,
-    //   cloudWatchLogDestination: {
-    //     logGroup: logGroup.logGroupName,
-    //   },
-    // },
+    logPublishingOptions: {
+      isLoggingEnabled: true,
+      cloudWatchLogDestination: {
+        logGroup: logGroupName,
+      },
+    },
   }
+);
+
+// Add OpenSearch data source
+// https://docs.amplify.aws/react/build-a-backend/data/custom-business-logic/search-and-aggregate-queries/#step-4-expose-new-queries-on-opensearch
+const osDataSource = backend.data.addOpenSearchDataSource(
+  "osDataSource",
+  openSearchDomain
 );
