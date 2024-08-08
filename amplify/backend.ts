@@ -51,6 +51,16 @@ const openSearchDomain = new opensearch.Domain(
     encryptionAtRest: {
       enabled: true,
     },
+    // Free tier: 750 hours of t2.small.search or t3.small.search
+    capacity: {
+      dataNodeInstanceType: "t3.small.search",
+    },
+
+    // Free tier ebs: 10GB of storage/month (default)
+    // Can't be lowered: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html#ebsresource
+    // ebs: {
+    //   volumeSize: 2,
+    // },
   }
 );
 
@@ -207,6 +217,8 @@ dynamodb-pipeline:
           sts_role_arn: "${openSearchIntegrationPipelineRole.roleArn}"
           region: "${region}"
 `;
+
+// donotsubmit: change instance type
 
 // Create a CloudWatch log group
 const logGroupName = "/aws/vendedlogs/OpenSearchService/pipelines/freedom-dev";
